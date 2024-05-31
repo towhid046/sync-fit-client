@@ -53,7 +53,7 @@ const Navbar = () => {
 
         {/* Right side: User Image */}
         <div className="flex gap-4">
-          <Link>
+          <Link to={'/login'}>
             <ButtonPrimary>Log In</ButtonPrimary>
           </Link>
           <Link>
