@@ -22,7 +22,9 @@ const Navbar = () => {
 
   const links = menus.map((menu) => (
     <li
-      className="hover:text-custom-third transition duration-300"
+      className={`hover:text-custom-third transition duration-300 ${
+        menu.name === "Dashboard" && !user ? "hidden" : "flex"
+      }`}
       onClick={() => setIsOpen(false)}
       key={menu.id}
     >
