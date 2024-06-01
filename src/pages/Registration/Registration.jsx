@@ -3,6 +3,10 @@ import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import PageBanner from "../../components/shared/PageBanner/PageBanner";
 import { useForm } from "react-hook-form";
 import googleIcon from "../../assets/svg/google.svg";
+import useAuth from "./../../hooks/useAuth";
+import { useState } from "react";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
 
 const formInfo = [
   { id: 1, title: "Your Name", placeholder: "Your Name", name: "name" },
@@ -30,7 +34,27 @@ const formInfo = [
 
 const Registration = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { createNewUser, updateUserProfile, singInWithGoogle } = useAuth();
+  const [isShowPass, setIsShowPass] = useState(false);
+
+  const onSubmit = async (data) => {
+    try {
+      const res = await createNewUser(data.email, data.password);
+      await updateUserProfile(data.name, data.photoUrl);
+
+      console.log(res.user);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const handleLogInWithGoogle = async () => {
+    try {
+      await singInWithGoogle();
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   return (
     <section className="min-h-screen">
@@ -42,7 +66,7 @@ const Registration = () => {
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             {formInfo.map((item) => (
-              <div key={item.id} className="mb-4">
+              <div key={item.id} className="mb-4 relative">
                 <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-[10px]">
                   {item.title}
                 </label>
@@ -51,9 +75,16 @@ const Registration = () => {
                   className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#4A4E4B]"
                   placeholder={item.placeholder}
                   required
-                  type={item.type || "text"}
-                  // name="name"
+                  type={(!isShowPass && item.type) || "text"}
                 />
+                {item.type === "password" && (
+                  <div
+                    onClick={() => setIsShowPass(!isShowPass)}
+                    className="cursor-pointer text-lg absolute right-4 top-12"
+                  >
+                    {isShowPass ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                  </div>
+                )}
               </div>
             ))}
             <label htmlFor="term-policy">
@@ -66,7 +97,10 @@ const Registration = () => {
           </form>
           <div className="flex flex-col items-center">
             <p className="text-2xl mt-5 mb-2">Or</p>
-            <button className=" flex items-center  justify-center gap-x-3 text-sm sm:text-base  rounded-lg bg-gray-800 text-white duration-300 transition-colors border px-8 py-2.5">
+            <button
+              onClick={handleLogInWithGoogle}
+              className=" flex items-center  justify-center gap-x-3 text-sm sm:text-base  rounded-lg bg-gray-800 text-white duration-300 transition-colors border px-8 py-2.5"
+            >
               <img src={googleIcon} className="w-6" alt="" />
               <span>Continue with Google</span>
             </button>

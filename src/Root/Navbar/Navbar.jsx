@@ -2,13 +2,12 @@ import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import ButtonPrimary from "./../../components/shared/ButtonPrimary/ButtonPrimary";
+import useAuth from "../../hooks/useAuth";
+import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
-  };
+  const { user, logOutUser } = useAuth();
 
   const menus = [
     { id: 1, name: "Home", link: "/" },
@@ -28,6 +27,18 @@ const Navbar = () => {
     </li>
   ));
 
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleLogOutUser = async () => {
+    try {
+      await logOutUser();
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <nav className="bg-custom-primary py-5 w-full sticky z-10 top-0">
       <div className="container px-4 mx-auto flex justify-between items-center">
@@ -40,7 +51,10 @@ const Navbar = () => {
               <FaBars className="text-2xl" />
             )}
           </button>
-          <Link to={'/'} className="text-custom-third cursor-pointer font-bold text-3xl">
+          <Link
+            to={"/"}
+            className="text-custom-third cursor-pointer font-bold text-3xl"
+          >
             Sync<span className="text-custom-secondary">Fit</span>
           </Link>
         </div>
@@ -51,15 +65,26 @@ const Navbar = () => {
         </div>
 
         {/* Right side: User Image */}
-        <div className="flex gap-4">
-          <Link to={'/login'}>
-            <ButtonPrimary>Log In</ButtonPrimary>
-          </Link>
-          <Link>
-            <ButtonPrimary>Log Out</ButtonPrimary>
-          </Link>
-
-          <img src="/" alt="User" className="w-8 h-8 rounded-full mr-2" />
+        <div className="flex gap-4 items-center">
+          {user ? (
+            <>
+              <button onClick={handleLogOutUser}>
+                <ButtonPrimary>Log Out</ButtonPrimary>
+              </button>
+              <img
+                data-tooltip-id="my-tooltip"
+                data-tooltip-content={user?.displayName}
+                data-tooltip-place="bottom"
+                src={user?.photoURL}
+                alt="User"
+                className="user-profile-image-custom-class rounded-full cursor-pointer"
+              />
+            </>
+          ) : (
+            <Link to={"/login"}>
+              <ButtonPrimary>Log In</ButtonPrimary>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -69,6 +94,8 @@ const Navbar = () => {
           {links}
         </div>
       )}
+
+      <Tooltip id="my-tooltip" />
     </nav>
   );
 };
