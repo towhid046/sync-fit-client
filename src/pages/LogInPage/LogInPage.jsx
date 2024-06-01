@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
+import PageBanner from './../../components/shared/PageBanner/PageBanner';
 
 const formInfo = [
   {
@@ -20,8 +21,10 @@ const formInfo = [
 
 const LogInPage = () => {
   return (
-    <section className="container mx-auto px-4 my-32 min-h-screen">
-      <div className="bg-custom-secondary max-w-xl md:p-12 p-6 mx-auto shadow-sm mt-12">
+   <section className="min-h-screen">
+    <PageBanner title="Login" link="/login"/>
+     <div className="container mx-auto px-4 md:py-16 py-12">
+      <div className="bg-custom-secondary max-w-xl md:p-12 p-6 mx-auto shadow-sm ">
         <form>
           {formInfo.map((item) => (
             <div key={item.id} className="mb-4">
@@ -54,7 +57,8 @@ const LogInPage = () => {
           </Link>
         </p>
       </div>
-    </section>
+    </div>
+   </section>
   );
 };
 

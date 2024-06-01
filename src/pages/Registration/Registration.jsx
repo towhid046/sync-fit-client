@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
+import PageBanner from "../../components/shared/PageBanner/PageBanner";
 
 const formInfo = [
   { id: 1, title: "Your Name", placeholder: "Your Name", name: "name" },
@@ -27,8 +28,10 @@ const formInfo = [
 
 const Registration = () => {
   return (
-    <section className="container mx-auto px-4 my-32 min-h-screen">
-      <div className="bg-custom-secondary max-w-xl md:p-12 p-6 mx-auto shadow-sm mt-12">
+    <section className="min-h-screen">
+      <PageBanner title="Registration" link="/registration"/>
+     <div className="container mx-auto px-4 md:py-16 py-12">
+      <div className="bg-custom-secondary max-w-xl md:p-12 p-6 mx-auto shadow-sm ">
         <form>
           {formInfo.map((item) => (
             <div key={item.id} className="mb-4">
@@ -54,6 +57,7 @@ const Registration = () => {
         </form>
         <p className="mt-5">Already Have an account? <Link to={'/login'}><strong className="hover:text-custom-primary duration-300 transition">Login</strong></Link></p>
       </div>
+    </div>
     </section>
   );
 };

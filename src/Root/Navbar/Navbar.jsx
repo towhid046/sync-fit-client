@@ -41,8 +41,8 @@ const Navbar = () => {
               <FaBars className="text-2xl" />
             )}
           </button>
-          <span className="text-white cursor-pointer font-bold text-3xl">
-            Rig<span className="text-custom-secondary">Fit</span>
+          <span className="text-custom-third cursor-pointer font-bold text-3xl">
+            Sync<span className="text-custom-secondary">Fit</span>
           </span>
         </div>
 
@@ -57,7 +57,7 @@ const Navbar = () => {
             <ButtonPrimary>Log In</ButtonPrimary>
           </Link>
           <Link>
-            <ButtonSecondary>Log Out</ButtonSecondary>
+            <ButtonPrimary>Log Out</ButtonPrimary>
           </Link>
 
           <img src="/" alt="User" className="w-8 h-8 rounded-full mr-2" />
@@ -66,7 +66,7 @@ const Navbar = () => {
 
       {/* Responsive Menu */}
       {isOpen && (
-        <div className="menu md:hidden mt-2 list-none flex flex-col gap-4 text-white p-10 items-center fixed bg-custom-primary w-full font-medium">
+        <div className="menu md:hidden list-none flex flex-col gap-4 text-white p-10 items-center absolute bg-custom-primary w-full font-medium">
           {links}
         </div>
       )}
