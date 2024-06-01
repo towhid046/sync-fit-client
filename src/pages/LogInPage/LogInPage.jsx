@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { useState } from "react";
+import swal from "sweetalert";
 
 const formInfo = [
   {
@@ -32,18 +33,19 @@ const LogInPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await logInUser(data.email, data.password);
-      console.log(res.user);
+      await logInUser(data.email, data.password);
+      swal("Success", "Your member account login successfully!!", "success");
     } catch (error) {
-      console.error(error.message);
+      swal("Error", `${error.message}`, "error");
     }
   };
 
   const handleLogInWithGoogle = async () => {
     try {
       await singInWithGoogle();
+      swal("Success", "Your member account login successfully!!", "success");
     } catch (error) {
-      console.error(error.message);
+      swal("Error", `${error.message}`, "error");
     }
   };
 
@@ -66,7 +68,7 @@ const LogInPage = () => {
                   className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#4A4E4B]"
                   placeholder={item.placeholder}
                   required
-                  type={(!isShowPass && item.type )|| "text"}
+                  type={(!isShowPass && item.type) || "text"}
                   {...register(item.name)}
                 />
                 {item.type === "password" && (

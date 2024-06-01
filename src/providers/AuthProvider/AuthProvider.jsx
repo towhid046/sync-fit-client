@@ -10,12 +10,15 @@ import { createContext, useEffect, useState } from "react";
 import { auth, googleProvider } from "./../../config/firebase";
 import PropTypes from "prop-types";
 import { TbRuler2 } from "react-icons/tb";
+import useAxiosPublic from "./../../hooks/useAxiosPublic";
 
 export const UserContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const axiosPublic = useAxiosPublic();
 
   // Register new user:
   const createNewUser = (email, password) => {
@@ -55,7 +58,25 @@ const AuthProvider = ({ children }) => {
       onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
         setLoading(false);
-        console.log(currentUser)
+        
+        // send a http request if the current user have:
+        if (currentUser) {
+          const loggedUser = {
+            name: currentUser.displayName,
+            email: currentUser.email,
+            role: "member",
+          };
+
+          const sendData = async () => {
+            try {
+              const res = await axiosPublic.post("/users", loggedUser);
+              // console.log(res.data);
+            } catch (error) {
+              console.error(error.message);
+            }
+          };
+          sendData();
+        }
       });
     };
     return () => unSubscribe();

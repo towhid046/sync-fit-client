@@ -68,9 +68,9 @@ const Navbar = () => {
         <div className="flex gap-4 items-center">
           {user ? (
             <>
-              <button onClick={handleLogOutUser}>
+              <div onClick={handleLogOutUser}>
                 <ButtonPrimary>Log Out</ButtonPrimary>
-              </button>
+              </div>
               <img
                 data-tooltip-id="my-tooltip"
                 data-tooltip-content={user?.displayName}

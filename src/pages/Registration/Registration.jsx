@@ -7,6 +7,7 @@ import useAuth from "./../../hooks/useAuth";
 import { useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
+import swal from "sweetalert";
 
 const formInfo = [
   { id: 1, title: "Your Name", placeholder: "Your Name", name: "name" },
@@ -39,20 +40,21 @@ const Registration = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await createNewUser(data.email, data.password);
+      await createNewUser(data.email, data.password);
       await updateUserProfile(data.name, data.photoUrl);
-
-      console.log(res.user);
+      swal("Success", "Your member account register successfully!!", "success");
     } catch (error) {
       console.error(error.message);
+      swal('Error', `${error.message}`, 'error')
     }
   };
 
   const handleLogInWithGoogle = async () => {
     try {
       await singInWithGoogle();
+      swal("Success", "Your member account register successfully!!", "success");
     } catch (error) {
-      console.error(error.message);
+      swal('Error', `${error.message}`, 'error')
     }
   };
 
