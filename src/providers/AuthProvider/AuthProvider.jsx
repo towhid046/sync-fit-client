@@ -58,11 +58,10 @@ const AuthProvider = ({ children }) => {
       onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
         setLoading(false);
-        
+
         // send a http request if the current user have:
         if (currentUser) {
           const loggedUser = {
-            name: currentUser.displayName,
             email: currentUser.email,
             role: "member",
           };
@@ -73,14 +72,19 @@ const AuthProvider = ({ children }) => {
               // console.log(res.data);
             } catch (error) {
               console.error(error.message);
+            } finally {
+              setLoading(false);
             }
           };
           sendData();
         }
       });
+
     };
     return () => unSubscribe();
-  }, []);
+  }, [axiosPublic]);
+
+  
 
   const userInfo = {
     user,
@@ -89,6 +93,8 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     logOutUser,
     singInWithGoogle,
+    loading,
+    setLoading,
   };
 
   return (

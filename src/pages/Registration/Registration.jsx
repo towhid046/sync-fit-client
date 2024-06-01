@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import PageBanner from "../../components/shared/PageBanner/PageBanner";
 import { useForm } from "react-hook-form";
@@ -37,15 +37,17 @@ const Registration = () => {
   const { register, handleSubmit } = useForm();
   const { createNewUser, updateUserProfile, singInWithGoogle } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
       await createNewUser(data.email, data.password);
       await updateUserProfile(data.name, data.photoUrl);
+
       swal("Success", "Your member account register successfully!!", "success");
+      navigate("/");
     } catch (error) {
-      console.error(error.message);
-      swal('Error', `${error.message}`, 'error')
+      swal("Error", `${error.message}`, "error");
     }
   };
 
@@ -53,8 +55,9 @@ const Registration = () => {
     try {
       await singInWithGoogle();
       swal("Success", "Your member account register successfully!!", "success");
+      navigate("/");
     } catch (error) {
-      swal('Error', `${error.message}`, 'error')
+      swal("Error", `${error.message}`, "error");
     }
   };
 

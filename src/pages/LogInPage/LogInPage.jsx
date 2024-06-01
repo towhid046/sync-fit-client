@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import PageBanner from "./../../components/shared/PageBanner/PageBanner";
 import googleIcon from "../../assets/svg/google.svg";
@@ -28,8 +28,9 @@ const formInfo = [
 
 const LogInPage = () => {
   const { register, handleSubmit } = useForm();
-  const { logInUser, singInWithGoogle } = useAuth();
+  const { logInUser, singInWithGoogle, setLoading } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     try {
@@ -37,6 +38,8 @@ const LogInPage = () => {
       swal("Success", "Your member account login successfully!!", "success");
     } catch (error) {
       swal("Error", `${error.message}`, "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,6 +47,7 @@ const LogInPage = () => {
     try {
       await singInWithGoogle();
       swal("Success", "Your member account login successfully!!", "success");
+      navigate("/");
     } catch (error) {
       swal("Error", `${error.message}`, "error");
     }

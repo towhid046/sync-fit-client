@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ButtonPrimary from "./../../components/shared/ButtonPrimary/ButtonPrimary";
 import useAuth from "../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
+import swal from "sweetalert";
+import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logOutUser } = useAuth();
+  const { user, logOutUser, loading } = useAuth();
+  const navigate = useNavigate();
 
   const menus = [
     { id: 1, name: "Home", link: "/" },
@@ -34,8 +37,10 @@ const Navbar = () => {
   const handleLogOutUser = async () => {
     try {
       await logOutUser();
+      swal("Log out", "You have log Out successfully!!", "success");
+      navigate("/");
     } catch (error) {
-      console.error(error.message);
+      swal("Error", `${error.message}`, "error");
     }
   };
 
@@ -66,24 +71,30 @@ const Navbar = () => {
 
         {/* Right side: User Image */}
         <div className="flex gap-4 items-center">
-          {user ? (
-            <>
-              <div onClick={handleLogOutUser}>
-                <ButtonPrimary>Log Out</ButtonPrimary>
-              </div>
-              <img
-                data-tooltip-id="my-tooltip"
-                data-tooltip-content={user?.displayName}
-                data-tooltip-place="bottom"
-                src={user?.photoURL}
-                alt="User"
-                className="user-profile-image-custom-class rounded-full cursor-pointer"
-              />
-            </>
+          {loading ? (
+            <LoadingSpinner />
           ) : (
-            <Link to={"/login"}>
-              <ButtonPrimary>Log In</ButtonPrimary>
-            </Link>
+            <>
+              {user ? (
+                <>
+                  <div onClick={handleLogOutUser}>
+                    <ButtonPrimary>Log Out</ButtonPrimary>
+                  </div>
+                  <img
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content={user?.displayName}
+                    data-tooltip-place="bottom"
+                    src={user?.photoURL}
+                    alt="User"
+                    className="user-profile-image-custom-class rounded-full cursor-pointer"
+                  />
+                </>
+              ) : (
+                <Link to={"/login"}>
+                  <ButtonPrimary>Log In</ButtonPrimary>
+                </Link>
+              )}
+            </>
           )}
         </div>
       </div>
