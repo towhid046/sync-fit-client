@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import swal from "sweetalert";
+import { scrollToTop } from "../../utilities/scrollToTop";
 
 const formInfo = [
   {
@@ -31,6 +32,10 @@ const LogInPage = () => {
   const { logInUser, singInWithGoogle, setLoading } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   const onSubmit = async (data) => {
     try {

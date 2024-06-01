@@ -1,11 +1,19 @@
-import Hero from './Hero/Hero';
+import { useEffect } from "react";
+import Hero from "./Hero/Hero";
+import { scrollToTop } from "./../../utilities/scrollToTop";
+import Features from "./Features/Features";
 
 const HomePage = () => {
-    return (
-        <div>
-            <Hero/>
-        </div>
-    );
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
+  return (
+    <div>
+      <Hero />
+      <Features />
+    </div>
+  );
 };
 
 export default HomePage;

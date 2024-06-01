@@ -15,13 +15,6 @@ const slides = [
       img: "https://images.pexels.com/photos/19895784/pexels-photo-19895784/free-photo-of-computer-components-on-table.jpeg?auto=compress&cs=tinysrgb&w=600",
     },
     {
-      id: 4,
-      title: "Unleash Your Digital Bohemia",
-      description:
-        "Express your individuality and embrace your digital nomad lifestyle with our eclectic collection of electronic wearables and accessories. Dive into a world where technology meets bohemian charm, and every gadget tells a unique story.",
-      img: "https://images.pexels.com/photos/6755141/pexels-photo-6755141.jpeg?auto=compress&cs=tinysrgb&w=600",
-    },
-    {
       id: 5,
       title: "Tech for Everyday Life",
       description:

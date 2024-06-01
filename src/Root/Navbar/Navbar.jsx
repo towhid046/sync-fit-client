@@ -47,7 +47,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-custom-primary py-5 w-full sticky z-10 top-0">
+    <nav className="bg-custom-primary py-5 w-full sticky z-50 top-0">
       <div className="container px-4 mx-auto flex justify-between items-center">
         {/* Left side: Toggle Button and Website Name */}
         <div className="flex items-center">

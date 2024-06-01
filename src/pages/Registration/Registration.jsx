@@ -4,10 +4,11 @@ import PageBanner from "../../components/shared/PageBanner/PageBanner";
 import { useForm } from "react-hook-form";
 import googleIcon from "../../assets/svg/google.svg";
 import useAuth from "./../../hooks/useAuth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import swal from "sweetalert";
+import { scrollToTop } from "../../utilities/scrollToTop";
 
 const formInfo = [
   { id: 1, title: "Your Name", placeholder: "Your Name", name: "name" },
@@ -38,6 +39,10 @@ const Registration = () => {
   const { createNewUser, updateUserProfile, singInWithGoogle } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    scrollToTop();
+  }, []);
 
   const onSubmit = async (data) => {
     try {
