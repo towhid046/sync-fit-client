@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import ButtonPrimary from "./../../components/shared/ButtonPrimary/ButtonPrimary";
-import ButtonSecondary from "../../components/shared/ButtonSecondary/ButtonSecondary";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,9 +40,9 @@ const Navbar = () => {
               <FaBars className="text-2xl" />
             )}
           </button>
-          <span className="text-custom-third cursor-pointer font-bold text-3xl">
+          <Link to={'/'} className="text-custom-third cursor-pointer font-bold text-3xl">
             Sync<span className="text-custom-secondary">Fit</span>
-          </span>
+          </Link>
         </div>
 
         {/* Middle: Menu Items */}

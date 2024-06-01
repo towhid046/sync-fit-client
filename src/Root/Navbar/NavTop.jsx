@@ -28,8 +28,8 @@ const NavTop = () => {
         <strong>+99 0123456677</strong>
         <span className="hidden md:flex">|</span>
         <ul className="flex items-center gap-4">
-          {socialIcons.map((icon) => (
-            <Link key={icon}>{icon}</Link>
+          {socialIcons.map((icon,index) => (
+            <Link key={index}>{icon}</Link>
           ))}
         </ul>
       </div>

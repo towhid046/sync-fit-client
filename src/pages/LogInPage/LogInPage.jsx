@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import PageBanner from './../../components/shared/PageBanner/PageBanner';
+import googleIcon from '../../assets/svg/google.svg'
 
 const formInfo = [
   {
@@ -25,6 +26,8 @@ const LogInPage = () => {
     <PageBanner title="Login" link="/login"/>
      <div className="container mx-auto px-4 md:py-16 py-12">
       <div className="bg-custom-secondary max-w-xl md:p-12 p-6 mx-auto shadow-sm ">
+      <h2 className="md:text-5xl font-bold text-4xl mb-5">Login your account</h2>
+
         <form>
           {formInfo.map((item) => (
             <div key={item.id} className="mb-4">
@@ -48,7 +51,14 @@ const LogInPage = () => {
             Login
           </ButtonPrimary>
         </form>
-        <p className="mt-5">
+        <div className="flex flex-col items-center">
+            <p className="text-2xl mt-5 mb-2">Or</p>
+            <button className=" flex items-center  justify-center gap-x-3 text-sm sm:text-base  rounded-lg bg-gray-800 text-white duration-300 transition-colors border px-8 py-2.5">
+              <img src={googleIcon} className="w-6" alt="" />
+              <span>Continue with Google</span>
+            </button>
+          </div>
+        <p className="mt-5 text-center">
           Don't Have an account?{" "}
           <Link to={"/registration"}>
             <strong className="hover:text-custom-primary duration-300 transition">
