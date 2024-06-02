@@ -10,7 +10,7 @@ const Classes = () => {
     isLoading,
     error,
     isError,
-  } = usePublicData("classes", "/popular-classes");
+  } = usePublicData(["classes"], "/popular-classes");
 
   if (isError) {
     return <ErrorElement errorText={error} />;

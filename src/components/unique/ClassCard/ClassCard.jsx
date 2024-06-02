@@ -7,7 +7,7 @@ const ClassCard = ({ singleClass }) => {
     singleClass;
 
   return (
-    <div className=" bg-custom-secondary transition duration-300 hover:-translate-y-2">
+    <div className=" bg-white transition duration-300 hover:-translate-y-2 shadow-sm">
       <figure className="relative">
         <img className="max-h-72 w-full" src={image} alt="" />
         <span className="bg-custom-primary px-4 py-1 text-white absolute top-4 right-4">
