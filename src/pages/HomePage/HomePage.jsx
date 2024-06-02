@@ -6,6 +6,7 @@ import AboutUs from "./AboutUs/AboutUs";
 import Classes from "./Classes/Classes";
 import Testimonials from "./Testimonials/Testimonials";
 import Forums from "./Forums/Forums";
+import NewsLetter from "./NewsLetter/NewsLetter";
 
 const HomePage = () => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const HomePage = () => {
       <Classes />
       <Testimonials />
       <Forums />
+      <NewsLetter />
     </div>
   );
 };

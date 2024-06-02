@@ -77,7 +77,7 @@ const Registration = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             {formInfo.map((item) => (
               <div key={item.id} className="mb-4 relative">
-                <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-[10px]">
+                <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
                   {item.title}
                 </label>
                 <input
@@ -115,12 +115,12 @@ const Registration = () => {
               <span>Continue with Google</span>
             </button>
           </div>
-          <p className="mt-5 text-center">
+          <p className="mt-5 text-center text-gray-500">
             Already Have an account?{" "}
             <Link to={"/login"}>
-              <strong className="hover:text-custom-primary duration-300 transition">
+              <span className="text-custom-primary italic underline duration-300 transition">
                 Login
-              </strong>
+              </span>
             </Link>
           </p>
         </div>

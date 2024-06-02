@@ -4,7 +4,7 @@ const aboutUsImg =
   "https://images.pexels.com/photos/20379134/pexels-photo-20379134/free-photo-of-man-in-cap-exercising-at-gym.jpeg?auto=compress&cs=tinysrgb&w=400";
 const AboutUs = () => {
   return (
-    <section className="flex md:flex-row flex-col gap-8 justify-between container mx-auto px-4 lg:py-16 md:py-12 py-8 max-w-4xl md:mt-8 mt-5 ">
+    <section className="flex md:flex-row flex-col gap-8 justify-between container mx-auto px-4 lg:py-16 md:py-12 py-8 max-w-4xl md:pt-8">
       <div className="flex-1 ">
         <h2 className="md:text-4xl text-3xl font-bold uppercase">
           Behind The story of SyncFit

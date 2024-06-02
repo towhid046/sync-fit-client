@@ -70,7 +70,7 @@ const LogInPage = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             {formInfo.map((item) => (
               <div key={item.id} className="mb-4 relative">
-                <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-[10px]">
+                <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
                   {item.title}
                 </label>
                 <input
@@ -108,12 +108,12 @@ const LogInPage = () => {
               <span>Continue with Google</span>
             </button>
           </div>
-          <p className="mt-5 text-center">
+          <p className="mt-5 text-center text-gray-500">
             Don't Have an account?{" "}
             <Link to={"/registration"}>
-              <strong className="hover:text-custom-primary duration-300 transition">
+              <span className="underline text-custom-primary italic duration-300 transition">
                 Registration
-              </strong>
+              </span>
             </Link>
           </p>
         </div>

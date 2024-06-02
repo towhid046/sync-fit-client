@@ -7,12 +7,20 @@ import {
   MdOutlineKeyboardArrowLeft,
 } from "react-icons/md";
 import { Link } from "react-router-dom";
-import slides from "./slideData.js";
 import { Slide } from "react-awesome-reveal";
 import ButtonPrimary from "./../../../components/shared/ButtonPrimary/ButtonPrimary";
+import usePublicData from "./../../../hooks/usePublicData";
+import ErrorElement from "./../../../components/shared/ErrorElement/ErrorElement";
+import LoadingSpinner from "./../../../components/shared/LoadingSpinner/LoadingSpinner";
 
 const Hero = () => {
   const sliderRef = useRef(null);
+  const {
+    data: slides,
+    isLoading,
+    isError,
+    error,
+  } = usePublicData(["slides"], "/slides");
 
   const handleNext = () => {
     if (sliderRef.current) {
@@ -34,6 +42,13 @@ const Hero = () => {
     autoplaySpeed: 5000,
   };
 
+  if (isError) {
+    return <ErrorElement errorText={error} />;
+  }
+  if (isLoading) {
+    return <LoadingSpinner customClass="min-h-[80vh]" />;
+  }
+
   return (
     <section className="relative overflow-x-hidden">
       <button
@@ -45,7 +60,7 @@ const Hero = () => {
 
       <Slider className="mx-auto" ref={sliderRef} {...settings} autoplay={true}>
         {slides?.map((slide) => (
-          <div key={slide.id}>
+          <div key={slide._id}>
             <div
               style={{ backgroundImage: `url(${slide.img})` }}
               className=" p-5 bg-cover bg-center bg-no-repeat relative overflow-hidden"

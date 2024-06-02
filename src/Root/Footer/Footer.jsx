@@ -33,10 +33,11 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="bg-neutral">
-        <div className="footer container border-b mx-auto px-4 p-10 text-neutral-content">
+      <footer className="bg-neutral bg-gray-800 text-gray-400">
+        <div className="flex justify-between gap-10 flex-col md:flex-row container mx-auto px-4 p-10 ">
+          
           <div className="max-w-xs">
-          <div>
+          <div className="mb-4">
           <Link to={"/"} className="flex items-center gap-2">
               <HiOutlineWrenchScrewdriver className="text-3xl text-[#dd3333]" />
               <h2 className="text-3xl font-bold bg-gradient-to-r from-[#dd3333] to-neutral inline-block text-transparent bg-clip-text">
@@ -58,7 +59,17 @@ const Footer = () => {
 
           {/* Quick links */}
           <nav>
-            <h6 className="footer-title text-lg">Quick Links</h6>
+            <h6 className="text-2xl font-semibold mb-4">Quick Links</h6>
+            {quickLinks?.map((link, index) => (
+              <Link to={link.url} key={index} className="link link-hover flex items-center gap-1 hover:text-error transition duration-300 ease-in-out">
+                <IoIosArrowForward/>
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+
+          <nav>
+            <h6 className="text-2xl font-semibold mb-4">Quick Links</h6>
             {quickLinks?.map((link, index) => (
               <Link to={link.url} key={index} className="link link-hover flex items-center gap-1 hover:text-error transition duration-300 ease-in-out">
                 <IoIosArrowForward/>
@@ -69,7 +80,7 @@ const Footer = () => {
 
           {/* contact */}
           <ul>
-            <h6 className="footer-title text-lg">Contact</h6>
+            <h6 className="text-2xl font-semibold mb-4">Contact</h6>
             {contacts.map((contact, index) => (
               <li key={index} className="flex gap-3 mb-1">
                 <span className="text-lg">{contact.icon}</span>
@@ -78,27 +89,11 @@ const Footer = () => {
             ))}
           </ul>
 
-          <form className="max-w-xs" onClick={(e)=>{e.preventDefault()}}>
-          <h6 className="footer-title text-lg">Newsletter</h6>
-          <p>Subscribe our news letter to get exciting latest and updated news.</p>
-          <fieldset className="form-control mt-1">
-            <div className="join">
-              <input
-                type="text"
-                placeholder="Enter Your Email"
-                className="input bg-base-200 text-base-content focus:outline-none border focus:border-neutral-content join-item"
-              />
-              <button className="btn btn-error join-item">
-              <FaArrowTrendUp className="text-xl text-base-300"/>
-              </button>
-            </div>
-          </fieldset>
-        </form>
-
         </div>
+      <hr className="border-custom-primary opacity-30 container mx-auto px-4" />
       </footer>
 
-      <footer className="  bg-neutral ">
+      <footer className="  bg-gray-800 text-gray-400">
         <div className=" container md:flex-row flex-col flex justify-between  mx-auto px-4 items-center py-4 text-neutral-content text-[13px] gap-3">
           <p>Copyright &copy; 2024 - All right reserved</p>
           <ul className="flex gap-3">
