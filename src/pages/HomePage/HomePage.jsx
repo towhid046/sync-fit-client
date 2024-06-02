@@ -3,6 +3,7 @@ import Hero from "./Hero/Hero";
 import { scrollToTop } from "./../../utilities/scrollToTop";
 import Features from "./Features/Features";
 import AboutUs from "./AboutUs/AboutUs";
+import Classes from "./Classes/Classes";
 
 const HomePage = () => {
   useEffect(() => {
@@ -14,6 +15,7 @@ const HomePage = () => {
       <Hero />
       <Features />
       <AboutUs />
+      <Classes />
     </div>
   );
 };

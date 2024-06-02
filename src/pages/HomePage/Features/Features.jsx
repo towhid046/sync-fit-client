@@ -20,7 +20,7 @@ const Features = () => {
   ));
 
   return (
-    <section className="container mx-auto px-4 lg:my-16 md:my-12 my-8">
+    <section className="container mx-auto px-4 lg:py-16 md:py-12 py-8">
       <SectionHeader
         title="Fitness Programmes at SyncFit"
         description="If you want to be fit, you need to start Today!"
