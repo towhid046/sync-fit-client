@@ -5,6 +5,7 @@ import Features from "./Features/Features";
 import AboutUs from "./AboutUs/AboutUs";
 import Classes from "./Classes/Classes";
 import Testimonials from "./Testimonials/Testimonials";
+import Forums from "./Forums/Forums";
 
 const HomePage = () => {
   useEffect(() => {
@@ -18,6 +19,7 @@ const HomePage = () => {
       <AboutUs />
       <Classes />
       <Testimonials />
+      <Forums />
     </div>
   );
 };

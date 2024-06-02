@@ -6,12 +6,12 @@ const Review = ({ review }) => {
   const { description, rating, author } = review;
   return (
     <div className={`space-y-7 max-w-5xl mx-3`}>
-      <div className="bg-custom-secondary cursor-grab shadow-lg p-6 rounded-xl relative ">
+      <div className="bg-custom-secondary cursor-grab shadow-lg p-6 relative ">
         <div className="mb-2">
           <PiQuotes className="text-6xl text-custom-primary opacity-30 rotate-180 " />
         </div>
         <p className="text-gray-500 mb-2">
-          {description.split("").slice(0, 109).join('')}
+          {description.split("").slice(0, 109).join("")}
         </p>
         <span className="absolute -bottom-6 left-6 text-custom-secondary ">
           <BiSolidDownArrow className="text-4xl" />

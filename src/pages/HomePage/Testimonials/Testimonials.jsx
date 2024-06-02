@@ -35,7 +35,7 @@ const Testimonials = () => {
       {
         breakpoint: 700,
         settings: {
-          dots:false,
+          dots: false,
           slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 1,
@@ -49,7 +49,7 @@ const Testimonials = () => {
   }
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner customClass="min-h-[80vh]" />;
   }
 
   return (

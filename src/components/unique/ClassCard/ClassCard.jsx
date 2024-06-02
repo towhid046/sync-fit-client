@@ -1,10 +1,17 @@
 import PropTypes from "prop-types";
 import { CiStar } from "react-icons/ci";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
-import { FaUserTie } from "react-icons/fa";
 const ClassCard = ({ singleClass }) => {
-  const { id, image, title, description, totalBookings, price, rating } =
-    singleClass;
+  const {
+    id,
+    image,
+    title,
+    description,
+    totalBookings,
+    price,
+    rating,
+    trainer,
+  } = singleClass;
 
   return (
     <div className=" bg-white transition duration-300 hover:-translate-y-2 shadow-sm">
@@ -18,21 +25,28 @@ const ClassCard = ({ singleClass }) => {
         <ul className="list-none flex items-center  gap-12 flex-wrap">
           <li className="flex items-center gap-2">
             <CiStar className="text-xl text-custom-primary" />
-            <span className="text-gray-500">{rating} Stars</span>
+            <span className="text-gray-400">{rating} Stars</span>
           </li>
           <li className="flex items-center gap-2">
             <MdOutlineBookmarkAdded className="text-lg text-custom-primary" />
-            <span className="text-gray-500">{totalBookings} Booked</span>
+            <span className="text-gray-400">{totalBookings} Booked</span>
           </li>
         </ul>
         <div>
           <h2 className="text-3xl font-semibold mb-2">{title}</h2>
-          <p className="text-gray-600">{description}</p>
+          <p className="text-gray-500">{description}</p>
         </div>
-        <hr />
+        <hr className="border-custom-primary opacity-20" />
         <div className="flex items-center gap-4">
-          <FaUserTie className="text-2xl" />
-          <h2 className="text-xl font-medium">Trainer Name</h2>
+          <img
+            src={trainer?.image}
+            className="w-12 h-12 rounded-full"
+            alt="Trainer"
+          />
+          <div>
+            <h2 className="text-xl font-medium">{trainer.name || "Unknown"}</h2>
+            <p className="text-gray-500 italic">{trainer?.location}</p>
+          </div>
         </div>
       </div>
     </div>

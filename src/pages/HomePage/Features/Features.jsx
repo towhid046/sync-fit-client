@@ -1,9 +1,18 @@
+import usePublicData from "../../../hooks/usePublicData";
 import SectionHeader from "./../../../components/shared/SectionHeader/SectionHeader";
-import featuresData from "./featuresData";
+import ErrorElement from "./../../../components/shared/ErrorElement/ErrorElement";
+import LoadingSpinner from "./../../../components/shared/LoadingSpinner/LoadingSpinner";
 const Features = () => {
-  const items = featuresData.map((item) => (
+  const {
+    data: features,
+    isLoading,
+    isError,
+    error,
+  } = usePublicData(["features"], "/features");
+
+  const items = features?.map((item) => (
     <div
-      key={item.id}
+      key={item._id}
       className="
       hover:-translate-y-2
       transition duration-500
@@ -18,6 +27,13 @@ const Features = () => {
       </div>
     </div>
   ));
+
+  if (isError) {
+    return <ErrorElement errorText={error} />;
+  }
+  if (isLoading) {
+    return <LoadingSpinner customClass='min-h-[80vh]' />;
+  }
 
   return (
     <section className="container mx-auto px-4 lg:py-16 md:py-12 py-8">
