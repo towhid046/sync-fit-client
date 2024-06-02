@@ -30,8 +30,8 @@ const NewsLetter = () => {
   };
 
   return (
-    <section className="container lg:py-16 md:py-12 py-8 px-4">
-      <div className=" flex md:flex-row flex-col md:gap-12 gap-5 bg-custom-secondary shadow-xl  justify-between  mx-auto lg:p-16 md:p-12 p-8 max-w-4xl items-center">
+    <section className="container max-w-4xl mx-auto lg:py-16 md:py-12 py-8 px-4 mt-5">
+      <div className=" flex md:flex-row flex-col md:gap-12 gap-5 bg-custom-secondary shadow-xl justify-between lg:p-16 md:p-12 p-8  items-center">
         <div className="flex-1">
           <h2 className="md:text-4xl text-3xl font-bold uppercase">
             Subscribe to Our Newsletter!!
