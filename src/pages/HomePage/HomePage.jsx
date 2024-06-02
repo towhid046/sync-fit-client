@@ -4,6 +4,7 @@ import { scrollToTop } from "./../../utilities/scrollToTop";
 import Features from "./Features/Features";
 import AboutUs from "./AboutUs/AboutUs";
 import Classes from "./Classes/Classes";
+import Testimonials from "./Testimonials/Testimonials";
 
 const HomePage = () => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const HomePage = () => {
       <Features />
       <AboutUs />
       <Classes />
+      <Testimonials />
     </div>
   );
 };
