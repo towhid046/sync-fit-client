@@ -70,13 +70,14 @@ const Registration = () => {
     <section className="min-h-screen">
       <PageBanner title="Registration" link="/registration" />
       <div className="container mx-auto px-4 md:py-16 py-12">
-        <div className="bg-custom-secondary max-w-xl md:p-12 p-6 mx-auto shadow-sm ">
+        <div className="bg-custom-secondary max-w-3xl md:p-12 p-6 mx-auto shadow-sm ">
           <h2 className="md:text-5xl font-bold text-4xl mb-5">
             Register your account
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid md:grid-cols-2 gap-6 grid-cols-1 mb-4">
             {formInfo.map((item) => (
-              <div key={item.id} className="mb-4 relative">
+              <div key={item.id} className="relative">
                 <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
                   {item.title}
                 </label>
@@ -97,7 +98,8 @@ const Registration = () => {
                 )}
               </div>
             ))}
-            <label htmlFor="term-policy">
+            </div>
+            <label htmlFor="term-policy" className="cursor-pointer">
               <input type="checkbox" id="term-policy" className="mr-2" />
               Accept our terms and policy
             </label>
@@ -109,7 +111,7 @@ const Registration = () => {
             <p className="text-2xl mt-5 mb-2">Or</p>
             <button
               onClick={handleLogInWithGoogle}
-              className=" flex items-center  justify-center gap-x-3 text-sm sm:text-base  rounded-lg bg-gray-800 text-white duration-300 transition-colors border px-8 py-3"
+              className=" flex items-center  justify-center gap-x-3 text-sm sm:text-base bg-gray-800 text-white duration-300 transition-colors border px-8 py-3"
             >
               <img src={googleIcon} className="w-6" alt="" />
               <span>Continue with Google</span>

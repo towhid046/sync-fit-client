@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSlot, setSelectedSlot] = useState("");
+  const [selectedPackage, setSelectedPackage] = useState({});
 
   const axiosPublic = useAxiosPublic();
 
@@ -89,6 +90,11 @@ const AuthProvider = ({ children }) => {
     setSelectedSlot(slot);
   };
 
+  // handle User selected Package:
+  const handleUserSelectedPackage = (pack) => {
+    setSelectedPackage(pack);
+  };
+
   const userInfo = {
     user,
     createNewUser,
@@ -100,6 +106,8 @@ const AuthProvider = ({ children }) => {
     setLoading,
     handleUserSelectedSlot,
     selectedSlot,
+    handleUserSelectedPackage,
+    selectedPackage,
   };
 
   return (

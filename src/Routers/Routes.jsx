@@ -8,6 +8,7 @@ import Trainers from "../pages/TrainersPage/Trainers/Trainers";
 import TrainerDetails from "../pages/TrainerDetails/TrainerDetails";
 import TrainerBookedPage from "../pages/TrainerBookedPage/TrainerBookedPage";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
+import PaymentPage from "../pages/PaymentPage/PaymentPage";
 const routers = createBrowserRouter([
   {
     path: "/",
@@ -51,6 +52,16 @@ const routers = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <TrainerBookedPage />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/payment/:trainerId",
+        loader: async ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/trainers/${params.trainerId}`),
+        element: (
+          <PrivateRoutes>
+            <PaymentPage/>
           </PrivateRoutes>
         ),
       },

@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import SectionHeader from "./../../components/shared/SectionHeader/SectionHeader";
 import packages from "./packagesData";
@@ -12,7 +12,7 @@ const TrainerBookedPage = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
-  const { selectedSlot } = useAuth();
+  const { selectedSlot, handleUserSelectedPackage } = useAuth();
   const trainer = useLoaderData();
 
   const {
@@ -52,12 +52,15 @@ const TrainerBookedPage = () => {
 
       <hr />
 
-      <div>
+      <Link
+        onClick={() => handleUserSelectedPackage(pack)}
+        to={`/payment/${_id}`}
+      >
         <ButtonPrimary customClass="border-custom-primary flex items-center gap-3 py-2.5 w-full justify-center">
           Join Now
           <FaArrowTrendUp />
         </ButtonPrimary>
-      </div>
+      </Link>
     </div>
   ));
 
