@@ -53,7 +53,7 @@ const Hero = () => {
     <section className="relative overflow-x-hidden">
       <button
         onClick={handlePrev}
-        className="bg-custom-secondary bg-opacity-20 p-3 rounded-full text-custom-secondary  transition duration-300 hover:bg-gray-800 hover:bg-opacity-80  left-4 lg:left-6 z-40 top-[40%] absolute"
+        className="bg-custom-secondary bg-opacity-20 p-3 rounded-full text-custom-secondary  transition duration-300 hover:bg-custom-primary hover:bg-opacity-70  left-4 lg:left-6 z-40 top-[40%] absolute"
       >
         <MdOutlineKeyboardArrowLeft className=" text-2xl" />
       </button>
@@ -89,7 +89,7 @@ const Hero = () => {
 
       <button
         onClick={handleNext}
-        className="bg-custom-secondary bg-opacity-20 p-3 rounded-full text-custom-secondary  transition duration-300 hover:bg-gray-800 hover:bg-opacity-80  absolute right-4 lg:right-6 z-40 top-[40%]"
+        className="bg-custom-secondary bg-opacity-20 p-3 rounded-full text-custom-secondary  transition duration-300  hover:bg-custom-primary hover:bg-opacity-70 absolute right-4 lg:right-6 z-40 top-[40%]"
       >
         <MdOutlineKeyboardArrowRight className="text-2xl " />
       </button>

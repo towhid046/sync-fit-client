@@ -102,7 +102,7 @@ const LogInPage = () => {
             <p className="text-2xl mt-5 mb-2">Or</p>
             <button
               onClick={handleLogInWithGoogle}
-              className=" flex items-center  justify-center gap-x-3 text-sm sm:text-base  rounded-lg bg-gray-800 text-white duration-300 transition-colors border px-8 py-2.5"
+              className=" flex items-center  justify-center gap-x-3 text-sm sm:text-base  rounded-lg bg-gray-800 text-white duration-300 transition-colors border px-8 py-3"
             >
               <img src={googleIcon} className="w-6" alt="" />
               <span>Continue with Google</span>

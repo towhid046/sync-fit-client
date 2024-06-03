@@ -63,7 +63,7 @@ const NewsLetter = () => {
             placeholder="Your Email"
             className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#4A4E4B] mb-5"
           />
-          <ButtonPrimary customClass="border-custom-primary flex items-center gap-4">
+          <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5">
             Subscribe Now
             <FaArrowTrendUp />
           </ButtonPrimary>

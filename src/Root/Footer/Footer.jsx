@@ -38,12 +38,12 @@ const Footer = () => {
           
           <div className="max-w-xs">
           <div className="mb-4">
-          <Link to={"/"} className="flex items-center gap-2">
-              <HiOutlineWrenchScrewdriver className="text-3xl text-[#dd3333]" />
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-[#dd3333] to-neutral inline-block text-transparent bg-clip-text">
-                FixFast
-              </h2>
-            </Link>
+          <Link
+            to={"/"}
+            className="text-custom-primary cursor-pointer font-bold text-3xl"
+          >
+            Sync<span className="text-custom-secondary">Fit</span>
+          </Link>
           </div>
             <p>
             At FixFast: Connecting Service Providers and Consumers for Quick Solutions.
@@ -61,7 +61,7 @@ const Footer = () => {
           <nav>
             <h6 className="text-2xl font-semibold mb-4">Quick Links</h6>
             {quickLinks?.map((link, index) => (
-              <Link to={link.url} key={index} className="link link-hover flex items-center gap-1 hover:text-error transition duration-300 ease-in-out">
+              <Link to={link.url} key={index} className="hover:underline flex items-center gap-1 hover:text-custom-primary ">
                 <IoIosArrowForward/>
                 {link.name}
               </Link>

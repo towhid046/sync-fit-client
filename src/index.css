@@ -26,5 +26,15 @@ button.slick-arrow.slick-prev:before, .slick-next:before{
 }
 button.slick-arrow.slick-next:before, .slick-next:before{
     display: none;
+}
 
+/* Team card hover effect */
+
+.team-card-special-class:hover >figure>div>button{
+    transform: translateY(-2px);
+}
+
+.team-card-special-class:hover >figure>p.trainer-overlay-class{
+    height: 100%;
+    transition: .7s;
 }
