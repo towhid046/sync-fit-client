@@ -100,7 +100,7 @@ const Registration = () => {
             ))}
             </div>
             <label htmlFor="term-policy" className="cursor-pointer">
-              <input type="checkbox" id="term-policy" className="mr-2" />
+              <input required type="checkbox" id="term-policy" className="mr-2" />
               Accept our terms and policy
             </label>
             <ButtonPrimary customClass="w-full py-3 border-custom-primary mt-5">
@@ -111,7 +111,7 @@ const Registration = () => {
             <p className="text-2xl mt-5 mb-2">Or</p>
             <button
               onClick={handleLogInWithGoogle}
-              className=" flex items-center  justify-center gap-x-3 text-sm sm:text-base bg-gray-800 text-white duration-300 transition-colors border px-8 py-3"
+              className=" flex items-center  justify-center gap-x-3 text-sm sm:text-base bg-gray-800 text-white duration-300 transition-colors border px-8 py-2.5"
             >
               <img src={googleIcon} className="w-6" alt="" />
               <span>Continue with Google</span>

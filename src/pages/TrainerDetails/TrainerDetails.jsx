@@ -127,10 +127,12 @@ const TrainerDetails = () => {
             <span className="text-gray-600">{biography}</span>
             {/* become a trainer  */}
             <div className="flex justify-end mt-6">
+              <Link to={'/be-a-trainer'}>
               <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5">
                 Be A Trainer
                 <FaArrowTrendUp />
               </ButtonPrimary>
+              </Link>
             </div>
           </div>
         </div>

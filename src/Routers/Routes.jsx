@@ -9,6 +9,7 @@ import TrainerDetails from "../pages/TrainerDetails/TrainerDetails";
 import TrainerBookedPage from "../pages/TrainerBookedPage/TrainerBookedPage";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 import PaymentPage from "../pages/PaymentPage/PaymentPage";
+import BeATrainer from "../pages/BeATrainer/BeATrainer";
 const routers = createBrowserRouter([
   {
     path: "/",
@@ -61,7 +62,15 @@ const routers = createBrowserRouter([
           fetch(`${import.meta.env.VITE_API_URL}/trainers/${params.trainerId}`),
         element: (
           <PrivateRoutes>
-            <PaymentPage/>
+            <PaymentPage />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/be-a-trainer",
+        element: (
+          <PrivateRoutes>
+            <BeATrainer />
           </PrivateRoutes>
         ),
       },
