@@ -4,7 +4,6 @@ import { FaInstagram, FaLinkedin, FaFacebookF } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { CiDumbbell } from "react-icons/ci";
 import ButtonPrimary from "./../../shared/ButtonPrimary/ButtonPrimary";
-import ButtonSecondary from "./../../shared/ButtonSecondary/ButtonSecondary";
 
 const Trainer = ({ trainer }) => {
   const {
@@ -20,14 +19,14 @@ const Trainer = ({ trainer }) => {
   } = trainer;
 
   const socialItems = [
-    { id: 1, icon: <FaFacebookF />, link: socialLinks.facebook, animTime: 300 },
+    { id: 1, icon: <FaFacebookF />, link: socialLinks?.facebook, animTime: 300 },
     {
       id: 2,
       icon: <FaInstagram />,
-      link: socialLinks.instagram,
+      link: socialLinks?.instagram,
       animTime: 500,
     },
-    { id: 3, icon: <FaLinkedin />, link: socialLinks.linkedin, animTime: 700 },
+    { id: 3, icon: <FaLinkedin />, link: socialLinks?.linkedin, animTime: 700 },
   ];
 
   const allSocialItems = socialItems?.map((item) => (
@@ -67,10 +66,10 @@ const Trainer = ({ trainer }) => {
             <span className="text-gray-400">{rating} Stars</span>
           </li>
           <li className="flex items-center gap-2">
+            <CiDumbbell className="text-xl text-custom-primary -rotate-45" />
             <span className="text-gray-400">
-              {yearsOfExperience} <p>
+              {yearsOfExperience} {' '}
               years of experiences
-              </p>
             </span>
           </li>
         </ul>

@@ -20,7 +20,7 @@ const ForumDetails = () => {
         description={description?.split(" ").splice(0, 5).join(" ")}
       />
       <div className="max-w-3xl mx-auto">
-        <div className="bg-base-100 border border-custom-primary  border-opacity-5 justify-between flex flex-col">
+        <div className="border border-custom-primary  border-opacity-5 justify-between flex flex-col">
           <figure className="relative overflow-hidden md:p-4">
             <img
               className="max-h-80 w-full"
