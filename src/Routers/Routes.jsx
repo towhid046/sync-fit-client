@@ -6,6 +6,7 @@ import LogInPage from "./../pages/LogInPage/LogInPage";
 import ForumDetails from "./../pages/ForumDetails/ForumDetails";
 import Trainers from "../pages/TrainersPage/Trainers/Trainers";
 import TrainerDetails from "../pages/TrainerDetails/TrainerDetails";
+import TrainerBookedPage from "../pages/TrainerBookedPage/TrainerBookedPage";
 const routers = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +39,15 @@ const routers = createBrowserRouter([
         loader: async ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/trainers/${params.trainerId}`),
         element: <TrainerDetails />,
+      },
+
+      // Private routers:
+
+      {
+        path: "/trainer-booking/:trainerId",
+        loader: async ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/trainers/${params.trainerId}`),
+        element: <TrainerBookedPage />,
       },
     ],
   },

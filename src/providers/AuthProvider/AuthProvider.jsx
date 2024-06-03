@@ -17,6 +17,7 @@ export const UserContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedSlot, setSelectedSlot] = useState("");
 
   const axiosPublic = useAxiosPublic();
 
@@ -79,12 +80,14 @@ const AuthProvider = ({ children }) => {
           sendData();
         }
       });
-
     };
     return () => unSubscribe();
   }, [axiosPublic]);
 
-  
+  // handle User selected Slot:
+  const handleUserSelectedSlot = (slot) => {
+    setSelectedSlot(slot);
+  };
 
   const userInfo = {
     user,
@@ -95,6 +98,8 @@ const AuthProvider = ({ children }) => {
     singInWithGoogle,
     loading,
     setLoading,
+    handleUserSelectedSlot,
+    selectedSlot,
   };
 
   return (

@@ -5,14 +5,17 @@ import { scrollToTop } from "./../../utilities/scrollToTop";
 import { CiStar } from "react-icons/ci";
 import { FaInstagram, FaLinkedin, FaFacebookF } from "react-icons/fa";
 import { CiDumbbell } from "react-icons/ci";
-import { HiMiniArrowUpLeft } from "react-icons/hi2";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
+import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
+import { FaArrowTrendUp } from "react-icons/fa6";
+import useAuth from './../../hooks/useAuth';
 
 const TrainerDetails = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
   const trainer = useLoaderData();
+  const {handleUserSelectedSlot} = useAuth()
 
   const {
     _id,
@@ -49,18 +52,21 @@ const TrainerDetails = () => {
   ));
 
   const slotItems = availableSlots?.map((slot) => (
+   <Link to={`/trainer-booking/${_id}`} key={slot}>
     <button
-      className={`hover:bg-custom-primary py-2 px-4 font-medium text-gray-500 border transition duration-500 hover:bg-opacity-70 hover:text-white `}
+    onClick={()=>handleUserSelectedSlot(slot)}
+      className={`hover:bg-custom-primary py-2 px-4 font-medium text-gray-500 border border-custom-primary border-opacity-40 transition duration-500 hover:bg-opacity-70 hover:text-white `}
       key={slot}
     >
       {slot}
     </button>
+   </Link>
   ));
 
   const expertiseItems = areaOfExpertise.map((area) => (
     <li key={area} className="flex items-center gap-1">
       <IoCheckmarkDoneOutline className="text-custom-primary text-2xl" />
-      <span>{area}</span>
+      <span className="text-gray-500">{area}</span>
     </li>
   ));
 
@@ -71,7 +77,7 @@ const TrainerDetails = () => {
         description={`Around ${yearsOfExperience} years of experiences and his / her average rating is ${rating}`}
       />
 
-      <div className=" mb-16 p-16 container mx-auto px-4 bg-custom-secondary  border-opacity-5 max-w-4xl ">
+      <div className=" mb-16 p-16 pb-9 container mx-auto px-4 bg-custom-secondary shadow-sm max-w-4xl ">
         <div className="flex md:flex-row flex-col items-center justify-center md:gap-12 gap-8">
           <figure className="flex-1 flex justify-center">
             <img
@@ -108,33 +114,26 @@ const TrainerDetails = () => {
 
         <div className=" mt-5 p-6 pb-0 flex md:flex-row flex-col md:items-start items-center justify-center md:gap-12 gap-8">
           <div className="flex-1">
-            <p className="text-lg  text-custom-primary font-medium mb-2 italic">
+            <p className="text-xl underline  text-custom-primary font-medium mb-2 italic">
               Available Slots:
             </p>
-            <ul className="space-y-1  flex flex-col items-start">
+            <ul className="space-y-2  flex flex-col items-start">
               {slotItems}
             </ul>
           </div>
 
           <div className="flex-1">
-            <p className="italic text-custom-primary text-lg font-medium">Biography :</p>
-            <span className="text-gray-600"
->
-            {biography}
-
-            </span>
-            <div className="mt-5 flex justify-end">
-          <Link to={"/all-trainers"} className="flex justify-center">
-            <button className=" underline text-custom-primary font-semibold flex items-center ">
-              <HiMiniArrowUpLeft className="text-xl" />
-              Back to All Trainers
-            </button>
-          </Link>
-        </div>
+            <p className="italic text-gray-600 font-medium">Biography :</p>
+            <span className="text-gray-600">{biography}</span>
+            {/* become a trainer  */}
+            <div className="flex justify-end mt-6">
+              <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5">
+                Be A Trainer
+                <FaArrowTrendUp />
+              </ButtonPrimary>
+            </div>
           </div>
         </div>
-
-        
       </div>
     </section>
   );
