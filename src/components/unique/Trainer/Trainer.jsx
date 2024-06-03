@@ -4,6 +4,7 @@ import { FaInstagram, FaLinkedin, FaFacebookF } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { CiDumbbell } from "react-icons/ci";
 import ButtonPrimary from "./../../shared/ButtonPrimary/ButtonPrimary";
+import { IoCheckmarkDoneOutline } from "react-icons/io5";
 
 const Trainer = ({ trainer }) => {
   const {
@@ -41,12 +42,10 @@ const Trainer = ({ trainer }) => {
   ));
 
   const slotItems = availableSlots?.map((slot) => (
-    <button
-      className={`py-2 px-4 font-medium text-gray-500 border transition duration-500 hover:bg-gray-200 hover:text-gray-600 `}
-      key={slot}
-    >
-      {slot}
-    </button>
+    <li key={slot} className="flex items-center gap-2">
+      <IoCheckmarkDoneOutline className="text-custom-primary text-2xl" />
+      <span className="text-gray-500">{slot}</span>
+    </li>
   ));
 
   return (
@@ -76,7 +75,7 @@ const Trainer = ({ trainer }) => {
         <div>
           <h2 className="text-3xl font-semibold mb-2">{name}</h2>
           <div>
-            <p className="text-lg  text-custom-primary font-medium mb-2 italic">
+            <p className="text-lg  text-custom-primary opacity-80 font-medium mb-2 italic">
               Available Slots:
             </p>
             <ul className="space-y-1">{slotItems}</ul>

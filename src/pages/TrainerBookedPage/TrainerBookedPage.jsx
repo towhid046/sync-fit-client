@@ -5,12 +5,15 @@ import packages from "./packagesData";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import ButtonPrimary from "./../../components/shared/ButtonPrimary/ButtonPrimary";
+import { useEffect } from "react";
+import { scrollToTop } from "./../../utilities/scrollToTop";
 
 const TrainerBookedPage = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
   const { selectedSlot } = useAuth();
   const trainer = useLoaderData();
-
-  console.log(packages)
 
   const {
     _id,
@@ -31,7 +34,9 @@ const TrainerBookedPage = () => {
     >
       <div>
         <h2 className="text-4xl font-bold">{pack.membershipTitle}</h2>
-        <p className="text-lg font-bold italic text-custom-primary">Price: {pack.price}</p>
+        <p className="text-lg font-bold italic text-custom-primary">
+          Price: {pack.price}
+        </p>
       </div>
 
       <hr />
