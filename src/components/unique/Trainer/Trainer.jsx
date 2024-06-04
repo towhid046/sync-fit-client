@@ -17,6 +17,7 @@ const Trainer = ({ trainer }) => {
     biography,
     areaOfExpertise,
     rating,
+    age,
   } = trainer;
 
   const socialItems = [
@@ -41,7 +42,7 @@ const Trainer = ({ trainer }) => {
     </button>
   ));
 
-  const slotItems = availableSlots?.map((slot) => (
+  const slotItems = availableSlots?.slice(0,3).map((slot) => (
     <li key={slot} className="flex items-center gap-2">
       <IoCheckmarkDoneOutline className="text-custom-primary text-2xl" />
       <span className="text-gray-500">{slot}</span>
@@ -49,7 +50,7 @@ const Trainer = ({ trainer }) => {
   ));
 
   return (
-    <div className=" bg-white  shadow-sm p-5 team-card-special-class ">
+    <div className=" bg-white flex flex-col justify-between shadow-sm p-5 team-card-special-class ">
       <figure className="relative overflow-hidden flex items-enter justify-center rounded-tl-3xl rounded-br-3xl">
         <img className="h-60 w-full" src={image} alt="News Image" />
         <div className="absolute bottom-4 left-4   flex gap-3 items-center z-20">
@@ -59,10 +60,10 @@ const Trainer = ({ trainer }) => {
       </figure>
 
       <div className="space-y-4 mt-5">
-        <ul className="list-none flex items-center  gap-12 flex-wrap">
+        <ul className="list-none flex items-center   gap-3 flex-wrap">
           <li className="flex items-center gap-2">
             <CiStar className="text-xl text-custom-primary" />
-            <span className="text-gray-400">{rating} Stars</span>
+            <span className="text-gray-400">Ages: {age || 'Unknown'}</span>
           </li>
           <li className="flex items-center gap-2">
             <CiDumbbell className="text-xl text-custom-primary -rotate-45" />
