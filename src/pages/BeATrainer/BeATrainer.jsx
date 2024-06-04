@@ -1,9 +1,8 @@
-import { useLoaderData } from "react-router-dom";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import PageBanner from "../../components/shared/PageBanner/PageBanner";
 import { useForm } from "react-hook-form";
 import useAuth from "./../../hooks/useAuth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { scrollToTop } from "../../utilities/scrollToTop";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -11,24 +10,13 @@ import Select from "react-select";
 
 const BeATrainer = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { selectedSlot, selectedPackage, user } = useAuth();
-  //   const trainer = useLoaderData();
+  const { user } = useAuth();
+  const [days, setDays] = useState([]);
+  const [times, setTimes] = useState([]);
 
   useEffect(() => {
     scrollToTop();
   }, []);
-
-  //   const {
-  //     _id,
-  //     name: trainerName,
-  //     image,
-  //     yearsOfExperience,
-  //     socialLinks,
-  //     availableSlots,
-  //     biography,
-  //     areaOfExpertise,
-  //     rating,
-  //   } = trainer;
 
   const checkboxOptions = [
     {
@@ -109,8 +97,21 @@ const BeATrainer = () => {
 
   // const axiosPublic = useAxiosPublic();
 
+  const getAvailableSlot = (arr1, arr2) => {
+    const availableSlots = [];
+    for (let i = 0; i < arr1.length; i++) {
+      for (let v = 0; v < arr2.length; v++) {
+        availableSlots.push(arr1[i] + ' ' + arr2[v]);
+      }
+    }
+    return availableSlots;
+  };
+
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log({ ...data, times, days });
+    const availableSlots = getAvailableSlot(days, times);
+    console.log(availableSlots);
+
     // try {
     //   const res = await axiosPublic.post("/booking-package", data);
     //   if (res.data?.insertedId) {
@@ -120,6 +121,14 @@ const BeATrainer = () => {
     // } catch (error) {
     //   console.error(error.message);
     // }
+  };
+
+  const getValueInArray = (arr) => {
+    let newArr = [];
+    arr.forEach((item) => {
+      newArr.push(item.value);
+    });
+    return newArr;
   };
 
   const checkboxItems = checkboxOptions.map((option) => (
@@ -134,22 +143,14 @@ const BeATrainer = () => {
     </div>
   ));
 
-  const handleGetTime = (val) => {
-    // console.log(val);
-    const times = [];
-    val.forEach((v) => {
-      times.push(v.value);
-    });
-    console.log(times);
+  const handleGetTime = (arr) => {
+    const timesInArray = getValueInArray(arr);
+    setTimes(timesInArray);
   };
 
-  const handleGetDays = (val) => {
-    // console.log(val);
-    const days = [];
-    val.forEach((v) => {
-      days.push(v.value);
-    });
-    console.log(days);
+  const handleGetDays = (arr) => {
+    const daysInArray = getValueInArray(arr);
+    setDays(daysInArray);
   };
 
   return (
