@@ -83,7 +83,7 @@ const ClassesPage = () => {
   }
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner customClass={'min-h-[80vh]'} />;
   }
 
   return (

@@ -74,7 +74,7 @@ const Navbar = () => {
         {/* Right side: User Image */}
         <div className="flex gap-4 items-center">
           {loading ? (
-            <LoadingSpinner />
+            <LoadingSpinner customClass='bg-white w-10' />
           ) : (
             <>
               {user ? (

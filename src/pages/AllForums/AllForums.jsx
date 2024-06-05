@@ -13,6 +13,7 @@ import ErrorElement from "./../../components/shared/ErrorElement/ErrorElement";
 const AllForums = () => {
   const [forums, setForums] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(null);
   const [isVoteChange, setIsVoteChange] = useState(true);
 
@@ -73,6 +74,7 @@ const AllForums = () => {
   };
 
   const handleUpVote = async (id) => {
+    setLoading(true)
     try {
       const res = await axiosPublic.patch(
         `/modify-forum-up-vote?id=${id}&voteState=${isVoteChange}`
@@ -82,6 +84,8 @@ const AllForums = () => {
       }
     } catch (error) {
       console.error(error.message);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -89,6 +93,7 @@ const AllForums = () => {
     if (isVoteChange) {
       return;
     }
+    setLoading(true)
     try {
       const res = await axiosPublic.patch(
         `/modify-forum-up-vote?id=${id}&voteState=${isVoteChange}&downVote=down`
@@ -98,6 +103,8 @@ const AllForums = () => {
       }
     } catch (error) {
       console.error(error.message);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -121,6 +128,7 @@ const AllForums = () => {
               handleDownVote={handleDownVote}
               key={forum._id}
               forum={forum}
+              loading={loading}
             />
           ))}
         </div>

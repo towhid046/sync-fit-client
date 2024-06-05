@@ -5,12 +5,16 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
 
 import PropTypes from "prop-types";
 import { scrollToTop } from "../../../utilities/scrollToTop";
+import { BarLoader } from "react-spinners";
 
-const AllForumCard = ({ forum, handleUpVote, handleDownVote }) => {
+const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
   const [isVoteChange, setIsVoteChange] = useState(false);
+  const [isDownVote, setIsDownVote] = useState(false);
+
   useEffect(() => {
     scrollToTop();
   }, []);
+
   const {
     _id,
     thumbnail_img,
@@ -33,6 +37,18 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote }) => {
   const handleToUpVote = (id) => {
     handleUpVote(id);
     setIsVoteChange(!isVoteChange);
+    if (isDownVote) {
+      setIsDownVote(false);
+    }
+  };
+
+  const handleToDownVote = (id) => {
+    handleDownVote(id);
+    setIsDownVote(!isDownVote);
+
+    if (isVoteChange) {
+      setIsVoteChange(false);
+    }
   };
 
   return (
@@ -92,21 +108,35 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote }) => {
           </figure>
 
           {/* forum votes */}
-          <div className="flex items-center border max-w-max m-4 bg-gray-800 bg-opacity-70 text-white">
+          <div className="flex items-center border max-w-max m-4 bg-gray-800 bg-opacity-90 text-white">
             <button
               onClick={() => handleToUpVote(_id)}
               data-tooltip-id="my-tooltip"
               data-tooltip-content="Up-vote"
-              className={`flex items-center gap-1 border-r p-3`}
+              className={`flex items-center gap-1 border-r p-3 ${
+                isVoteChange && "text-custom-primary"
+              }`}
             >
-              <FaArrowUp />
-              <span>Up-vote: {up_vote_count}</span>
+              {loading ? (
+                <BarLoader
+                  color={"#717FF8"}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : (
+                <>
+                  <FaArrowUp />
+                  <span>Up-vote: {up_vote_count}</span>
+                </>
+              )}
             </button>{" "}
             <button
-              onClick={() => handleDownVote(_id)}
+              onClick={() => handleToDownVote(_id)}
               data-tooltip-id="my-tooltip"
               data-tooltip-content="Down-vote"
-              className={` flex items-center gap-1 p-3`}
+              className={` flex items-center gap-1 p-3 ${
+                isDownVote && "text-red-400"
+              }`}
             >
               <FaArrowDown />
               <span>Down-vote </span>
@@ -122,6 +152,7 @@ AllForumCard.propTypes = {
   forum: PropTypes.object.isRequired,
   handleUpVote: PropTypes.func,
   handleDownVote: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 export default AllForumCard;
