@@ -7,7 +7,6 @@ export default {
         "custom-primary": "#717FF8",
         "custom-secondary": "#E5FFEF",
         "custom-secondary-light": "#E1F8E6",
-        "custom-third": "#FCA120",
       },
       fontFamily: {
         poppins: ['Poppins', 'ui-sans-serif', 'system-ui'],

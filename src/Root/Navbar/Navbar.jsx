@@ -22,7 +22,7 @@ const Navbar = () => {
 
   const links = menus.map((menu) => (
     <li
-      className={`hover:text-custom-third transition duration-300 ${
+      className={`hover:text-custom-primary transition duration-300 ${
         menu.name === "Dashboard" && !user ? "hidden" : "flex"
       }`}
       onClick={() => setIsOpen(false)}
@@ -47,7 +47,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-custom-primary py-5 w-full sticky z-50 top-0">
+    <nav className="bg-gray-800 py-5 w-full sticky z-50 top-0">
       <div className="container px-4 mx-auto flex justify-between items-center">
         {/* Left side: Toggle Button and Website Name */}
         <div className="flex items-center">
@@ -60,7 +60,7 @@ const Navbar = () => {
           </button>
           <Link
             to={"/"}
-            className="text-custom-third cursor-pointer font-bold text-3xl"
+            className="text-custom-primary cursor-pointer font-bold text-3xl"
           >
             Sync<span className="text-custom-secondary">Fit</span>
           </Link>
@@ -80,7 +80,9 @@ const Navbar = () => {
               {user ? (
                 <>
                   <div onClick={handleLogOutUser}>
-                    <ButtonPrimary>Log Out</ButtonPrimary>
+                    <ButtonPrimary
+                    customClass={'bg-gray-800 hover:border-custom-primary'}
+                    >Log Out</ButtonPrimary>
                   </div>
                   <img
                     data-tooltip-id="my-tooltip"
@@ -93,7 +95,7 @@ const Navbar = () => {
                 </>
               ) : (
                 <Link to={"/login"}>
-                  <ButtonPrimary>Log In</ButtonPrimary>
+                  <ButtonPrimary customClass={'bg-gray-800 hover:border-custom-primary'}>Log In</ButtonPrimary>
                 </Link>
               )}
             </>
@@ -103,7 +105,7 @@ const Navbar = () => {
 
       {/* Responsive Menu */}
       {isOpen && (
-        <div className="menu md:hidden list-none flex flex-col gap-4 text-white p-10 items-center absolute bg-custom-primary w-full font-medium">
+        <div className="menu md:hidden list-none flex flex-col gap-4 text-white p-10 items-center absolute bg-gray-800 w-full font-medium">
           {links}
         </div>
       )}

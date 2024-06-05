@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .menu>li>a.active{
-    color:#fca120
+    color:#717FF8
 }
 body{
  font-family: "Poppins", sans-serif;   
