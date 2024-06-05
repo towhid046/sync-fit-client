@@ -11,6 +11,7 @@ import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 import PaymentPage from "../pages/PaymentPage/PaymentPage";
 import BeATrainer from "../pages/BeATrainer/BeATrainer";
 import ClassesPage from "../pages/ClassesPage/ClassesPage";
+import AllForums from "../pages/AllForums/AllForums";
 const routers = createBrowserRouter([
   {
     path: "/",
@@ -29,9 +30,9 @@ const routers = createBrowserRouter([
         element: <LogInPage />,
       },
       {
-        path: "/forums-details/:forumId",
+        path: "/forums-details/:newId",
         loader: async ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/forums/${params.forumId}`),
+          fetch(`${import.meta.env.VITE_API_URL}/news/${params.newId}`),
         element: <ForumDetails />,
       },
       {
@@ -46,8 +47,15 @@ const routers = createBrowserRouter([
       },
       {
         path: "/all-classes",
-        loader: async()=> fetch(`${import.meta.env.VITE_API_URL}/total-classes-count`),
+        loader: async () =>
+          fetch(`${import.meta.env.VITE_API_URL}/total-classes-count`),
         element: <ClassesPage />,
+      },
+      {
+        path: "/all-forums",
+        loader: async () =>
+          fetch(`${import.meta.env.VITE_API_URL}/total-forums-count`),
+        element: <AllForums />,
       },
 
       // Private routers:

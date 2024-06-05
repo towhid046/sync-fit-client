@@ -17,7 +17,7 @@ const Navbar = () => {
     { id: 2, name: "Trainers", link: "/all-trainers" },
     { id: 3, name: "Classes", link: "/all-classes" },
     { id: 4, name: "Dashboard", link: "/dashboard" },
-    { id: 5, name: "Community", link: "/community" },
+    { id: 5, name: "Community", link: "/all-forums" },
   ];
 
   const links = menus.map((menu) => (

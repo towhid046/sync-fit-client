@@ -6,11 +6,11 @@ import LoadingSpinner from "../../../components/shared/LoadingSpinner/LoadingSpi
 
 const Forums = () => {
   const {
-    data: forums,
+    data: news,
     isLoading,
     isError,
     error,
-  } = usePublicData(["forums"], "/forums");
+  } = usePublicData(["news"], "/news");
 
   if (isError) {
     return <ErrorElement errorText={error} />;
@@ -26,20 +26,10 @@ const Forums = () => {
         description="Stay Updated with SyncFit"
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5">
-        {forums?.slice(0, 6).map((info) => (
+        {news?.slice(0, 6).map((info) => (
           <ForumCard key={info._id} info={info} />
         ))}
       </div>
-      {/* <Slide direction='up'> 
- <div className="flex justify-center my-7">
-        <Link to={"/all-news"}>
-          <button className="rounded-full md:px-12 px-5 btn btn-outline btn-error ">
-            View All News
-            <BsArrowRight className="text-xl" />
-          </button>
-        </Link>
-      </div> 
- </Slide> */}
     </section>
   );
 };

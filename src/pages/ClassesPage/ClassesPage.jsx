@@ -2,7 +2,6 @@ import axios from "axios";
 import SectionHeader from "../../components/shared/SectionHeader/SectionHeader";
 import { useEffect, useState } from "react";
 import { scrollToTop } from "../../utilities/scrollToTop";
-// import ServiceCard from "../../components/unique/ServiceCard/ServiceCard";
 import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
 import AllClassCard from "./AllClassCard/AllClassCard";
@@ -20,13 +19,6 @@ const ClassesPage = () => {
   const perPageClasses = 2;
   const totalNumberOfPages = Math.ceil(totalClasses / perPageClasses);
   const pageNumbers = [...Array(totalNumberOfPages).keys()];
-
-  // const {
-  //   data: classes,
-  //   isLoading,
-  //   error,
-  //   isError,
-  // } = usePublicData(["classes"], `/classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}`);
 
   useEffect(() => {
     scrollToTop();
@@ -145,7 +137,7 @@ const ClassesPage = () => {
       )}
 
       <div
-        className={`flex justify-center items-center py-8 ${
+        className={`flex justify-center items-center py-8 mt-10 ${
           searchText && "hidden"
         }`}
       >
