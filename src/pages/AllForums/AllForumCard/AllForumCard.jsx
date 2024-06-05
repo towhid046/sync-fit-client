@@ -1,18 +1,15 @@
-import { Link } from "react-router-dom";
 import { CiCalendar } from "react-icons/ci";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
 
 import PropTypes from "prop-types";
 import { scrollToTop } from "../../../utilities/scrollToTop";
-import useAxiosPublic from './../../../hooks/useAxiosPublic';
 
-const AllForumCard = ({ forum }) => {
-  const axiosPublic = useAxiosPublic()
-
+const AllForumCard = ({ forum, handleUpVote, handleDownVote }) => {
+  const [isVoteChange, setIsVoteChange] = useState(false);
   useEffect(() => {
-    // scrollToTop();
+    scrollToTop();
   }, []);
   const {
     _id,
@@ -25,26 +22,18 @@ const AllForumCard = ({ forum }) => {
     down_vote_count,
   } = forum;
 
+  const [initialDes, setInitialDes] = useState(
+    description?.split(" ").slice(0, 20).join(" ")
+  );
 
-  const handleUpVote = async(id)=>{
-    try {
-      const res = await axiosPublic.patch(`/modify-forum-up-vote?id=${id}` )
-      console.log(res.data.modifiedCount)
-    } catch (error) {
-      console.error(error.message)
-      
-    }
-  }
+  const handleShowFullDescription = () => {
+    setInitialDes(description);
+  };
 
-  const handleDownVote = async(id)=>{
-    try {
-      const res = await axiosPublic.patch(`/modify-forum-up-vote?id=${id}` )
-      console.log(res.data.modifiedCount)
-    } catch (error) {
-      console.error(error.message)
-      
-    }
-  }
+  const handleToUpVote = (id) => {
+    handleUpVote(id);
+    setIsVoteChange(!isVoteChange);
+  };
 
   return (
     <section className="mb-16">
@@ -78,7 +67,18 @@ const AllForumCard = ({ forum }) => {
               </ul>
               <hr className="border-custom-primary opacity-20" />
               <h2 className="text-xl font-semibold mb-3">{title}</h2>
-              <p>{description}</p>
+              <p>
+                {initialDes}
+                <em
+                  onClick={handleShowFullDescription}
+                  className={`${
+                    initialDes.split(" ").length > 20 && "hidden"
+                  } text-custom-primary cursor-pointer`}
+                >
+                  {" "}
+                  ...see more
+                </em>
+              </p>
             </div>
           </div>
 
@@ -94,21 +94,22 @@ const AllForumCard = ({ forum }) => {
           {/* forum votes */}
           <div className="flex items-center border max-w-max m-4 bg-gray-800 bg-opacity-70 text-white">
             <button
-            onClick={()=>handleUpVote(_id)}
+              onClick={() => handleToUpVote(_id)}
               data-tooltip-id="my-tooltip"
               data-tooltip-content="Up-vote"
-              className="flex items-center gap-1 border-r p-3"
+              className={`flex items-center gap-1 border-r p-3`}
             >
               <FaArrowUp />
               <span>Up-vote: {up_vote_count}</span>
             </button>{" "}
             <button
+              onClick={() => handleDownVote(_id)}
               data-tooltip-id="my-tooltip"
               data-tooltip-content="Down-vote"
-              className="flex items-center gap-1 p-3"
+              className={` flex items-center gap-1 p-3`}
             >
               <FaArrowDown />
-              <span>Down-vote: {down_vote_count} </span>
+              <span>Down-vote </span>
             </button>
           </div>
         </article>
@@ -119,6 +120,8 @@ const AllForumCard = ({ forum }) => {
 
 AllForumCard.propTypes = {
   forum: PropTypes.object.isRequired,
+  handleUpVote: PropTypes.func,
+  handleDownVote: PropTypes.func,
 };
 
 export default AllForumCard;

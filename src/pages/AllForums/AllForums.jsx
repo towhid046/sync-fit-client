@@ -7,12 +7,18 @@ import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinne
 import { useLoaderData } from "react-router-dom";
 import PageBanner from "../../components/shared/PageBanner/PageBanner";
 import AllForumCard from "./AllForumCard/AllForumCard";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import ErrorElement from "./../../components/shared/ErrorElement/ErrorElement";
 
 const AllForums = () => {
   const [forums, setForums] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(null);
+  const [isVoteChange, setIsVoteChange] = useState(true);
+
   const count = useLoaderData();
+
+  const axiosPublic = useAxiosPublic();
 
   // pagination related variables:
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,14 +48,16 @@ const AllForums = () => {
       }
     };
     getData();
-  }, [currentPage]);
+  }, [currentPage, isVoteChange]);
 
   const handleGetCurrentPage = (currPage) => {
+    setIsLoading(true);
     setCurrentPage(currPage);
     scrollToTop();
   };
 
   const handlePrevBtn = () => {
+    setIsLoading(true);
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
       scrollToTop();
@@ -57,39 +65,67 @@ const AllForums = () => {
   };
 
   const handleNextBtn = () => {
+    setIsLoading(true);
     if (currentPage < totalNumberOfPages) {
       setCurrentPage(currentPage + 1);
       scrollToTop();
     }
   };
 
+  const handleUpVote = async (id) => {
+    try {
+      const res = await axiosPublic.patch(
+        `/modify-forum-up-vote?id=${id}&voteState=${isVoteChange}`
+      );
+      if (res.data.modifiedCount) {
+        setIsVoteChange(!isVoteChange);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const handleDownVote = async (id) => {
+    if (isVoteChange) {
+      return;
+    }
+    try {
+      const res = await axiosPublic.patch(
+        `/modify-forum-up-vote?id=${id}&voteState=${isVoteChange}&downVote=down`
+      );
+      if (res.data.modifiedCount) {
+        setIsVoteChange(true);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   if (isError) {
-    return (
-      <div className="flex justify-center py-12 min-h-[80vh] items-center">
-        <h2 className="text-2xl font-bold text-gray-300">{isError}</h2>
-      </div>
-    );
+    return <ErrorElement errorText={isError} />;
   }
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner customClass={"min-h-[80vh]"} />;
   }
 
   return (
     <section>
       <PageBanner title="Community" link="/all-forums" />
       <div className="pt-10 container mx-auto px-4">
-
         {/* all forums container */}
         <div className="flex flex-col gap-7">
           {forums?.map((forum) => (
-            <AllForumCard key={forum._id} forum={forum} />
+            <AllForumCard
+              handleUpVote={handleUpVote}
+              handleDownVote={handleDownVote}
+              key={forum._id}
+              forum={forum}
+            />
           ))}
         </div>
 
-
         {/* pagination div */}
-
         <div className={`flex justify-center items-center py-12`}>
           <button
             onClick={handlePrevBtn}
