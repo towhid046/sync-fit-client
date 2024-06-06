@@ -34,18 +34,25 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
     setInitialDes(description);
   };
 
-  const handleToUpVote = (id) => {
-    handleUpVote(id);
+  const handleToUpVote = async (id) => {
+    const success = await handleUpVote(id);
+    if (success === false) {
+      return;
+    }
+
     setIsVoteChange(!isVoteChange);
     if (isDownVote) {
       setIsDownVote(false);
     }
   };
 
-  const handleToDownVote = (id) => {
-    handleDownVote(id);
-    setIsDownVote(!isDownVote);
+  const handleToDownVote = async (id) => {
+    const successDownVote = await handleDownVote(id);
+    if (successDownVote === false) {
+      return;
+    }
 
+    setIsDownVote(!isDownVote);
     if (isVoteChange) {
       setIsVoteChange(false);
     }

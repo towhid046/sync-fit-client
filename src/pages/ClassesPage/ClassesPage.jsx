@@ -6,6 +6,8 @@ import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
 import AllClassCard from "./AllClassCard/AllClassCard";
 import { useLoaderData } from "react-router-dom";
+import ErrorElement from './../../components/shared/ErrorElement/ErrorElement';
+
 const ClassesPage = () => {
   const [searchText, setSearchText] = useState("");
   const [classes, setClasses] = useState([]);
@@ -27,12 +29,7 @@ const ClassesPage = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get(
-          `${
-            import.meta.env.VITE_API_URL
-          }/classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}`
-        );
-
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}`);
         setClasses(res.data);
       } catch (error) {
         setIsError(error?.message);
@@ -55,12 +52,16 @@ const ClassesPage = () => {
   // };
 
   const handleGetCurrentPage = (currPage) => {
+    setIsLoading(true)
+
     setCurrentPage(currPage);
     // setSearchText("");
     scrollToTop();
   };
 
   const handlePrevBtn = () => {
+    setIsLoading(true)
+
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
       scrollToTop();
@@ -68,6 +69,7 @@ const ClassesPage = () => {
   };
 
   const handleNextBtn = () => {
+    setIsLoading(true)
     if (currentPage < totalNumberOfPages) {
       setCurrentPage(currentPage + 1);
       scrollToTop();
@@ -75,11 +77,7 @@ const ClassesPage = () => {
   };
 
   if (isError) {
-    return (
-      <div className="flex justify-center py-12 min-h-[80vh] items-center">
-        <h2 className="text-2xl font-bold text-gray-300">{isError}</h2>
-      </div>
-    );
+    return <ErrorElement errorText={isError}/>
   }
 
   if (isLoading) {

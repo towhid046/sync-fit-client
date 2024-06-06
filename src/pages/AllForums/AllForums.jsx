@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { scrollToTop } from "../../utilities/scrollToTop";
 import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import PageBanner from "../../components/shared/PageBanner/PageBanner";
 import AllForumCard from "./AllForumCard/AllForumCard";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ErrorElement from "./../../components/shared/ErrorElement/ErrorElement";
+import swal from "sweetalert";
+import useAuth from "./../../hooks/useAuth";
 
 const AllForums = () => {
   const [forums, setForums] = useState([]);
@@ -17,7 +19,11 @@ const AllForums = () => {
   const [isError, setIsError] = useState(null);
   const [isVoteChange, setIsVoteChange] = useState(true);
 
+  const { user } = useAuth();
+
   const count = useLoaderData();
+
+  const navigate = useNavigate();
 
   const axiosPublic = useAxiosPublic();
 
@@ -74,38 +80,79 @@ const AllForums = () => {
   };
 
   const handleUpVote = async (id) => {
-    setLoading(true)
-    try {
-      const res = await axiosPublic.patch(
-        `/modify-forum-up-vote?id=${id}&voteState=${isVoteChange}`
-      );
-      if (res.data.modifiedCount) {
-        setIsVoteChange(!isVoteChange);
+    let success = false;
+
+    if (user) {
+      setLoading(true);
+      try {
+        const res = await axiosPublic.patch(
+          `/modify-forum-up-vote?id=${id}&voteState=${isVoteChange}`
+        );
+        if (res.data.modifiedCount) {
+          setIsVoteChange(!isVoteChange);
+          success = true;
+        }
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error(error.message);
-    }finally{
-      setLoading(false)
+      return;
     }
+
+    swal({
+      title: "Login to vote",
+      text: "Want to gives vote, Please Login first!",
+      icon: "info",
+      buttons: true,
+      dangerMode: false,
+    }).then((willDelete) => {
+      if (willDelete) {
+        navigate("/login");
+      }
+    });
+
+    return success;
   };
 
   const handleDownVote = async (id) => {
-    if (isVoteChange) {
+    let successDownVote = false;
+
+    if (user) {
+      if (isVoteChange) {
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const res = await axiosPublic.patch(
+          `/modify-forum-up-vote?id=${id}&voteState=${isVoteChange}&downVote=down`
+        );
+        if (res.data.modifiedCount) {
+          setIsVoteChange(true);
+          successDownVote = true;
+        }
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setLoading(false);
+      }
       return;
     }
-    setLoading(true)
-    try {
-      const res = await axiosPublic.patch(
-        `/modify-forum-up-vote?id=${id}&voteState=${isVoteChange}&downVote=down`
-      );
-      if (res.data.modifiedCount) {
-        setIsVoteChange(true);
+
+    swal({
+      title: "Login to vote",
+      text: "Want to gives vote, Please Login first!",
+      icon: "info",
+      buttons: true,
+      dangerMode: false,
+    }).then((willDelete) => {
+      if (willDelete) {
+        navigate("/login");
       }
-    } catch (error) {
-      console.error(error.message);
-    }finally{
-      setLoading(false)
-    }
+    });
+
+    return successDownVote;
   };
 
   if (isError) {
