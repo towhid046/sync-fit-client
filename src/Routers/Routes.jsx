@@ -12,10 +12,8 @@ import PaymentPage from "../pages/PaymentPage/PaymentPage";
 import BeATrainer from "../pages/BeATrainer/BeATrainer";
 import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import AllForums from "../pages/AllForums/AllForums";
-import Dashboard from "../pages/Dashboard/Dashboard";
-import DashboardRoot from "../Root/Root/DashboardRoot/DashboardRoot";
-import NewsLetterSubscribers from "../pages/Dashboard/NewsletterSubscribers/NewsLetterSubscribers";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
+import NewsLetterSubscribers from "../pages/AdminDashboard/NewsletterSubscribers/NewsLetterSubscribers";
 
 const routers = createBrowserRouter([
   {
@@ -95,7 +93,6 @@ const routers = createBrowserRouter([
       },
 
       // Dashboard related routes:
-      
     ],
   },
 
@@ -104,10 +101,10 @@ const routers = createBrowserRouter([
     path: "/admin-dashboard",
     element: <AdminDashboard />,
     children: [
-     {
-      path: '/admin-dashboard/newsletter-subscribers',
-      element: <NewsLetterSubscribers/>
-     }
+      {
+        path: "/admin-dashboard/newsletter-subscribers",
+        element: <NewsLetterSubscribers />,
+      },
     ],
   },
 ]);
