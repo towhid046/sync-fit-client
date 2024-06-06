@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
 
   // Register new user:
   const createNewUser = (email, password) => {
-    setLoading(TbRuler2);
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -41,7 +41,6 @@ const AuthProvider = ({ children }) => {
 
   // update user profile:
   const updateUserProfile = (userName, photoUrl) => {
-    setLoading(true);
     updateProfile(auth.currentUser, {
       displayName: userName,
       photoURL: photoUrl,
