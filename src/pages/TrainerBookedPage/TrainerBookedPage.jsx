@@ -35,7 +35,7 @@ const TrainerBookedPage = () => {
       <div>
         <h2 className="text-4xl font-bold">{pack.membershipTitle}</h2>
         <p className="text-lg font-bold italic text-custom-primary">
-          Price: {pack.price}
+          Price: $ {pack.price}
         </p>
       </div>
 

@@ -51,7 +51,7 @@ const PaymentPage = () => {
       id: 4,
       title: "Price",
       name: "price",
-      defValue: selectedPackage?.price,
+      defValue: `${selectedPackage?.price}`,
     },
     {
       id: 5,

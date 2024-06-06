@@ -154,7 +154,7 @@ const BeATrainer = () => {
     const postData = async () => {
       try {
         const res = await axiosPublic.post(imgbb_api_url, imageFile, {
-          headers: {"Content-Type": "multipart/form-data"},
+          headers: { "Content-Type": "multipart/form-data" },
         });
 
         const image = res.data?.data.url;
@@ -167,9 +167,16 @@ const BeATrainer = () => {
           availableSlots,
         };
 
-        const response = await axiosPublic.post("/applied-trainers", newTrainer);
+        const response = await axiosPublic.post(
+          "/applied-trainers",
+          newTrainer
+        );
         if (response.data?.insertedId) {
-          swal("Success", "You have application successful to become a trainer", "success");
+          swal(
+            "Success",
+            "You have application successful to become a trainer",
+            "success"
+          );
           reset();
         }
       } catch (error) {
@@ -199,13 +206,14 @@ const BeATrainer = () => {
     <section className="min-h-screen">
       <PageBanner title="Be A Trainer" link={`/be-a-trainer`} />
       <div className="container mx-auto px-4 md:py-16 py-12">
-        <div className="bg-custom-secondary max-w-3xl md:p-12 p-6 mx-auto shadow-sm ">
-          <h2 className="md:text-5xl font-bold text-4xl mb-5">
-            Become A Trainer
-          </h2>
-          {loading ? (
-            <LoadingSpinner />
-          ) : (
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="bg-custom-secondary max-w-3xl md:p-12 p-6 mx-auto shadow-sm ">
+            <h2 className="md:text-5xl font-bold text-4xl mb-5">
+              Become A Trainer
+            </h2>
+
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="grid md:grid-cols-2 gap-6 grid-cols-1">
                 {formInfo.map((item) => (
@@ -282,8 +290,8 @@ const BeATrainer = () => {
                 Apply
               </ButtonPrimary>
             </form>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );

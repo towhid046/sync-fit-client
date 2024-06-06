@@ -115,21 +115,9 @@ const AppliedTrainerDetails = () => {
           <div className="flex-1">
             <div className="space-y-4">
               <h2 className="text-3xl font-semibold mb-2">{name}</h2>
-
-              <ul className="list-none flex md:items-center md:flex-row flex-col  md:gap-12 gap-2 flex-wrap">
-                <li className="flex items-center gap-2">
-                  <CiStar className="text-xl text-custom-primary" />
-                  <span className="text-gray-400">{rating} Stars</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <CiDumbbell className="text-xl text-custom-primary -rotate-45" />
-                  <span className="text-gray-400">
-                    {yearsOfExperience} years of experiences
-                  </span>
-                </li>
-              </ul>
-
-              <ul className="list-none mt-7 space-y-2">{expertiseItems}</ul>
+              <ul className="list-none mt-7 space-y-2">
+                <p className="text-xl font-medium text-gray-600 italic">Skills:</p>
+                {expertiseItems}</ul>
               <ul className="flex list-none gap-3 items-center">
                 {allSocialItems}
               </ul>
@@ -140,13 +128,13 @@ const AppliedTrainerDetails = () => {
         <div className=" mt-5 p-6 pb-0 flex md:flex-row flex-col md:items-start items-center justify-center md:gap-12 gap-8">
           <div className="flex-1">
             <p className="text-lg  text-custom-primary opacity-80 font-medium mb-2 italic">
-              Available Slots:
+              Offered Slots:
             </p>
             <ul className="space-y-1">{slotItems}</ul>
           </div>
 
           <div className="flex-1">
-            <p className="italic text-gray-600 font-medium">Biography :</p>
+            <p className="italic text-gray-600 font-medium underline">Biography :</p>
             <span className="text-gray-600">{biography}</span>
 
             {/* Accept or reject an applicant */}

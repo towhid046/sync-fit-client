@@ -8,14 +8,14 @@ import { CiDumbbell } from "react-icons/ci";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import { FaArrowTrendUp } from "react-icons/fa6";
-import useAuth from './../../hooks/useAuth';
+import useAuth from "./../../hooks/useAuth";
 
 const TrainerDetails = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
   const trainer = useLoaderData();
-  const {handleUserSelectedSlot} = useAuth()
+  const { handleUserSelectedSlot } = useAuth();
 
   const {
     _id,
@@ -30,14 +30,19 @@ const TrainerDetails = () => {
   } = trainer;
 
   const socialItems = [
-    { id: 1, icon: <FaFacebookF />, link: socialLinks.facebook, animTime: 300 },
+    {
+      id: 1,
+      icon: <FaFacebookF />,
+      link: socialLinks?.facebook,
+      animTime: 300,
+    },
     {
       id: 2,
       icon: <FaInstagram />,
-      link: socialLinks.instagram,
+      link: socialLinks?.instagram,
       animTime: 500,
     },
-    { id: 3, icon: <FaLinkedin />, link: socialLinks.linkedin, animTime: 700 },
+    { id: 3, icon: <FaLinkedin />, link: socialLinks?.linkedin, animTime: 700 },
   ];
 
   const allSocialItems = socialItems?.map((item) => (
@@ -45,25 +50,25 @@ const TrainerDetails = () => {
       key={item.id}
       className={`p-3 text-white bg-custom-primary bg-opacity-70 hover:bg-opacity-100 duration-500 rounded-full `}
     >
-      <Link target="_blank" to={item.link}>
-        <span className=" text-xl">{item.icon}</span>
+      <Link target="_blank" to={item?.link}>
+        <span className=" text-xl">{item?.icon}</span>
       </Link>
     </button>
   ));
 
   const slotItems = availableSlots?.map((slot) => (
-   <Link to={`/trainer-booking/${_id}`} key={slot}>
-    <button
-    onClick={()=>handleUserSelectedSlot(slot)}
-      className={`hover:bg-custom-primary py-2 px-4 font-medium text-gray-500 border border-custom-primary border-opacity-40 transition duration-500 hover:bg-opacity-70 hover:text-white `}
-      key={slot}
-    >
-      {slot}
-    </button>
-   </Link>
+    <Link to={`/trainer-booking/${_id}`} key={slot}>
+      <button
+        onClick={() => handleUserSelectedSlot(slot)}
+        className={`hover:bg-custom-primary py-2 px-4 font-medium text-gray-500 border border-custom-primary border-opacity-40 transition duration-500 hover:bg-opacity-70 hover:text-white `}
+        key={slot}
+      >
+        {slot}
+      </button>
+    </Link>
   ));
 
-  const expertiseItems = areaOfExpertise.map((area) => (
+  const expertiseItems = areaOfExpertise?.map((area) => (
     <li key={area} className="flex items-center gap-1">
       <IoCheckmarkDoneOutline className="text-custom-primary text-2xl" />
       <span className="text-gray-500">{area}</span>
@@ -127,11 +132,11 @@ const TrainerDetails = () => {
             <span className="text-gray-600">{biography}</span>
             {/* become a trainer  */}
             <div className="flex justify-end mt-6">
-              <Link to={'/be-a-trainer'}>
-              <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5">
-                Be A Trainer
-                <FaArrowTrendUp />
-              </ButtonPrimary>
+              <Link to={"/be-a-trainer"}>
+                <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5">
+                  Be A Trainer
+                  <FaArrowTrendUp />
+                </ButtonPrimary>
               </Link>
             </div>
           </div>

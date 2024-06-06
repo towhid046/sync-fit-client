@@ -5,7 +5,7 @@ const AdminDashboard = () => {
   return (
     <div className="flex">
       <AdminNavbar />
-      <main className="container mx-auto px-4">
+      <main className="container mx-auto px-8 mt-8 mb-12">
         <Outlet />
       </main>
     </div>

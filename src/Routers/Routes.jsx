@@ -17,6 +17,7 @@ import NewsLetterSubscribers from "../pages/AdminDashboard/NewsletterSubscribers
 import AllTrainers from "../pages/AdminDashboard/AllTrainers/AllTrainers";
 import AppliedTrainers from "../pages/AdminDashboard/AppliedTrainers/AppliedTrainers";
 import AppliedTrainerDetails from "../pages/AdminDashboard/AppliedTrainerDetails/AppliedTrainerDetails";
+import Balance from "../pages/AdminDashboard/Balance/Balance";
 
 const routers = createBrowserRouter([
   {
@@ -121,6 +122,10 @@ const routers = createBrowserRouter([
         loader: async ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/applied-trainers/${params.appliedTrainerId}`),
         element: <AppliedTrainerDetails/>,
+      },
+      {
+        path: "/admin-dashboard/balance",
+        element: <Balance />,
       },
     ],
   },
