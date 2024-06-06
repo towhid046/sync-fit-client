@@ -5,16 +5,19 @@ import ErrorElement from "./../../../components/shared/ErrorElement/ErrorElement
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import swal from "sweetalert";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import ButtonPrimary from "./../../../components/shared/ButtonPrimary/ButtonPrimary";
+import { Link } from "react-router-dom";
+import EmptyComponent from "./../../../components/shared/EmptyComponent/EmptyComponent";
 
-const AllTrainers = () => {
+const AppliedTrainers = () => {
   const axiosSecure = useAxiosSecure();
   const {
-    data: trainers,
+    data: applicants,
     isLoading,
     isError,
     error,
     refetch,
-  } = useSecureData(["all-trainers"], "/trainers");
+  } = useSecureData(["applied-trainers"], "/applied-trainers");
 
   const handleRemoveTrainer = async (id, email) => {
     swal({
@@ -47,10 +50,14 @@ const AllTrainers = () => {
     return <ErrorElement errorText={error} />;
   }
 
+  if (applicants.length <= 0) {
+    return <EmptyComponent emptyText={"No applicant have found yet!"} />;
+  }
+
   return (
     <section>
       <SectionHeader
-        title={`All Trainers: ${trainers?.length}`}
+        title={`All Applications: ${applicants?.length}`}
         description="See all the trainers here"
       />
       <div className="overflow-x-auto">
@@ -59,15 +66,15 @@ const AllTrainers = () => {
             <thead>
               <tr className="text-left">
                 <th className="py-2 px-4 border-b">SN.</th>
-                <th className="py-2 px-4 border-b">Trainer Name</th>
+                <th className="py-2 px-4 border-b">Name</th>
                 <th className="py-2 px-4 border-b">Email</th>
                 <th className="py-2 px-4 border-b">Action</th>
               </tr>
             </thead>
             <tbody>
-              {trainers?.map((trainer, index) => (
+              {applicants?.map((applicant, index) => (
                 <tr
-                  key={trainer._id}
+                  key={applicant._id}
                   className={`text-left ${
                     index % 2 !== 1 ? "bg-custom-secondary-light" : ""
                   }`}
@@ -77,27 +84,25 @@ const AllTrainers = () => {
                   <td className="py-2 px-4 border-b">
                     <div className="flex items-center gap-2">
                       <img
-                        src={trainer.image}
+                        src={applicant.image}
                         className="w-10 rounded-full h-10"
                         alt=""
                       />
                       <div>
-                        <p className="font-semibold text-gray-800">{trainer?.name}</p>
+                        <p className="font-semibold">{applicant?.name}</p>
                         <small className="text-gray-600">
-                          <em>{trainer?.role}</em>
+                          <em>{applicant?.status}</em>
                         </small>
                       </div>
                     </div>
                   </td>
-                  <td className="py-2 px-4 border-b text-gray-700">{trainer?.email}</td>
+                  <td className="py-2 px-4 border-b">{applicant?.email}</td>
                   <td className="py-2 px-4 border-b">
-                    <button
-                      onClick={() =>
-                        handleRemoveTrainer(trainer._id, trainer.email)
-                      }
+                    <Link
+                      to={`/admin-dashboard/applied-trainer-details/${applicant._id}`}
                     >
-                      <RiDeleteBin5Fill className="text-red-400  text-2xl" />
-                    </button>
+                      <ButtonPrimary> See details</ButtonPrimary>
+                    </Link>
                   </td>
                 </tr>
               ))}
@@ -109,4 +114,4 @@ const AllTrainers = () => {
   );
 };
 
-export default AllTrainers;
+export default AppliedTrainers;

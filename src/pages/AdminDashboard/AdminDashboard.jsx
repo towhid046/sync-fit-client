@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
-    <div className="flex gap-7">
+    <div className="flex">
       <AdminNavbar />
       <main className="container mx-auto px-4">
         <Outlet />

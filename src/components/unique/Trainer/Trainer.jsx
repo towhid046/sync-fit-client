@@ -60,7 +60,7 @@ const Trainer = ({ trainer }) => {
       </figure>
 
       <div className="space-y-4 mt-5">
-        <ul className="list-none flex items-center   gap-3 flex-wrap">
+        <ul className="list-none flex items-center gap-3 flex-wrap">
           <li className="flex items-center gap-2">
             <CiStar className="text-xl text-custom-primary" />
             <span className="text-gray-400">Ages: {age || 'Unknown'}</span>

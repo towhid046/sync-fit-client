@@ -26,7 +26,7 @@ const NewsLetterSubscribers = () => {
         description="See all the user who subscriber the newsletter"
       />
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
+        <table className="min-w-full bg-white bg-opacity-80 border border-gray-200">
           <thead>
             <tr className="text-center">
               <th className="py-2 px-4 border-b">SN.</th>
@@ -38,8 +38,8 @@ const NewsLetterSubscribers = () => {
             {newsletterSubscribers?.map((subscriber, index) => (
               <tr key={subscriber._id} className={`text-center ${index % 2 !== 1 ? 'bg-custom-secondary-light' : ''}`}>
                 <td className="py-2 px-4 border-b">{index + 1}</td>
-                <td className="py-2 px-4 border-b">{subscriber?.name}</td>
-                <td className="py-2 px-4 border-b">{subscriber?.email}</td>
+                <td className="py-2 px-4 border-b text-gray-800">{subscriber?.name}</td>
+                <td className="py-2 px-4 border-b text-gray-800">{subscriber?.email}</td>
               </tr>
             ))}
           </tbody>
