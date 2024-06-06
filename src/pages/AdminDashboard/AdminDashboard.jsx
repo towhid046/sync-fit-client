@@ -3,9 +3,11 @@ import { Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-7">
       <AdminNavbar />
-      <Outlet />
+      <main className="container mx-auto px-4">
+        <Outlet />
+      </main>
     </div>
   );
 };

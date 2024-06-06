@@ -10,10 +10,9 @@ const NewsLetterSubscribers = () => {
     isError,
     error,
   } = useSecureData(["newsletterSubscribers"], "/news-letter-subscribers");
-  console.log(newsletterSubscribers);
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner customClass={'min-h-[90vh]'}/>;
   }
 
   if (isError) {
@@ -21,7 +20,7 @@ const NewsLetterSubscribers = () => {
   }
 
   return (
-    <section className="container mx-auto px-4">
+    <section>
       <SectionHeader
         title={`All Newsletter Subscribers: ${newsletterSubscribers?.length}`}
         description="See all the user who subscriber the newsletter"

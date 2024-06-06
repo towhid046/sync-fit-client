@@ -14,6 +14,7 @@ import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import AllForums from "../pages/AllForums/AllForums";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import NewsLetterSubscribers from "../pages/AdminDashboard/NewsletterSubscribers/NewsLetterSubscribers";
+import AllTrainers from "../pages/AdminDashboard/AllTrainers/AllTrainers";
 
 const routers = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ const routers = createBrowserRouter([
       {
         path: "/admin-dashboard/newsletter-subscribers",
         element: <NewsLetterSubscribers />,
+      },
+      {
+        path: "/admin-dashboard/all-trainers",
+        element: <AllTrainers />,
       },
     ],
   },

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { HashLoader } from "react-spinners";
 const LoadingSpinner = ({ customClass }) => {
   return (
-    <div className={`flex justify-center items-center ${customClass} `}>
+    <div className={`flex justify-center items-center min-h-[80vh] ${customClass} `}>
       <HashLoader
         color={"#1F2937"}
         size={45 }

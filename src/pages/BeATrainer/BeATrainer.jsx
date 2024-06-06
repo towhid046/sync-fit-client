@@ -204,7 +204,7 @@ const BeATrainer = () => {
             Become A Trainer
           </h2>
           {loading ? (
-            <LoadingSpinner customClass={"min-h-[80vh]"} />
+            <LoadingSpinner />
           ) : (
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="grid md:grid-cols-2 gap-6 grid-cols-1">

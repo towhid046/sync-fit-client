@@ -16,7 +16,7 @@ const Team = () => {
     return <ErrorElement errorText={error} />;
   }
   if (isLoading) {
-    return <LoadingSpinner customClass="min-h-[80vh]" />;
+    return <LoadingSpinner/>;
   }
 
   return (

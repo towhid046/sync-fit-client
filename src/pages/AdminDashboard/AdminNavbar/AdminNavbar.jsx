@@ -12,7 +12,7 @@ const AdminNavbar = () => {
 
   const menus = [
     { id: 1, name: "All Newsletter Subscribers", link: "/admin-dashboard/newsletter-subscribers" },
-    { id: 2, name: "All Trainers", link: "/all-trainers-ad" },
+    { id: 2, name: "All Trainers", link: "/admin-dashboard/all-trainers" },
     { id: 3, name: "Applied Trainer", link: "/applied-trainers" },
     { id: 4, name: "Dashboard", link: "/dashboard" },
     { id: 5, name: "Balance", link: "/balance" },

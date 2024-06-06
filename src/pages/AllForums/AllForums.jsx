@@ -160,7 +160,7 @@ const AllForums = () => {
   }
 
   if (isLoading) {
-    return <LoadingSpinner customClass={"min-h-[80vh]"} />;
+    return <LoadingSpinner />;
   }
 
   return (

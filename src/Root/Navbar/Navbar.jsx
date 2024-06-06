@@ -5,7 +5,7 @@ import ButtonPrimary from "./../../components/shared/ButtonPrimary/ButtonPrimary
 import useAuth from "../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
 import swal from "sweetalert";
-import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinner";
+import { BeatLoader } from "react-spinners";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +76,11 @@ const Navbar = () => {
         {/* Right side: User Image */}
         <div className="flex gap-4 items-center">
           {loading ? (
-            <LoadingSpinner customClass='bg-white w-10' />
+             <BeatLoader
+             color={"#ffffff"}
+             aria-label="Loading Spinner"
+             data-testid="loader"
+           />
           ) : (
             <>
               {user ? (
