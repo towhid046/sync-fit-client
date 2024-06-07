@@ -15,7 +15,7 @@ const AdminNavbar = () => {
     { id: 2, name: "All Trainers", link: "/admin-dashboard/all-trainers" },
     { id: 3, name: "Applied Trainer", link: "/admin-dashboard/applied-trainers" },
     { id: 5, name: "Balance", link: "/admin-dashboard/balance" },
-    { id: 6, name: "Add Class", link: "/add-class" },
+    { id: 6, name: "Add Class", link: "/admin-dashboard/add-new-class" },
   ];
 
   const links = menus.map((menu) => (

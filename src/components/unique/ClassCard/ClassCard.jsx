@@ -3,23 +3,15 @@ import { CiStar } from "react-icons/ci";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
 const ClassCard = ({ singleClass }) => {
   const {
-    id,
     image,
-    title,
+    class_name,
     description,
-    totalBookings,
-    price,
-    rating,
-    trainer,
   } = singleClass;
 
   return (
     <div className=" bg-white transition duration-300 hover:-translate-y-2 shadow-sm">
       <figure className="relative">
         <img className="max-h-72 w-full" src={image} alt="" />
-        <span className="bg-custom-primary px-4 py-1 text-white absolute top-4 right-4">
-          ${price}
-        </span>
       </figure>
       <div className="space-y-4 p-5">
         <ul className="list-none flex items-center  gap-12 flex-wrap">

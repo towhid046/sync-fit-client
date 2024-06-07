@@ -18,6 +18,7 @@ import AllTrainers from "../pages/AdminDashboard/AllTrainers/AllTrainers";
 import AppliedTrainers from "../pages/AdminDashboard/AppliedTrainers/AppliedTrainers";
 import AppliedTrainerDetails from "../pages/AdminDashboard/AppliedTrainerDetails/AppliedTrainerDetails";
 import Balance from "../pages/AdminDashboard/Balance/Balance";
+import AddNewClass from "../pages/AdminDashboard/AddNewClass/AddNewClass";
 
 const routers = createBrowserRouter([
   {
@@ -103,29 +104,65 @@ const routers = createBrowserRouter([
   // Admin Dashboard related routes:
   {
     path: "/admin-dashboard",
-    element: <AdminDashboard />,
+    element: (
+      <PrivateRoutes>
+        <AdminDashboard />
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "/admin-dashboard/newsletter-subscribers",
-        element: <NewsLetterSubscribers />,
+        element: (
+          <PrivateRoutes>
+            <NewsLetterSubscribers />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/admin-dashboard/all-trainers",
-        element: <AllTrainers />,
+        element: (
+          <PrivateRoutes>
+            <AllTrainers />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/admin-dashboard/applied-trainers",
-        element: <AppliedTrainers />,
+        element: (
+          <PrivateRoutes>
+            <AppliedTrainers />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/admin-dashboard/applied-trainer-details/:appliedTrainerId",
         loader: async ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/applied-trainers/${params.appliedTrainerId}`),
-        element: <AppliedTrainerDetails/>,
+          fetch(
+            `${import.meta.env.VITE_API_URL}/applied-trainers/${
+              params.appliedTrainerId
+            }`
+          ),
+        element: (
+          <PrivateRoutes>
+            <AppliedTrainerDetails />,
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/admin-dashboard/balance",
-        element: <Balance />,
+        element: (
+          <PrivateRoutes>
+            <Balance />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/admin-dashboard/add-new-class",
+        element: (
+          <PrivateRoutes>
+            <AddNewClass/>
+          </PrivateRoutes>
+        ),
       },
     ],
   },

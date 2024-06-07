@@ -1,6 +1,5 @@
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-
-
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import PropTypes from "prop-types";
 
 const COLORS = ["#FF8042", "#00C49F"];
 
@@ -12,7 +11,6 @@ const renderCustomizedLabel = ({
   innerRadius,
   outerRadius,
   percent,
-  index,
 }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -31,10 +29,10 @@ const renderCustomizedLabel = ({
   );
 };
 
-const BalancePieChart = ({transactionsCount, totalNewsLetter}) => {
+const BalancePieChart = ({ transactionsCount, totalNewsLetter }) => {
   const data = [
-    { name: "Group A", value: transactionsCount },
-    { name: "Group B", value: totalNewsLetter },
+    { name: "Paid members", value: transactionsCount },
+    { name: "Newsletter subscribers", value: totalNewsLetter },
   ];
 
   return (
@@ -54,9 +52,15 @@ const BalancePieChart = ({transactionsCount, totalNewsLetter}) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
+        <Tooltip />
       </PieChart>
     </ResponsiveContainer>
   );
+};
+
+BalancePieChart.propTypes = {
+  transactionsCount: PropTypes.number,
+  totalNewsLetter: PropTypes.number,
 };
 
 export default BalancePieChart;

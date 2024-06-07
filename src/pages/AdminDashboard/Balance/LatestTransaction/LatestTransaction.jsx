@@ -1,12 +1,9 @@
-import { Link } from "react-router-dom";
-import ButtonPrimary from "./../../../../components/shared/ButtonPrimary/ButtonPrimary";
-
 import PropTypes, { object } from "prop-types";
 
 const LatestTransaction = ({ transactions }) => {
   return (
     <section className="mt-5">
-      <h2 className="text-3xl font-semibold mb-3 text-gray-700 italic">
+      <h2 className="text-3xl font-semibold mb-3 text-gray-700">
         Latest Transaction
       </h2>
       <div className="overflow-x-auto">
@@ -17,7 +14,7 @@ const LatestTransaction = ({ transactions }) => {
                 <th className="py-2 px-4 border-b">Trainer Name</th>
                 <th className="py-2 px-4 border-b">User Name</th>
                 <th className="py-2 px-4 border-b">Price</th>
-                <th className="py-2 px-4 border-b">Package Name</th>
+                <th className="py-2 px-4 border-b">Package Type</th>
               </tr>
             </thead>
             <tbody>
@@ -36,12 +33,12 @@ const LatestTransaction = ({ transactions }) => {
                   <td className="py-2 px-4 border-b">$ {transaction?.price}</td>
                   <td
                     className={`
-                    ${transaction.packageName === "Premium Membership" &&"text-green-600"} 
+                    ${transaction.packageName === "Premium Membership" &&"text-green-500"} 
                     ${transaction.packageName === "Standard Membership" &&"text-custom-primary"} 
                     ${transaction.packageName === "Premium Membership" &&"text-gray-400"} 
                     py-2 px-4 border-b`}
                   >
-                    {transaction?.packageName}
+                    {transaction?.packageName.split(' ')[0]}
                   </td>
                 </tr>
               ))}
