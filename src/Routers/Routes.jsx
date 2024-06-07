@@ -19,6 +19,8 @@ import AppliedTrainers from "../pages/AdminDashboard/AppliedTrainers/AppliedTrai
 import AppliedTrainerDetails from "../pages/AdminDashboard/AppliedTrainerDetails/AppliedTrainerDetails";
 import Balance from "../pages/AdminDashboard/Balance/Balance";
 import AddNewClass from "../pages/AdminDashboard/AddNewClass/AddNewClass";
+import TrainerDashboard from "../pages/TrainerDashboard/TrainerDashboard";
+import ManageSlots from './../pages/TrainerDashboard/ManageSlots/ManageSlots';
 
 const routers = createBrowserRouter([
   {
@@ -138,9 +140,7 @@ const routers = createBrowserRouter([
         path: "/admin-dashboard/applied-trainer-details/:appliedTrainerId",
         loader: async ({ params }) =>
           fetch(
-            `${import.meta.env.VITE_API_URL}/applied-trainers/${
-              params.appliedTrainerId
-            }`
+            `${import.meta.env.VITE_API_URL}/applied-trainers/${params.appliedTrainerId}`
           ),
         element: (
           <PrivateRoutes>
@@ -166,6 +166,19 @@ const routers = createBrowserRouter([
       },
     ],
   },
+
+  // Trainer Dashboard relate routes:
+
+  {
+    path: '/trainer-dashboard',
+    element: <TrainerDashboard/>,
+    children: [
+      {
+        path: '/trainer-dashboard/manage-slots',
+        element : <ManageSlots/>
+      }
+    ]
+  }
 ]);
 
 export default routers;

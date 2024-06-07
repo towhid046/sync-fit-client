@@ -25,12 +25,11 @@ const AppliedTrainerDetails = () => {
     _id,
     name,
     image,
-    yearsOfExperience,
+    email,
     socialLinks,
     availableSlots,
     biography,
     areaOfExpertise,
-    rating,
   } = applicant;
 
   const handleAcceptApplicant = async (applicant) => {
@@ -114,9 +113,8 @@ const AppliedTrainerDetails = () => {
 
           <div className="flex-1">
             <div className="space-y-4">
-              <h2 className="text-3xl font-semibold mb-2">{name}</h2>
               <ul className="list-none mt-7 space-y-2">
-                <p className="text-xl font-medium text-gray-600 italic">Skills:</p>
+                <p className="text-xl font-bold text-gray-700">Skills:</p>
                 {expertiseItems}</ul>
               <ul className="flex list-none gap-3 items-center">
                 {allSocialItems}
@@ -127,6 +125,8 @@ const AppliedTrainerDetails = () => {
 
         <div className=" mt-5 p-6 pb-0 flex md:flex-row flex-col md:items-start items-center justify-center md:gap-12 gap-8">
           <div className="flex-1">
+          <h2 className="text-3xl font-semibold mb-1">{name}</h2>
+          <p className="text-gray-700 mb-5">Email: {email}</p>
             <p className="text-lg  text-custom-primary opacity-80 font-medium mb-2 italic">
               Offered Slots:
             </p>
