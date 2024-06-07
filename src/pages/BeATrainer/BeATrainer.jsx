@@ -97,13 +97,13 @@ const BeATrainer = () => {
   ];
 
   const options2 = [
-    { value: "9:00 AM - 11:00 AM", label: "9 AM - 11 AM" },
-    { value: "11:00 AM - 1:00 PM", label: "11 AM - 1 PM" },
-    { value: "1:00 PM - 3:00 PM", label: "1 PM - 3 PM" },
-    { value: "3:00 PM - 5:00 PM", label: "3 PM - 5 PM" },
-    { value: "5:00 PM - 7:00 PM", label: "5 PM - 7 PM" },
-    { value: "7:00 PM - 9:00 PM", label: "7 PM - 9 PM" },
-    { value: "9:00 PM - 11:00 PM", label: "9 PM - 11 PM" },
+    { value: "8:00 AM - 10:00 AM", label: "8 AM - 10 AM" },
+    { value: "10:00 AM - 12:00 PM", label: "10 AM - 12 PM" },
+    { value: "12:00 PM - 2:00 PM", label: "12 PM - 2 PM" },
+    { value: "2:00 PM - 4:00 PM", label: "2 PM - 4 PM" },
+    { value: "4:00 PM - 6:00 PM", label: "4 PM - 6 PM" },
+    { value: "6:00 PM - 8:00 PM", label: "6 PM - 8 PM" },
+    { value: "8:00 PM - 10:00 PM", label: "8 PM - 10 PM" },
   ];
 
   const getAvailableSlot = (arr1, arr2) => {
@@ -139,7 +139,6 @@ const BeATrainer = () => {
       swal("Skills Unselected!!", "Please select your skills", "error");
       return;
     }
-
     setLoading(true);
 
     const imageFile = { image: data.image[0] };
@@ -168,9 +167,26 @@ const BeATrainer = () => {
         };
 
         const response = await axiosPublic.post(
-          "/applied-trainers",
+          `/applied-trainers?email=${newTrainer.email}`,
           newTrainer
         );
+        if (response?.data?.message === "already_applied") {
+          swal(
+            "Already Applied",
+            "You are already applied. Your application is under processing..",
+            "info"
+          );
+          return;
+        }
+
+        if (response?.data?.message === "trainer_exist") {
+          swal(
+            "Trainer Exist",
+            "You are already a trainer. Email exist!!",
+            "error"
+          );
+          return;
+        }
         if (response.data?.insertedId) {
           swal(
             "Success",

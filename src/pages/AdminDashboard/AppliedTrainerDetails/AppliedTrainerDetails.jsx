@@ -38,7 +38,7 @@ const AppliedTrainerDetails = () => {
     swal({
       title: "Are you sure?",
       text: "Want to make this applicant as a Trainer!!",
-      icon: "success",
+      icon: "info",
       buttons: true,
       dangerMode: false,
     }).then(async (accept) => {

@@ -20,7 +20,9 @@ import AppliedTrainerDetails from "../pages/AdminDashboard/AppliedTrainerDetails
 import Balance from "../pages/AdminDashboard/Balance/Balance";
 import AddNewClass from "../pages/AdminDashboard/AddNewClass/AddNewClass";
 import TrainerDashboard from "../pages/TrainerDashboard/TrainerDashboard";
-import ManageSlots from './../pages/TrainerDashboard/ManageSlots/ManageSlots';
+import ManageSlots from "./../pages/TrainerDashboard/ManageSlots/ManageSlots";
+import AddNewSlot from "../pages/TrainerDashboard/AddNewSlot/AddNewSlot";
+import AddNewForum from "../pages/AddNewForum/AddNewForum";
 
 const routers = createBrowserRouter([
   {
@@ -140,7 +142,9 @@ const routers = createBrowserRouter([
         path: "/admin-dashboard/applied-trainer-details/:appliedTrainerId",
         loader: async ({ params }) =>
           fetch(
-            `${import.meta.env.VITE_API_URL}/applied-trainers/${params.appliedTrainerId}`
+            `${import.meta.env.VITE_API_URL}/applied-trainers/${
+              params.appliedTrainerId
+            }`
           ),
         element: (
           <PrivateRoutes>
@@ -160,25 +164,37 @@ const routers = createBrowserRouter([
         path: "/admin-dashboard/add-new-class",
         element: (
           <PrivateRoutes>
-            <AddNewClass/>
+            <AddNewClass />
           </PrivateRoutes>
         ),
       },
     ],
   },
+  {
+    path: "/admin-dashboard/add-new-forum",
+    element: <AddNewForum />,
+  },
 
   // Trainer Dashboard relate routes:
 
   {
-    path: '/trainer-dashboard',
-    element: <TrainerDashboard/>,
+    path: "/trainer-dashboard",
+    element: <TrainerDashboard />,
     children: [
       {
-        path: '/trainer-dashboard/manage-slots',
-        element : <ManageSlots/>
-      }
-    ]
-  }
+        path: "/trainer-dashboard/manage-slots",
+        element: <ManageSlots />,
+      },
+      {
+        path: "/trainer-dashboard/add-new-slot",
+        element: <AddNewSlot />,
+      },
+      {
+        path: "/trainer-dashboard/add-new-forum",
+        element: <AddNewForum />,
+      },
+    ],
+  },
 ]);
 
 export default routers;
