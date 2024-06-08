@@ -6,9 +6,11 @@ import useAuth from "../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
 import swal from "sweetalert";
 import { BeatLoader } from "react-spinners";
+import { BiSolidDownArrow } from "react-icons/bi";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isUserRouteOpen, setIsUserRouteOpen] = useState(false);
   const { user, logOutUser, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ const Navbar = () => {
     { id: 2, name: "Trainers", link: "/all-trainers" },
     { id: 3, name: "Classes", link: "/all-classes" },
 
-    // if the user role is admin then go to admin-dashboard: 
+    // if the user role is admin then go to admin-dashboard:
     { id: 4, name: "Dashboard", link: "/trainer-dashboard" },
     { id: 5, name: "Community", link: "/all-forums" },
   ];
@@ -34,8 +36,27 @@ const Navbar = () => {
     </li>
   ));
 
+  const userRouteList = [
+    { id: 1, name: "Activity Log", link: "/activity-log" },
+    { id: 2, name: "Profile", link: "/user-profile" },
+    { id: 3, name: "Booked Trainer", link: "/booked-trainer" },
+  ];
+
+  const userRoutes = userRouteList.map((list) => (
+    <li
+      className={`hover:text-custom-primary transition duration-300`}
+      key={list.id}
+    >
+      <NavLink to={list.link}>{list.name}</NavLink>
+    </li>
+  ));
+
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleUserImage = () => {
+    setIsUserRouteOpen(!isUserRouteOpen);
   };
 
   const handleLogOutUser = async () => {
@@ -50,7 +71,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gray-800 py-5 w-full sticky z-50 top-0">
-      <div className="container px-4 mx-auto flex justify-between items-center">
+      <div className="container relative px-4 mx-auto flex justify-between items-center">
         {/* Left side: Toggle Button and Website Name */}
         <div className="flex items-center">
           <button onClick={toggleNavbar} className="md:hidden text-white mr-4">
@@ -76,19 +97,21 @@ const Navbar = () => {
         {/* Right side: User Image */}
         <div className="flex gap-4 items-center">
           {loading ? (
-             <BeatLoader
-             color={"#ffffff"}
-             aria-label="Loading Spinner"
-             data-testid="loader"
-           />
+            <BeatLoader
+              color={"#ffffff"}
+              aria-label="Loading Spinner"
+              data-testid="loader"
+            />
           ) : (
             <>
               {user ? (
                 <>
                   <div onClick={handleLogOutUser}>
                     <ButtonPrimary
-                    customClass={'bg-gray-800 hover:border-custom-primary'}
-                    >Log Out</ButtonPrimary>
+                      customClass={"bg-gray-800 hover:border-custom-primary"}
+                    >
+                      Log Out
+                    </ButtonPrimary>
                   </div>
                   <img
                     data-tooltip-id="my-tooltip"
@@ -97,26 +120,52 @@ const Navbar = () => {
                     src={user?.photoURL}
                     alt="User"
                     className="user-profile-image-custom-class rounded-full cursor-pointer"
+                    onClick={toggleUserImage}
+                    onMouseOver={toggleUserImage}
                   />
                 </>
               ) : (
                 <Link to={"/login"}>
-                  <ButtonPrimary customClass={'bg-gray-800 hover:border-custom-primary'}>Log In</ButtonPrimary>
+                  <ButtonPrimary
+                    customClass={"bg-gray-800 hover:border-custom-primary"}
+                  >
+                    Log In
+                  </ButtonPrimary>
                 </Link>
               )}
             </>
           )}
         </div>
+
+        {/* Responsive Menu */}
+        {isOpen && (
+          <div className="menu md:hidden list-none flex flex-col gap-4 text-white  left-0 top-24 p-10 items-center absolute bg-gray-800 w-max-max font-medium rounded-xl">
+            <div className="absolute -top-5  left-4">
+              <BiSolidDownArrow className="text-3xl text-gray-800 rotate-180" />
+            </div>
+            {links}
+          </div>
+        )}
+
+        {/* User routes */}
+        {isUserRouteOpen && (
+          <div className="list-none flex flex-col gap-4 text-white p-10 pt-14 items-center absolute right-0 top-24 bg-gray-800 w-max-max font-medium">
+            <div
+              onClick={toggleUserImage}
+              className="absolute left-5 top-5 cursor-pointer"
+            >
+              <FaTimes className="text-2xl text-wite-800 rotate-180" />
+            </div>
+
+            <div className="absolute -top-5 right-6 lg:right-7">
+              <BiSolidDownArrow className="text-3xl text-gray-800 rotate-180" />
+            </div>
+            {userRoutes}
+          </div>
+        )}
+
+        <Tooltip id="my-tooltip" />
       </div>
-
-      {/* Responsive Menu */}
-      {isOpen && (
-        <div className="menu md:hidden list-none flex flex-col gap-4 text-white p-10 items-center absolute bg-gray-800 w-full font-medium">
-          {links}
-        </div>
-      )}
-
-      <Tooltip id="my-tooltip" />
     </nav>
   );
 };

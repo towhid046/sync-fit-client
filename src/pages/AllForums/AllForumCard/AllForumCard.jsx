@@ -59,9 +59,9 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
   };
 
   return (
-    <section className="mb-16">
+    <section className="mb-12">
       <div className="max-w-3xl mx-auto">
-        <article className="border border-custom-primary  border-opacity-5 justify-between flex flex-col">
+        <article className="border border-custom-primary  border-opacity-10 justify-between flex flex-col">
           {/* forum article text */}
           <div className="p-5">
             <div className=" space-y-4">
@@ -78,9 +78,17 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
                     </span>
                     <p>
                       <em>
-                        <small className={`
-                        ${author?.role === 'Admin' ? 'text-red-700' :'text-custom-primary' }
-                        `}>{author?.role || 'Unknown'}</small>
+                        <small
+                          className={`
+                        ${
+                          author?.role === "Admin"
+                            ? "text-red-700"
+                            : "text-custom-primary"
+                        }
+                        `}
+                        >
+                          {author?.role || "Unknown"}
+                        </small>
                       </em>
                     </p>
                   </div>
