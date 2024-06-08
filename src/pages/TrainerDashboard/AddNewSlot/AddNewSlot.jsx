@@ -155,7 +155,7 @@ const AddNewSlot = () => {
     selectedClasses.forEach((data) => {
       newArrOfClasses.push(data.value);
     });
-    if (preselectedClassOptions.length > 0) {
+    if (preselectedClassOptions?.length > 0) {
       setClasses([...preselectedClassOptions, ...newArrOfClasses]);
       return;
     }

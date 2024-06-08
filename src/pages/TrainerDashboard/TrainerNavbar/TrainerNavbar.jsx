@@ -45,7 +45,7 @@ const TrainerNavbar = () => {
   };
 
   return (
-    <nav className="bg-green-600 container  mx-left p-12 max-w-max">
+    <nav className="bg-gray-800 container  mx-left p-12 max-w-max">
       <div className="container space-y-5 relative ">
         {/* Left side: Toggle Button and Website Name */}
         <div className=" ">

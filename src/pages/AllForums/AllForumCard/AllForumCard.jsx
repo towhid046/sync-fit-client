@@ -78,7 +78,9 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
                     </span>
                     <p>
                       <em>
-                        <small className="text-gray-400">Germany</small>
+                        <small className={`
+                        ${author?.role === 'Admin' ? 'text-red-700' :'text-custom-primary' }
+                        `}>{author?.role || 'Unknown'}</small>
                       </em>
                     </p>
                   </div>

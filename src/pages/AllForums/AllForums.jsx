@@ -30,7 +30,7 @@ const AllForums = () => {
   // pagination related variables:
   const [currentPage, setCurrentPage] = useState(1);
   const totalForums = count?.totalForums;
-  const perPageForums = 4;
+  const perPageForums = 6;
   const totalNumberOfPages = Math.ceil(totalForums / perPageForums);
   const pageNumbers = [...Array(totalNumberOfPages).keys()];
 
