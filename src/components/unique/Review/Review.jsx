@@ -2,6 +2,7 @@ import { BiSolidDownArrow } from "react-icons/bi";
 import { PiQuotes } from "react-icons/pi";
 import { FaRegStar } from "react-icons/fa";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 const Review = ({ review }) => {
   const { description, rating, author } = review;
   return (
@@ -9,6 +10,14 @@ const Review = ({ review }) => {
       <div className="bg-custom-secondary cursor-grab shadow-lg p-6 relative ">
         <div className="mb-2">
           <PiQuotes className="text-6xl text-custom-primary opacity-30 rotate-180 " />
+        </div>
+        <div>
+          <h2 className="text-xl mb-2 font-medium">
+            <em className="text-gray-700">Trainer Name:</em>{" "}
+            <Link
+            to={`${review?.trainerId ? `/trainer-details/${review?.trainerId}` : '/' }`}
+             className="transaction duration-300 text-custom-primary font-semibold">{review?.trainerName || 'Unknown'}</Link>
+          </h2>
         </div>
         <p className="text-gray-500 mb-2">
           {description.split("").slice(0, 109).join("")}
@@ -30,7 +39,7 @@ const Review = ({ review }) => {
         <img className="w-11 h-11 rounded-full" src={author?.image} alt="Img" />
         <div>
           <h3 className="font-bold text-lg">{author?.name}</h3>
-          <p>{author?.location}</p>
+          <p className="text-gray-600 ">{author?.location}</p>
         </div>
       </div>
     </div>

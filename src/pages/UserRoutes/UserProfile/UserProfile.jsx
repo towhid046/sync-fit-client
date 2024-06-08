@@ -1,8 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { IoEyeOutline } from "react-icons/io5";
-import { IoEyeOffOutline } from "react-icons/io5";
+import { useEffect } from "react";
 import swal from "sweetalert";
 import { scrollToTop } from "./../../../utilities/scrollToTop";
 import PageBanner from "./../../../components/shared/PageBanner/PageBanner";
@@ -18,7 +16,7 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
 
-  const { createNewUser, updateUserProfile, user } = useAuth();
+  const { updateUserProfile, user } = useAuth();
 
   const formInfo = [
     {

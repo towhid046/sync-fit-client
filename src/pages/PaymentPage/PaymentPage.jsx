@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import PageBanner from "../../components/shared/PageBanner/PageBanner";
 import { useForm } from "react-hook-form";
@@ -16,9 +16,12 @@ const PaymentPage = () => {
     scrollToTop();
   }, []);
 
+  const navigate = useNavigate();
+
   const {
     _id,
     name: trainerName,
+    email,
     image,
     yearsOfExperience,
     socialLinks,
@@ -34,6 +37,12 @@ const PaymentPage = () => {
       title: "Trainer Name",
       name: "trainerName",
       defValue: trainerName,
+    },
+    {
+      id: 21,
+      title: "Trainer Email",
+      name: "trainerEmail",
+      defValue: email,
     },
     {
       id: 2,
@@ -75,6 +84,7 @@ const PaymentPage = () => {
       if (res.data?.insertedId) {
         swal("Success", "You have successfully booked this package", "success");
         reset();
+        navigate("/");
       }
     } catch (error) {
       console.error(error.message);
