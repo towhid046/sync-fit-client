@@ -13,12 +13,19 @@ import slotData from "./slotData";
 import useSecureData from "./../../../hooks/useSecureData";
 
 const AddNewSlot = () => {
-  const [preselectedOptions, setPreselectedOptions] = useState([]);
-  const [slotExistError, setSlotExistError] = useState(null);
   const [trainer, setTrainer] = useState({});
   const [loading, setLoading] = useState(true);
-  const [className, setClassName] = useState([]);
+
+  const [preselectedSlotOptions, setPreselectedSlotOptions] = useState([]);
+  const [preselectedClassOptions, setPreselectedClassOptions] = useState([]);
+
+  const [slotExistError, setSlotExistError] = useState(null);
+  const [classExistError, setClassExistError] = useState(null);
+
   const [slots, setSlots] = useState([]);
+  const [classes, setClasses] = useState([]);
+
+  // --------------------------------------------------
   const { register, handleSubmit, reset } = useForm();
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
@@ -43,7 +50,8 @@ const AddNewSlot = () => {
           `/trainer-by-email?email=${user?.email}`
         );
         setTrainer(res?.data);
-        setPreselectedOptions(res?.data?.availableSlots);
+        setPreselectedSlotOptions(res?.data?.availableSlots);
+        setPreselectedClassOptions(res?.data?.classes);
       } catch (error) {
         console.error(error.message);
       } finally {
@@ -113,7 +121,7 @@ const AddNewSlot = () => {
 
     {
       id: 4,
-      title: "Profile Image",
+      title: "Profile Image Url",
       name: "image",
       defValue: trainer?.image,
       readOnly: true,
@@ -123,78 +131,69 @@ const AddNewSlot = () => {
   const handleSlots = (arr) => {
     setSlotExistError(null);
     arr.forEach((item) => {
-      if (preselectedOptions.includes(item?.value)) {
-        setSlotExistError(`${item.value} slot already exist!!`);
+      if (preselectedSlotOptions.includes(item.value)) {
+        return setSlotExistError(`${item.value} slot already exist!!`);
       }
     });
-    setSlots(arr);
+
+    const newArrOfSlots = [];
+    arr.forEach((data) => {
+      newArrOfSlots.push(data.value);
+    });
+    setSlots([...preselectedSlotOptions, ...newArrOfSlots]);
   };
 
   const handleClasses = (selectedClasses) => {
-    setClassName(selectedClasses);
+    setClassExistError(null);
+    selectedClasses.forEach((item) => {
+      if (preselectedClassOptions?.includes(item.value)) {
+        return setClassExistError(`${item.value} class already exist!!`);
+      }
+    });
+
+    const newArrOfClasses = [];
+    selectedClasses.forEach((data) => {
+      newArrOfClasses.push(data.value);
+    });
+    if (preselectedClassOptions.length > 0) {
+      setClasses([...preselectedClassOptions, ...newArrOfClasses]);
+      return;
+    }
+    setClasses([...newArrOfClasses]);
   };
 
   const onSubmit = (data) => {
-    if (data.areaOfExpertise <= 0) {
-      swal("Skills Unselected!!", "Please select your skills", "error");
+    if (slotExistError || classExistError) {
+      swal(
+        "Something Wrong!",
+        `You have select some ${slotExistError ? "slots " : ""} ${
+          classExistError ? "classes " : ""
+        }that already in your list`,
+        "error"
+      );
       return;
     }
     setLoading(true);
 
-    const status = "Pending";
-    const socialLinks = {
-      facebook: "https://www.facebook.com",
-      instagram: "https://www.instagram.com",
-      linkedin: "https://www.linkedin.com",
+    const updatedTrainerInfo = {
+      availableSlots: slots,
+      classes,
     };
 
-    console.log(slots, className)
-
-    const postData = async () => {
+    const putData = async () => {
       try {
-        const newTrainer = {
-          ...data,
-          status,
-          socialLinks,
-          // availableSlots,
-        };
-
-        const response = await axiosPublic.post(
-          `/applied-trainers?email=${newTrainer.email}`,
-          newTrainer
+        const response = await axiosPublic.put(
+          `/update-trainer?email=${data.email}`,
+          updatedTrainerInfo
         );
-        if (response?.data?.message === "already_applied") {
-          swal(
-            "Already Applied",
-            "You are already applied. Your application is under processing..",
-            "info"
-          );
-          return;
-        }
-
-        if (response?.data?.message === "trainer_exist") {
-          swal(
-            "Trainer Exist",
-            "You are already a trainer. Email exist!!",
-            "error"
-          );
-          return;
-        }
-        if (response.data?.insertedId) {
-          swal(
-            "Success",
-            "You have application successful to become a trainer",
-            "success"
-          );
-          reset();
-        }
+        console.log(response.data);
       } catch (error) {
-        swal("Something Wrong!", `${error.message}`, "error");
+        swal("Something Wrong!", `${error.message}`, "warning");
       } finally {
         setLoading(false);
       }
     };
-    // postData();
+    putData();
   };
 
   const checkboxItems = checkboxOptions.map((option) => (
@@ -204,7 +203,7 @@ const AddNewSlot = () => {
           {...register(option.name)}
           type="checkbox"
           checked={trainer?.areaOfExpertise?.includes(option.title)}
-          disabled
+          readOnly
           value={option.title}
           className="bg-transparent text-[#4A4E4B] border border-gray-500 rounded focus:ring-0 focus:outline-none mr-2 p-2"
         />
@@ -255,13 +254,13 @@ const AddNewSlot = () => {
 
               {checkboxItems}
 
-              {/* Select days */}
+              {/* Current Slots */}
               <div>
                 <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
                   Your Current Slots
                 </label>
                 <ul>
-                  {preselectedOptions?.map((item) => (
+                  {preselectedSlotOptions?.map((item) => (
                     <li className="text-gray-500 italic " key={item}>
                       {item}
                     </li>
@@ -274,26 +273,55 @@ const AddNewSlot = () => {
                 <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
                   Add New Slot
                 </label>
-                <Select isMulti onChange={handleSlots} options={slotData} />
-                <small className="text-red-500">{slotExistError}</small>
-              </div>
-
-              {/* select classes */}
-              <div>
-                <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
-                  Add classes
-                </label>
                 <Select
                   isMulti
-                  onChange={handleClasses}
-                  options={class_names}
+                  onChange={handleSlots}
+                  options={slotData}
+                  placeholder="Select new slot"
                 />
                 <small className="text-red-500">{slotExistError}</small>
               </div>
 
+              {/* selected classes */}
+              <div
+                className={`${
+                  preselectedClassOptions?.length ? "block" : "hidden"
+                }`}
+              >
+                <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
+                  Your Current Classes
+                </label>
+                <ul>
+                  {preselectedClassOptions?.map((item) => (
+                    <li className="text-gray-500 italic " key={item}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Add new classes */}
+              <div
+                className={`${
+                  preselectedClassOptions?.length ? "block" : "md:col-span-2"
+                }`}
+              >
+                <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
+                  Add classes
+                </label>
+                <Select
+                  required
+                  isMulti
+                  onChange={handleClasses}
+                  options={class_names}
+                  placeholder="Select class, you can select one or more"
+                />
+                <small className="text-red-500">{classExistError}</small>
+              </div>
+
               <div className="md:col-span-2">
                 <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
-                  Brief Biography
+                  Your Brief Biography
                 </label>
                 <textarea
                   className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#4A4E4B]"
@@ -307,7 +335,7 @@ const AddNewSlot = () => {
               </div>
             </div>
             <ButtonPrimary customClass="w-full py-2.5 border-custom-primary mt-5">
-              Apply
+              Submit
             </ButtonPrimary>
           </form>
         </div>
