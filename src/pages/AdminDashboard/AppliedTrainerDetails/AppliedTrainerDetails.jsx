@@ -58,6 +58,33 @@ const AppliedTrainerDetails = () => {
     });
   };
 
+  const handleRejectApplicant = async (applicant) => {
+    const id = applicant._id;
+
+    swal({
+      title: "Are you sure?",
+      text: "Want to make this applicant as a Trainer!!",
+      icon: "info",
+      buttons: true,
+      dangerMode: false,
+    }).then(async (accept) => {
+      if (accept) {
+        try {
+          const res = await axiosSecure.post(
+            `/accept-applicant/${id}`,
+            applicant
+          );
+          if(res.data.deletedCount){
+            navigate('/admin-dashboard/applied-trainers')
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+    });
+  };
+
+
   const socialItems = [
     { id: 1, icon: <FaFacebookF />, link: socialLinks.facebook, animTime: 300 },
     {
@@ -139,7 +166,7 @@ const AppliedTrainerDetails = () => {
 
             {/* Accept or reject an applicant */}
             <div className="flex justify-end gap-4 mt-6">
-              <div>
+              <div onClick={handleRejectApplicant}>
                 <ButtonPrimary customClass="border-custom-primary flex items-center gap-2 py-2 bg-red-400 border-red-400 hover:bg-red-500 hover:border-red-500">
                   <FaXmark className="text-lg" />
                   <span>Reject</span>

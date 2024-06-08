@@ -14,6 +14,10 @@ const Navbar = () => {
   const { user, logOutUser, loading } = useAuth();
   const navigate = useNavigate();
 
+  const handleCloseBothMenu = () => {
+    setIsUserRouteOpen(false);
+    setIsOpen(false);
+  };
   const menus = [
     { id: 1, name: "Home", link: "/" },
     { id: 2, name: "Trainers", link: "/all-trainers" },
@@ -29,7 +33,7 @@ const Navbar = () => {
       className={`hover:text-custom-primary transition duration-300 ${
         menu.name === "Dashboard" && !user ? "hidden" : "flex"
       }`}
-      onClick={() => setIsOpen(false)}
+      onClick={handleCloseBothMenu}
       key={menu.id}
     >
       <NavLink to={menu.link}>{menu.name}</NavLink>
@@ -44,6 +48,7 @@ const Navbar = () => {
 
   const userRoutes = userRouteList.map((list) => (
     <li
+      onClick={handleCloseBothMenu}
       className={`hover:text-custom-primary transition duration-300`}
       key={list.id}
     >
@@ -139,7 +144,7 @@ const Navbar = () => {
 
         {/* Responsive Menu */}
         {isOpen && (
-          <div className="menu md:hidden list-none flex flex-col gap-4 text-white  left-0 top-24 p-10 items-center absolute bg-gray-800 w-max-max font-medium rounded-xl">
+          <div className="menu md:hidden list-none flex flex-col gap-4 text-white  left-4 top-24 p-10 items-center absolute bg-gray-800 w-max-max font-medium rounded-xl">
             <div className="absolute -top-5  left-4">
               <BiSolidDownArrow className="text-3xl text-gray-800 rotate-180" />
             </div>
@@ -149,7 +154,7 @@ const Navbar = () => {
 
         {/* User routes */}
         {isUserRouteOpen && (
-          <div className="list-none flex flex-col gap-4 text-white p-10 pt-14 items-center absolute right-0 top-24 bg-gray-800 w-max-max font-medium">
+          <div className="list-none flex flex-col gap-4 text-white p-10 pt-14 items-center absolute right-4 top-24 bg-gray-800 w-max-max font-medium">
             <div
               onClick={toggleUserImage}
               className="absolute left-5 top-5 cursor-pointer"
@@ -157,7 +162,7 @@ const Navbar = () => {
               <FaTimes className="text-2xl text-wite-800 rotate-180" />
             </div>
 
-            <div className="absolute -top-5 right-6 lg:right-7">
+            <div className="absolute -top-5 right-3">
               <BiSolidDownArrow className="text-3xl text-gray-800 rotate-180" />
             </div>
             {userRoutes}

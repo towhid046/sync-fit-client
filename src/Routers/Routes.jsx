@@ -23,6 +23,9 @@ import TrainerDashboard from "../pages/TrainerDashboard/TrainerDashboard";
 import ManageSlots from "./../pages/TrainerDashboard/ManageSlots/ManageSlots";
 import AddNewSlot from "../pages/TrainerDashboard/AddNewSlot/AddNewSlot";
 import AddNewForum from "../pages/AddNewForum/AddNewForum";
+import ActivityLog from "../pages/UserRoutes/ActivityLog/ActivityLog";
+import UserProfile from "../pages/UserRoutes/UserProfile/UserProfile";
+import BookedTrainer from "../pages/UserRoutes/BookedTrainer/BookedTrainer";
 
 const routers = createBrowserRouter([
   {
@@ -71,7 +74,6 @@ const routers = createBrowserRouter([
       },
 
       // Private routers:
-
       {
         path: "/trainer-booking/:trainerId",
         loader: async ({ params }) =>
@@ -101,7 +103,31 @@ const routers = createBrowserRouter([
         ),
       },
 
-      // Dashboard related routes:
+      // user specific routes those whose role is user only access
+      {
+        path: "/activity-log",
+        element: (
+          <PrivateRoutes>
+            <ActivityLog />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/user-profile",
+        element: (
+          <PrivateRoutes>
+            <UserProfile />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/booked-trainer",
+        element: (
+          <PrivateRoutes>
+            <BookedTrainer />
+          </PrivateRoutes>
+        ),
+      },
     ],
   },
 

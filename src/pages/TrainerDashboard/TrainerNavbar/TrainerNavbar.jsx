@@ -14,8 +14,6 @@ const TrainerNavbar = () => {
     { id: 1, name: "Manage Slots", link: "/trainer-dashboard/manage-slots" },
     { id: 3, name: "Add New Slot", link: "/trainer-dashboard/add-new-slot" },
     { id: 2, name: "Add New Forum", link: "/trainer-dashboard/add-new-forum" },
-    { id: 5, name: "Balance", link: "/admin-dashboard/balance" },
-    { id: 6, name: "Add Class", link: "/admin-dashboard/add-new-class" },
   ];
 
   const links = menus.map((menu) => (
@@ -45,7 +43,7 @@ const TrainerNavbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 container  mx-left p-12 max-w-max">
+    <nav className="bg-gray-800 container  mx-left p-12 max-w-max min-h-screen">
       <div className="container space-y-5 relative ">
         {/* Left side: Toggle Button and Website Name */}
         <div className=" ">
@@ -89,7 +87,7 @@ const TrainerNavbar = () => {
             <br />
             <hr />
             <br />
-          {links}
+            {links}
           </div>
         </div>
       )}
