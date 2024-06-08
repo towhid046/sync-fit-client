@@ -51,7 +51,7 @@ const ActivityLog = () => {
                 <td className="py-2 px-4 border-b">{trainer?.name}</td>
                 <td className="py-2 px-4 border-b">{trainer?.email}</td>
                 <td className="py-2 px-4 border-b text-gray-800">
-                  {trainer?.availableSlots.map((item) => (
+                  {trainer?.availableSlots?.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </td>

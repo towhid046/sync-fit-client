@@ -18,7 +18,7 @@ const ClassesPage = () => {
   // pagination related variables:
   const [currentPage, setCurrentPage] = useState(1);
   const totalClasses = count?.totalClasses;
-  const perPageClasses = 2;
+  const perPageClasses = 6;
   const totalNumberOfPages = Math.ceil(totalClasses / perPageClasses);
   const pageNumbers = [...Array(totalNumberOfPages).keys()];
 
@@ -29,7 +29,7 @@ const ClassesPage = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}&search=${searchText}`);
         setClasses(res.data);
       } catch (error) {
         setIsError(error?.message);
@@ -38,24 +38,19 @@ const ClassesPage = () => {
       }
     };
     getData();
-  }, [currentPage]);
+  }, [currentPage, searchText]);
 
-  // const handleSearchService = (e) => {
-  //   e.preventDefault();
-  //   const value = e.target.search.value;
-  //   setSearchText(value);
-  // };
-
-  // const handleSearchOnChange = (e) => {
-  //   const searchVal = e.target.value;
-  //   setSearchText(searchVal);
-  // };
+  const handleSearchClassesOnChange = (e) => {
+    const searchVal = e.target.value;
+    setSearchText(searchVal);
+    console.log(searchText)
+  };
 
   const handleGetCurrentPage = (currPage) => {
     setIsLoading(true)
 
     setCurrentPage(currPage);
-    // setSearchText("");
+    setSearchText("");
     scrollToTop();
   };
 
@@ -90,17 +85,17 @@ const ClassesPage = () => {
         title="Explore All Classes"
         description="Explore all our classes"
       />
-      {/* <div className="mb-10">
-        <form onSubmit={handleSearchService} className="w-full">
-          <label className="input input-bordered rounded-full max-w-md flex mx-auto items-center gap-2">
-            <input
-              onChange={handleSearchOnChange}
+      <div className="mb-12">
+        <form  className="w-full">
+           <div className="mx-auto max-w-xl relative flex justify-center">
+           <input
+              onChange={handleSearchClassesOnChange}
               type="text"
               name="search"
-              className="grow"
-              placeholder="Search by service name"
+              className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#4A4E4B]"
+              placeholder="Search by class name"
             />
-            <button>
+             <button className="absolute right-5 top-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -114,9 +109,10 @@ const ClassesPage = () => {
                 />
               </svg>
             </button>
-          </label>
+           </div>
+           
         </form>
-      </div> */}
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {classes?.map((singleClass, index) => (
@@ -129,8 +125,8 @@ const ClassesPage = () => {
       </div>
 
       {classes.length <= 0 && (
-        <h2 className="text-2xl font-semibold italic text-gray-300 py-10 text-center">
-          Sorry, No service have match in your search!
+        <h2 className="md:text-3xl text-2xl font-semibold italic text-gray-400 py-10 text-center">
+          Sorry, No Class have match in your search!
         </h2>
       )}
 

@@ -23,7 +23,7 @@ const Navbar = () => {
     { id: 2, name: "Trainers", link: "/all-trainers" },
     { id: 3, name: "Classes", link: "/all-classes" },
 
-    // if the user role is admin then go to admin-dashboard:
+    //Todo: if the user role is admin then go to admin-dashboard:
     { id: 4, name: "Dashboard", link: "/trainer-dashboard" },
     { id: 5, name: "Community", link: "/all-forums" },
   ];
@@ -153,20 +153,23 @@ const Navbar = () => {
         )}
 
         {/* User routes */}
-        {isUserRouteOpen && (
-          <div className="list-none flex flex-col gap-4 text-white p-10 pt-14 items-center absolute right-4 top-24 bg-gray-800 w-max-max font-medium">
-            <div
-              onClick={toggleUserImage}
-              className="absolute left-5 top-5 cursor-pointer"
-            >
-              <FaTimes className="text-2xl text-wite-800 rotate-180" />
-            </div>
-
-            <div className="absolute -top-5 right-3">
-              <BiSolidDownArrow className="text-3xl text-gray-800 rotate-180" />
-            </div>
-            {userRoutes}
-          </div>
+        {user && (
+          <>
+            {isUserRouteOpen && (
+              <div className="list-none flex flex-col gap-4 text-white p-10 pt-14 items-center absolute right-4 top-24 bg-gray-800 w-max-max font-medium">
+                <div
+                  onClick={toggleUserImage}
+                  className="absolute left-5 top-5 cursor-pointer"
+                >
+                  <FaTimes className="text-2xl text-wite-800 rotate-180" />
+                </div>
+                <div className="absolute -top-5 right-3">
+                  <BiSolidDownArrow className="text-3xl text-gray-800 rotate-180" />
+                </div>
+                {userRoutes}
+              </div>
+            )}
+          </>
         )}
 
         <Tooltip id="my-tooltip" />
