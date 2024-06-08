@@ -105,7 +105,7 @@ const UserProfile = () => {
                     border border-gray-500 block 
                     w-full py-3 px-5 focus:outline-none
                     ${item.type === "file" && "py-2.5"}
-                     placeholder-[#4A4E4B]`}
+                     placeholder-[#a6a7a6]`}
                     placeholder={item.placeholder}
                     readOnly={
                       item.type === "email" || item.name === "lastLogInInfo"

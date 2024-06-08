@@ -235,7 +235,7 @@ const AddNewSlot = () => {
                     {...register(item.name)}
                     className={`bg-transparent text-[#4A4E4B] border border-gray-500 block w-full ${
                       item.type === "file" ? "py-2" : "py-2.5"
-                    } px-5 focus:outline-none placeholder-[#4A4E4B]`}
+                    } px-5 focus:outline-none placeholder-[#a6a7a6]`}
                     required
                     readOnly={item.readOnly || false}
                     type={item.type || "text"}
@@ -324,7 +324,7 @@ const AddNewSlot = () => {
                   Your Brief Biography
                 </label>
                 <textarea
-                  className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#4A4E4B]"
+                  className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#a6a7a6]"
                   placeholder="Your brief biography"
                   rows={4}
                   defaultValue={trainer?.biography}

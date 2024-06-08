@@ -24,7 +24,7 @@ const Navbar = () => {
     { id: 3, name: "Classes", link: "/all-classes" },
 
     //Todo: if the user role is admin then go to admin-dashboard:
-    { id: 4, name: "Dashboard", link: "/trainer-dashboard" },
+    { id: 4, name: "Dashboard", link: "/admin-dashboard" },
     { id: 5, name: "Community", link: "/all-forums" },
   ];
 

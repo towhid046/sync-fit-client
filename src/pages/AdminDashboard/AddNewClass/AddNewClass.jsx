@@ -83,7 +83,7 @@ const AddNewClass = () => {
                     {...register(item.name)}
                     className={`bg-transparent text-[#4A4E4B] border border-gray-500 block w-full ${
                       item.type === "file" ? "py-2" : "py-2.5"
-                    } px-5 focus:outline-none placeholder-[#4A4E4B]`}
+                    } px-5 focus:outline-none placeholder-[#a6a7a6]`}
                     required
                     type={item.type || "text"}
                     placeholder={item.title}
@@ -95,7 +95,7 @@ const AddNewClass = () => {
                   Class Details
                 </label>
                 <textarea
-                  className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#4A4E4B]"
+                  className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#a6a7a6]"
                   placeholder="Class details"
                   rows={5}
                   required

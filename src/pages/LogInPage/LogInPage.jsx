@@ -74,7 +74,7 @@ const LogInPage = () => {
                   {item.title}
                 </label>
                 <input
-                  className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#4A4E4B]"
+                  className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
                   placeholder={item.placeholder}
                   required
                   type={(!isShowPass && item.type) || "text"}

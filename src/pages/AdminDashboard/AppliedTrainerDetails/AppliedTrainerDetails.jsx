@@ -1,8 +1,6 @@
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { CiStar } from "react-icons/ci";
 import { FaInstagram, FaLinkedin, FaFacebookF } from "react-icons/fa";
-import { CiDumbbell } from "react-icons/ci";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import ButtonPrimary from "./../../../components/shared/ButtonPrimary/ButtonPrimary";
 import SectionHeader from "./../../../components/shared/SectionHeader/SectionHeader";
@@ -11,10 +9,15 @@ import { FaXmark } from "react-icons/fa6";
 import { IoMdCheckmark } from "react-icons/io";
 import swal from "sweetalert";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useForm } from "react-hook-form";
+import { FaTimes } from "react-icons/fa";
 
 const AppliedTrainerDetails = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { register, handleSubmit } = useForm();
+
   const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     scrollToTop();
   }, []);
@@ -31,6 +34,13 @@ const AppliedTrainerDetails = () => {
     biography,
     areaOfExpertise,
   } = applicant;
+  const [initialBio, setInitialBio] = useState(
+    biography?.split(" ").slice(0, 14).join(" ")
+  );
+
+  const handleShowFullBio = () => {
+    setInitialBio(biography);
+  };
 
   const handleAcceptApplicant = async (applicant) => {
     const id = applicant._id;
@@ -48,8 +58,8 @@ const AppliedTrainerDetails = () => {
             `/accept-applicant/${id}`,
             applicant
           );
-          if(res.data.deletedCount){
-            navigate('/admin-dashboard/applied-trainers')
+          if (res.data.deletedCount) {
+            navigate("/admin-dashboard/applied-trainers");
           }
         } catch (error) {
           console.log(error.message);
@@ -58,32 +68,33 @@ const AppliedTrainerDetails = () => {
     });
   };
 
-  const handleRejectApplicant = async (applicant) => {
-    const id = applicant._id;
+  const handleRejectApplicant = async (data) => {
+    try {
+      const res = await axiosSecure.patch(
+        `/rejected-applicant?email=${email}`,
+        data
+      );
 
-    swal({
-      title: "Are you sure?",
-      text: "Want to make this applicant as a Trainer!!",
-      icon: "info",
-      buttons: true,
-      dangerMode: false,
-    }).then(async (accept) => {
-      if (accept) {
-        try {
-          const res = await axiosSecure.post(
-            `/accept-applicant/${id}`,
-            applicant
-          );
-          if(res.data.deletedCount){
-            navigate('/admin-dashboard/applied-trainers')
-          }
-        } catch (error) {
-          console.log(error.message);
-        }
+      if (res?.data?.modifiedCount) {
+        swal(
+          "Rejection Success",
+          "Thanks for giving feedback that help the applicant for father improvement",
+          "success"
+        );
+        navigate("/admin-dashboard/applied-trainers");
       }
-    });
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      handleToggleModal(false);
+    }
   };
 
+  // ----------------------------------------
+  // modal related functions:
+  const handleToggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const socialItems = [
     { id: 1, icon: <FaFacebookF />, link: socialLinks.facebook, animTime: 300 },
@@ -142,7 +153,8 @@ const AppliedTrainerDetails = () => {
             <div className="space-y-4">
               <ul className="list-none mt-7 space-y-2">
                 <p className="text-xl font-bold text-gray-700">Skills:</p>
-                {expertiseItems}</ul>
+                {expertiseItems}
+              </ul>
               <ul className="flex list-none gap-3 items-center">
                 {allSocialItems}
               </ul>
@@ -152,8 +164,8 @@ const AppliedTrainerDetails = () => {
 
         <div className=" mt-5 p-6 pb-0 flex md:flex-row flex-col md:items-start items-center justify-center md:gap-12 gap-8">
           <div className="flex-1">
-          <h2 className="text-3xl font-semibold mb-1">{name}</h2>
-          <p className="text-gray-700 mb-5">Email: {email}</p>
+            <h2 className="text-3xl font-semibold mb-1">{name}</h2>
+            <p className="text-gray-700 mb-5">Email: {email}</p>
             <p className="text-lg  text-custom-primary opacity-80 font-medium mb-2 italic">
               Offered Slots:
             </p>
@@ -161,12 +173,24 @@ const AppliedTrainerDetails = () => {
           </div>
 
           <div className="flex-1">
-            <p className="italic text-gray-600 font-medium underline">Biography :</p>
-            <span className="text-gray-600">{biography}</span>
-
+            <p className="italic text-gray-600 font-medium underline">
+              Biography :
+            </p>
+            <p>
+              {initialBio}
+              <em
+                onClick={handleShowFullBio}
+                className={`${
+                  initialBio.split(" ").length > 14 && "hidden"
+                } text-custom-primary cursor-pointer`}
+              >
+                {" "}
+                ...see more
+              </em>
+            </p>
             {/* Accept or reject an applicant */}
             <div className="flex justify-end gap-4 mt-6">
-              <div onClick={handleRejectApplicant}>
+              <div onClick={handleToggleModal}>
                 <ButtonPrimary customClass="border-custom-primary flex items-center gap-2 py-2 bg-red-400 border-red-400 hover:bg-red-500 hover:border-red-500">
                   <FaXmark className="text-lg" />
                   <span>Reject</span>
@@ -183,6 +207,72 @@ const AppliedTrainerDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal form for review: */}
+      {isModalOpen && (
+        <section className="w-full bg-black bg-opacity-60 top-0 min-h-screen fixed flex items-center px-4 left-0 overflow-y-scroll">
+          <div className="w-full">
+            <div className="bg-custom-secondary  relative max-w-3xl md:p-12 p-6 mx-auto">
+              <div className="absolute right-6 top-6">
+                <button
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content="Close"
+                  onClick={handleToggleModal}
+                  className="border-opacity-20 border p-2 border-custom-primary hover:border-opacity-40  transition duration-300"
+                >
+                  <FaTimes className="text-gray-700 text-2xl hover:text-custom-primary" />
+                </button>
+              </div>
+
+              <>
+                <div className=" mb-5">
+                  <div className="flex md:flex-row flex-col items-center justify-center md:gap-12 gap-3">
+                    <div className="flex-1">
+                      <h2 className="text-3xl font-semibold mb-1">{name}</h2>
+                      <p className="text-gray-700 mb-5">Email: {email}</p>
+                      <p className="text-lg  text-custom-primary opacity-80 font-medium mb-2 italic">
+                        Offered Slots:
+                      </p>
+                      <ul className="space-y-1">{slotItems}</ul>
+                    </div>
+                    <div className="flex-1">
+                      <div className="space-y-4">
+                        <ul className="list-none mt-7 space-y-2">
+                          <p className="text-xl font-bold text-gray-700">
+                            Skills:
+                          </p>
+                          {expertiseItems}
+                        </ul>
+                        <ul className="flex list-none gap-3 items-center">
+                          {allSocialItems}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+
+              {/* modal form */}
+              <form onSubmit={handleSubmit(handleRejectApplicant)}>
+                <div className="mb-4 relative">
+                  <textarea
+                    className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#a6a7a6]"
+                    placeholder="Write rejection feedback"
+                    rows={4}
+                    required
+                    {...register("feedback")}
+                  ></textarea>
+                </div>
+                <div>
+                  <ButtonPrimary customClass="w-full py-3 border-custom-primary mt-5">
+                    Submit Feedback
+                  </ButtonPrimary>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      )}
     </section>
   );
 };

@@ -6,6 +6,8 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa6";
 import PropTypes from "prop-types";
 import { scrollToTop } from "../../../utilities/scrollToTop";
 import { BarLoader } from "react-spinners";
+import { GoShieldLock } from "react-icons/go";
+import { MdOutlinePeopleAlt } from "react-icons/md";
 
 const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
   const [isVoteChange, setIsVoteChange] = useState(false);
@@ -66,9 +68,9 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
           <div className="p-5">
             <div className=" space-y-4">
               <ul className="flex flex-wrap gap-4 justify-between items-start">
-                <li className="flex items-center gap-2">
+                <li className="flex items-center gap-3">
                   <img
-                    className="w-10 h-10 rounded-full"
+                    className="w-11 h-11 rounded-full"
                     src={author?.image}
                     alt=""
                   />
@@ -79,7 +81,7 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
                     <p>
                       <em>
                         <small
-                          className={`
+                          className={`flex items-center gap-2
                         ${
                           author?.role === "Admin"
                             ? "text-red-700"
@@ -88,8 +90,14 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
                         `}
                         >
                           {author?.role || "Unknown"}
+                          {
+                          author?.role === "Admin"
+                            ? <GoShieldLock/>
+                            : <MdOutlinePeopleAlt/>
+                        }
                         </small>
                       </em>
+                     
                     </p>
                   </div>
                 </li>

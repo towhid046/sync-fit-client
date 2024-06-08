@@ -50,7 +50,7 @@ const NewsLetter = () => {
             type="text"
             required
             placeholder="Your Name"
-            className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#4A4E4B] mb-4"
+            className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6] mb-4"
           />
 
           <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
@@ -61,7 +61,7 @@ const NewsLetter = () => {
             type="email"
             required
             placeholder="Your Email"
-            className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#4A4E4B] mb-5"
+            className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6] mb-5"
           />
           <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5">
             Subscribe Now

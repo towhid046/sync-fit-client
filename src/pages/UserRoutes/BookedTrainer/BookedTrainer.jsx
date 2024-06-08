@@ -212,7 +212,7 @@ const BookedTrainer = () => {
 
       {/* Modal form for review: */}
       {isModalOpen && (
-        <section className="w-full bg-black bg-opacity-60 top-12 min-h-screen fixed flex items-center px-4">
+        <section className="w-full bg-black bg-opacity-60 top-0 min-h-screen fixed flex items-center px-4">
           <div className="w-full">
             <div className="bg-custom-secondary  relative max-w-xl md:p-12 p-6 mx-auto ">
               <div className="absolute right-6 top-6">
@@ -241,7 +241,7 @@ const BookedTrainer = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4 relative">
                   <textarea
-                    className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#4A4E4B]"
+                    className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#a6a7a6]"
                     placeholder="Description"
                     rows={4}
                     required
