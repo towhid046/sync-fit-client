@@ -19,29 +19,6 @@ const AppliedTrainers = () => {
     refetch,
   } = useSecureData(["applied-trainers"], "/applied-trainers");
 
-  const handleRemoveTrainer = async (id, email) => {
-    swal({
-      title: "Are you sure?",
-      text: "Want to delete this trainer. Once delete, you won't be able to recover this action!!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    }).then(async (willDelete) => {
-      if (willDelete) {
-        try {
-          const res = await axiosSecure.delete(
-            `/remove-trainer/${id}?email=${email}`
-          );
-          if (res.data.deletedCount) {
-            refetch();
-          }
-        } catch (error) {
-          console.log(error.message);
-        }
-      }
-    });
-  };
-
   if (isLoading) {
     return <LoadingSpinner />;
   }

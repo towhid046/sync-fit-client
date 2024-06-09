@@ -11,28 +11,24 @@ import { BiSolidDownArrow } from "react-icons/bi";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserRouteOpen, setIsUserRouteOpen] = useState(false);
-  const { user, logOutUser, loading } = useAuth();
+  const { user, logOutUser, loading, userRole } = useAuth();
   const navigate = useNavigate();
 
   const handleCloseBothMenu = () => {
     setIsUserRouteOpen(false);
     setIsOpen(false);
   };
+
   const menus = [
     { id: 1, name: "Home", link: "/" },
     { id: 2, name: "Trainers", link: "/all-trainers" },
     { id: 3, name: "Classes", link: "/all-classes" },
-
-    //Todo: if the user role is admin then go to admin-dashboard:
-    { id: 4, name: "Dashboard", link: "/admin-dashboard" },
     { id: 5, name: "Community", link: "/all-forums" },
   ];
 
   const links = menus.map((menu) => (
     <li
-      className={`hover:text-custom-primary transition duration-300 ${
-        menu.name === "Dashboard" && !user ? "hidden" : "flex"
-      }`}
+      className={`hover:text-custom-primary transition duration-300 `}
       onClick={handleCloseBothMenu}
       key={menu.id}
     >
@@ -61,6 +57,10 @@ const Navbar = () => {
   };
 
   const toggleUserImage = () => {
+    if (userRole !== "Member") {
+      setIsUserRouteOpen(false);
+      return
+    }
     setIsUserRouteOpen(!isUserRouteOpen);
   };
 
@@ -97,6 +97,22 @@ const Navbar = () => {
         {/* Middle: Menu Items */}
         <div className="menu hidden md:flex flex-grow justify-center list-none gap-6 text-white font-medium">
           {links}
+          {userRole === "Admin" && (
+            <li
+              className={`hover:text-custom-primary transition duration-300 `}
+              onClick={handleCloseBothMenu}
+            >
+              <NavLink to={"admin-dashboard"}>Dashboard</NavLink>
+            </li>
+          )}
+          {userRole === "Trainer" && (
+            <li
+              className={`hover:text-custom-primary transition duration-300 `}
+              onClick={handleCloseBothMenu}
+            >
+              <NavLink to={"trainer-dashboard"}>Dashboard</NavLink>
+            </li>
+          )}
         </div>
 
         {/* Right side: User Image */}
@@ -153,24 +169,24 @@ const Navbar = () => {
         )}
 
         {/* User routes */}
-        {user && (
-          <>
-            {isUserRouteOpen && (
-              <div className="list-none flex flex-col gap-4 text-white p-10 pt-14 items-center absolute right-4 top-24 bg-gray-800 w-max-max font-medium">
-                <div
-                  onClick={toggleUserImage}
-                  className="absolute left-5 top-5 cursor-pointer"
-                >
-                  <FaTimes className="text-2xl text-wite-800 rotate-180" />
-                </div>
-                <div className="absolute -top-5 right-3">
-                  <BiSolidDownArrow className="text-3xl text-gray-800 rotate-180" />
-                </div>
-                {userRoutes}
-              </div>
+        {user &&(
+              <>
+                {isUserRouteOpen && (
+                  <div className="list-none flex flex-col gap-4 text-white p-10 pt-14 items-center absolute right-4 top-24 bg-gray-800 w-max-max font-medium">
+                    <div
+                      onClick={toggleUserImage}
+                      className="absolute left-5 top-5 cursor-pointer"
+                    >
+                      <FaTimes className="text-2xl text-wite-800 rotate-180" />
+                    </div>
+                    <div className="absolute -top-5 right-3">
+                      <BiSolidDownArrow className="text-3xl text-gray-800 rotate-180" />
+                    </div>
+                    {userRoutes}
+                  </div>
+                )}
+              </>
             )}
-          </>
-        )}
 
         <Tooltip id="my-tooltip" />
       </div>

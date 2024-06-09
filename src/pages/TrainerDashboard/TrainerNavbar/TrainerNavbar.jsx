@@ -15,7 +15,24 @@ const TrainerNavbar = () => {
     { id: 3, name: "Add New Slot", link: "/trainer-dashboard/add-new-slot" },
     { id: 2, name: "Add New Forum", link: "/trainer-dashboard/add-new-forum" },
   ];
+  const menus2 = [
+    { id: 1, name: "Home", link: "/" },
+    { id: 2, name: "Trainers", link: "/all-trainers" },
+    { id: 3, name: "Classes", link: "/all-classes" },
+    { id: 5, name: "Community", link: "/all-forums" },
+  ];
 
+  const links2 = menus2.map((menu) => (
+    <li
+      className={`hover:text-custom-primary transition duration-300 ${
+        menu.name === "Dashboard" && !user ? "hidden" : "flex"
+      }`}
+      onClick={() => setIsOpen(false)}
+      key={menu.id}
+    >
+      <NavLink to={menu.link}>{menu.name}</NavLink>
+    </li>
+  ));
   const links = menus.map((menu) => (
     <li
       className={`hover:text-custom-primary transition duration-300 ${
@@ -46,7 +63,7 @@ const TrainerNavbar = () => {
     <nav className="bg-gray-800 container  mx-left p-12 max-w-max min-h-screen">
       <div className="container space-y-5 relative ">
         {/* Left side: Toggle Button and Website Name */}
-        <div className=" ">
+        {/* <div className=" ">
           <button onClick={toggleNavbar} className="md:hidden text-white mr-4">
             {isOpen ? (
               <FaTimes className="text-2xl " />
@@ -54,27 +71,29 @@ const TrainerNavbar = () => {
               <FaBars className="text-2xl" />
             )}
           </button>
-        </div>
+        </div> */}
 
         {/* Middle: Menu Items */}
 
-        <div className="menu hidden md:flex flex-col list-none gap-3 text-white font-medium ">
+        <div className="menu md:flex flex-col list-none gap-3 text-white font-medium ">
+        <div className="mb-8">
           <Link
             to={"/"}
             className="text-custom-primary cursor-pointer font-bold text-3xl"
           >
             Sync<span className="text-custom-secondary">Fit</span>
           </Link>
+          </div>
           {links}
           <br />
           <hr />
           <br />
-          {links}
+          {links2}
         </div>
       </div>
 
       {/* Responsive Menu */}
-      {isOpen && (
+      {/* {isOpen && (
         <div className="menu md:hidden space-y-10">
           <Link
             to={"/"}
@@ -87,10 +106,10 @@ const TrainerNavbar = () => {
             <br />
             <hr />
             <br />
-            {links}
+            {links2}
           </div>
         </div>
-      )}
+      )} */}
 
       <Tooltip id="my-tooltip" />
     </nav>

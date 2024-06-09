@@ -198,26 +198,46 @@ const routers = createBrowserRouter([
   },
   {
     path: "/admin-dashboard/add-new-forum",
-    element: <AddNewForum />,
+    element: (
+      <PrivateRoutes>
+        <AddNewForum />
+      </PrivateRoutes>
+    ),
   },
 
   // Trainer Dashboard relate routes:
 
   {
     path: "/trainer-dashboard",
-    element: <TrainerDashboard />,
+    element: (
+      <PrivateRoutes>
+        <TrainerDashboard />
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "/trainer-dashboard/manage-slots",
-        element: <ManageSlots />,
+        element: (
+          <PrivateRoutes>
+            <ManageSlots />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/trainer-dashboard/add-new-slot",
-        element: <AddNewSlot />,
+        element: (
+          <PrivateRoutes>
+            <AddNewSlot />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/trainer-dashboard/add-new-forum",
-        element: <AddNewForum />,
+        element: (
+          <PrivateRoutes>
+            <AddNewForum />
+          </PrivateRoutes>
+        ),
       },
     ],
   },

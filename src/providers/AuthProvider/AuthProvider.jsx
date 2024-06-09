@@ -16,6 +16,7 @@ export const UserContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState("Member");
   const [loading, setLoading] = useState(true);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [selectedPackage, setSelectedPackage] = useState({});
@@ -49,7 +50,8 @@ const AuthProvider = ({ children }) => {
 
   // logout User:
   const logOutUser = () => {
-    setLoading(true);
+    setLoading(false);
+    setUserRole("Member");
     return signOut(auth);
   };
 
@@ -62,15 +64,37 @@ const AuthProvider = ({ children }) => {
 
         // send a http request if the current user have:
         if (currentUser) {
+          const userInfo = { email: currentUser?.email };
           const loggedUser = {
             email: currentUser.email,
-            role: "member",
+            role: "Member",
           };
 
           const sendData = async () => {
             try {
-              const res = await axiosPublic.post("/users", loggedUser);
-              // console.log(res.data);
+              const res = await axiosPublic.get(
+                `/user-role/${loggedUser?.email}`
+              );
+              if (res.data.role === "Admin") {
+                setUserRole("Admin");
+                return;
+              }
+
+              if (res.data.role === "Trainer") {
+                setUserRole("Trainer");
+                return;
+              } else {
+                setUserRole("Member");
+              }
+              // get token:
+              const response = await axiosPublic.post("/jwt", userInfo);
+              const token = response?.data?.token;
+              if (token) {
+                localStorage.setItem("access-token", token);
+              }
+
+              // save user:
+              await axiosPublic.post("/users", loggedUser);
             } catch (error) {
               console.error(error.message);
             } finally {
@@ -78,6 +102,8 @@ const AuthProvider = ({ children }) => {
             }
           };
           sendData();
+        } else {
+          localStorage.removeItem("access-token");
         }
       });
     };
@@ -107,6 +133,7 @@ const AuthProvider = ({ children }) => {
     selectedSlot,
     handleUserSelectedPackage,
     selectedPackage,
+    userRole,
   };
 
   return (

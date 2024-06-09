@@ -8,6 +8,7 @@ import { scrollToTop } from "../../utilities/scrollToTop";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Select from "react-select";
 import LoadingSpinner from "./../../components/shared/LoadingSpinner/LoadingSpinner";
+import slotData from "./../TrainerDashboard/AddNewSlot/slotData";
 
 const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const imgbb_api_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
@@ -15,6 +16,7 @@ const imgbb_api_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
 const BeATrainer = () => {
   const [days, setDays] = useState([]);
   const [times, setTimes] = useState([]);
+  const [slots, setSlots] = useState([]);
   const [loading, setLoading] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const { user } = useAuth();
@@ -23,6 +25,14 @@ const BeATrainer = () => {
   useEffect(() => {
     scrollToTop();
   }, []);
+
+  const handleSlots = (arr) => {
+    const newArrOfSlots = [];
+    arr.forEach((data) => {
+      newArrOfSlots.push(data.value);
+    });
+    setSlots(newArrOfSlots);
+  };
 
   const checkboxOptions = [
     {
@@ -86,63 +96,16 @@ const BeATrainer = () => {
     },
   ];
 
-  const options = [
-    { value: "Monday", label: "Mon" },
-    { value: "Tuesday", label: "Tue" },
-    { value: "Wednesday", label: "Wed" },
-    { value: "Thursday", label: "Thu" },
-    { value: "Friday", label: "Fri" },
-    { value: "Saturday", label: "Sat" },
-    { value: "Sunday", label: "Sun" },
-  ];
-
-  const options2 = [
-    { value: "8:00 AM - 10:00 AM", label: "8 AM - 10 AM" },
-    { value: "10:00 AM - 12:00 PM", label: "10 AM - 12 PM" },
-    { value: "12:00 PM - 2:00 PM", label: "12 PM - 2 PM" },
-    { value: "2:00 PM - 4:00 PM", label: "2 PM - 4 PM" },
-    { value: "4:00 PM - 6:00 PM", label: "4 PM - 6 PM" },
-    { value: "6:00 PM - 8:00 PM", label: "6 PM - 8 PM" },
-    { value: "8:00 PM - 10:00 PM", label: "8 PM - 10 PM" },
-  ];
-
-  const getAvailableSlot = (arr1, arr2) => {
-    const availableSlots = [];
-    for (let i = 0; i < arr1.length; i++) {
-      for (let v = 0; v < arr2.length; v++) {
-        availableSlots.push(arr1[i] + " " + arr2[v]);
-      }
-    }
-    return availableSlots;
-  };
-
-  const getValueInArray = (arr) => {
-    let newArr = [];
-    arr.forEach((item) => {
-      newArr.push(item.value);
-    });
-    return newArr;
-  };
-
-  const handleGetTime = (arr) => {
-    const timesInArray = getValueInArray(arr);
-    setTimes(timesInArray);
-  };
-
-  const handleGetDays = (arr) => {
-    const daysInArray = getValueInArray(arr);
-    setDays(daysInArray);
-  };
-
   const onSubmit = (data) => {
     if (data.areaOfExpertise <= 0) {
       swal("Skills Unselected!!", "Please select your skills", "error");
       return;
     }
+    scrollToTop();
+    
     setLoading(true);
 
     const imageFile = { image: data.image[0] };
-    const availableSlots = getAvailableSlot(days, times);
     const status = "Pending";
     const socialLinks = {
       facebook: "https://www.facebook.com",
@@ -163,7 +126,7 @@ const BeATrainer = () => {
           image,
           status,
           socialLinks,
-          availableSlots,
+          availableSlots:slots,
         };
 
         const response = await axiosPublic.post(
@@ -260,35 +223,22 @@ const BeATrainer = () => {
 
                 {checkboxItems}
 
-                {/* Select days */}
-                <div className="">
+                {/* Select Slots */}
+                <div className="md:col-span-2">
                   <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
                     Available Days in Week
                   </label>
                   <Select
-                    onChange={handleGetDays}
+                    // onChange={handleGetDays}
+                    onChange={handleSlots}
                     isMulti
-                    name="colors"
-                    options={options}
+                    options={slotData}
                     className="basic-multi-select w-full"
                     required
                   />
                 </div>
 
-                <div className="">
-                  <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
-                    Available Time in A Day
-                  </label>
-                  <Select
-                    onChange={handleGetTime}
-                    isMulti
-                    name="colors"
-                    options={options2}
-                    className="basic-multi-select w-full"
-                    required
-                  />
-                </div>
-
+                {/* Biography */}
                 <div className="md:col-span-2">
                   <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
                     Brief Biography

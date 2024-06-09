@@ -14,7 +14,7 @@ const AllTrainers = () => {
     isError,
     error,
     refetch,
-  } = useSecureData(["all-trainers"], "/trainers");
+  } = useSecureData(["all-trainers"], "/trainers",);
 
   const handleRemoveTrainer = async (id, email) => {
     swal({
