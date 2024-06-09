@@ -117,45 +117,37 @@ const Navbar = () => {
 
         {/* Right side: User Image */}
         <div className="flex gap-4 items-center">
-          {loading ? (
-            <BeatLoader
-              color={"#ffffff"}
-              aria-label="Loading Spinner"
-              data-testid="loader"
-            />
-          ) : (
-            <>
-              {user ? (
-                <>
-                  <div onClick={handleLogOutUser}>
-                    <ButtonPrimary
-                      customClass={"bg-gray-800 hover:border-custom-primary"}
-                    >
-                      Log Out
-                    </ButtonPrimary>
-                  </div>
-                  <img
-                    data-tooltip-id="my-tooltip"
-                    data-tooltip-content={user?.displayName}
-                    data-tooltip-place="bottom"
-                    src={user?.photoURL}
-                    alt="User"
-                    className="user-profile-image-custom-class rounded-full cursor-pointer"
-                    onClick={toggleUserImage}
-                    onMouseOver={toggleUserImage}
-                  />
-                </>
-              ) : (
-                <Link to={"/login"}>
+          <>
+            {user ? (
+              <>
+                <div onClick={handleLogOutUser}>
                   <ButtonPrimary
                     customClass={"bg-gray-800 hover:border-custom-primary"}
                   >
-                    Log In
+                    Log Out
                   </ButtonPrimary>
-                </Link>
-              )}
-            </>
-          )}
+                </div>
+                <img
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content={user?.displayName}
+                  data-tooltip-place="bottom"
+                  src={user?.photoURL}
+                  alt="User"
+                  className="user-profile-image-custom-class rounded-full cursor-pointer"
+                  onClick={toggleUserImage}
+                  onMouseOver={toggleUserImage}
+                />
+              </>
+            ) : (
+              <Link to={"/login"}>
+                <ButtonPrimary
+                  customClass={"bg-gray-800 hover:border-custom-primary"}
+                >
+                  Log In
+                </ButtonPrimary>
+              </Link>
+            )}
+          </>
         </div>
 
         {/* Responsive Menu */}

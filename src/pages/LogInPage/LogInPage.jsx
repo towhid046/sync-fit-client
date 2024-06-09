@@ -29,7 +29,7 @@ const formInfo = [
 
 const LogInPage = () => {
   const { register, handleSubmit } = useForm();
-  const { logInUser, singInWithGoogle, setLoading, } = useAuth();
+  const { logInUser, singInWithGoogle } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
 
@@ -46,8 +46,6 @@ const LogInPage = () => {
       navigate(location?.state ? location?.state : "/");
     } catch (error) {
       swal("Error", `${error.message}`, "error");
-    } finally {
-      setLoading(false);
     }
   };
 
