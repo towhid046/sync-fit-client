@@ -9,7 +9,6 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { scrollToTop } from "../../utilities/scrollToTop";
-import LoadingSpinner from "./../../components/shared/LoadingSpinner/LoadingSpinner";
 
 const formInfo = [
   {
@@ -30,7 +29,7 @@ const formInfo = [
 
 const LogInPage = () => {
   const { register, handleSubmit } = useForm();
-  const { logInUser, singInWithGoogle, setLoading, loading } = useAuth();
+  const { logInUser, singInWithGoogle, setLoading, } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
 
@@ -61,10 +60,6 @@ const LogInPage = () => {
       swal("Error", `${error.message}`, "error");
     }
   };
-
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <section className="min-h-screen">

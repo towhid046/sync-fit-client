@@ -29,11 +29,13 @@ import BookedTrainer from "../pages/UserRoutes/BookedTrainer/BookedTrainer";
 import AdminRoutes from "./AdminRoutes/AdminRoutes";
 import TrainerRoutes from "./TrainerRoutes/TrainerRoutes";
 import AdminTrainerCommonRoutes from "./AdminTrainerCommonRoutes/AdminTrainerCommonRoutes";
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 
 const routers = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: "/",
@@ -137,6 +139,7 @@ const routers = createBrowserRouter([
   // Admin Dashboard related routes:
   {
     path: "/admin-dashboard",
+    errorElement: <NotFoundPage />,
     element: (
       <AdminRoutes>
         <AdminDashboard />
@@ -211,6 +214,7 @@ const routers = createBrowserRouter([
   // Trainer Dashboard relate routes:
   {
     path: "/trainer-dashboard",
+    errorElement: <NotFoundPage />,
     element: (
       <TrainerRoutes>
         <TrainerDashboard />
