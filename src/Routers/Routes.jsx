@@ -206,7 +206,6 @@ const routers = createBrowserRouter([
   },
 
   // Trainer Dashboard relate routes:
-
   {
     path: "/trainer-dashboard",
     element: (

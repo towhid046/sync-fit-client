@@ -48,7 +48,6 @@ const Registration = () => {
     try {
       await createNewUser(data.email, data.password);
       await updateUserProfile(data.name, data.photoUrl);
-
       swal("Success", "Your member account register successfully!!", "success");
       navigate("/");
     } catch (error) {

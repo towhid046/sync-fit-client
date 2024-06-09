@@ -55,7 +55,7 @@ const Navbar = () => {
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
-
+  
   const toggleUserImage = () => {
     if (userRole !== "Member") {
       setIsUserRouteOpen(false);
@@ -165,6 +165,22 @@ const Navbar = () => {
               <BiSolidDownArrow className="text-3xl text-gray-800 rotate-180" />
             </div>
             {links}
+            {userRole === "Admin" && (
+            <li
+              className={`hover:text-custom-primary transition duration-300 `}
+              onClick={handleCloseBothMenu}
+            >
+              <NavLink to={"admin-dashboard"}>Dashboard</NavLink>
+            </li>
+          )}
+          {userRole === "Trainer" && (
+            <li
+              className={`hover:text-custom-primary transition duration-300 `}
+              onClick={handleCloseBothMenu}
+            >
+              <NavLink to={"trainer-dashboard"}>Dashboard</NavLink>
+            </li>
+          )}
           </div>
         )}
 

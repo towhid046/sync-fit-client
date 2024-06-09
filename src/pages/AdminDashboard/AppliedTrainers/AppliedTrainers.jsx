@@ -2,15 +2,11 @@ import SectionHeader from "../../../components/shared/SectionHeader/SectionHeade
 import useSecureData from "./../../../hooks/useSecureData";
 import LoadingSpinner from "./../../../components/shared/LoadingSpinner/LoadingSpinner";
 import ErrorElement from "./../../../components/shared/ErrorElement/ErrorElement";
-import { RiDeleteBin5Fill } from "react-icons/ri";
-import swal from "sweetalert";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import ButtonPrimary from "./../../../components/shared/ButtonPrimary/ButtonPrimary";
 import { Link } from "react-router-dom";
 import EmptyComponent from "./../../../components/shared/EmptyComponent/EmptyComponent";
 
 const AppliedTrainers = () => {
-  const axiosSecure = useAxiosSecure();
   const {
     data: applicants,
     isLoading,

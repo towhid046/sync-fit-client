@@ -98,7 +98,7 @@ const BeATrainer = () => {
 
   const onSubmit = (data) => {
     if (data.areaOfExpertise <= 0) {
-      swal("Skills Unselected!!", "Please select your skills", "error");
+      swal("Skills Unselected!!", "Please select your skills", "info");
       return;
     }
     scrollToTop();
@@ -136,7 +136,7 @@ const BeATrainer = () => {
         if (response?.data?.message === "already_applied") {
           swal(
             "Already Applied",
-            "You are already applied. Your application is under processing..",
+            "You are already applied. With this email address",
             "info"
           );
           return;

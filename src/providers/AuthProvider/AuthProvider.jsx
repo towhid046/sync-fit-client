@@ -9,7 +9,6 @@ import {
 import { createContext, useEffect, useState } from "react";
 import { auth, googleProvider } from "./../../config/firebase";
 import PropTypes from "prop-types";
-import { TbRuler2 } from "react-icons/tb";
 import useAxiosPublic from "./../../hooks/useAxiosPublic";
 
 export const UserContext = createContext(null);
@@ -62,39 +61,39 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
         setLoading(false);
 
+        if (currentUser?.email) {
+          const saveUser = async () => {
+            const loggedUser = { email: currentUser?.email, role: "Member" };
+            await axiosPublic.post("/users", loggedUser);
+          };
+          saveUser();
+        }
+        
         // send a http request if the current user have:
         if (currentUser) {
           const userInfo = { email: currentUser?.email };
-          const loggedUser = {
-            email: currentUser.email,
-            role: "Member",
-          };
-
           const sendData = async () => {
             try {
-              const res = await axiosPublic.get(
-                `/user-role/${loggedUser?.email}`
-              );
-              if (res.data.role === "Admin") {
-                setUserRole("Admin");
-                return;
-              }
-
-              if (res.data.role === "Trainer") {
-                setUserRole("Trainer");
-                return;
-              } else {
-                setUserRole("Member");
-              }
               // get token:
+
               const response = await axiosPublic.post("/jwt", userInfo);
               const token = response?.data?.token;
               if (token) {
                 localStorage.setItem("access-token", token);
               }
 
-              // save user:
-              await axiosPublic.post("/users", loggedUser);
+              // get the current user role
+              const res = await axiosPublic.get(
+                `/user-role/${currentUser.email}`
+              );
+
+              if (res?.data?.role === "Admin") {
+                setUserRole("Admin");
+                return;
+              }
+              if (res?.data?.role === "Trainer") {
+                setUserRole("Trainer");
+              }
             } catch (error) {
               console.error(error.message);
             } finally {
@@ -104,6 +103,7 @@ const AuthProvider = ({ children }) => {
           sendData();
         } else {
           localStorage.removeItem("access-token");
+          setUserRole("Member");
         }
       });
     };

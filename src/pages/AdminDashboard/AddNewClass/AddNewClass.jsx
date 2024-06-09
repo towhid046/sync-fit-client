@@ -6,6 +6,7 @@ import { scrollToTop } from "./../../../utilities/scrollToTop";
 import ButtonPrimary from "./../../../components/shared/ButtonPrimary/ButtonPrimary";
 import SectionHeader from "./../../../components/shared/SectionHeader/SectionHeader";
 import useAxiosSecure from "./../../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const imgbb_api_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
@@ -14,6 +15,7 @@ const AddNewClass = () => {
   const [loading, setLoading] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     scrollToTop();
@@ -40,7 +42,7 @@ const AddNewClass = () => {
 
     const postData = async () => {
       try {
-        const res = await axiosSecure.post(imgbb_api_url, imageFile, {
+        const res = await axiosPublic.post(imgbb_api_url, imageFile, {
           headers: { "Content-Type": "multipart/form-data" },
         });
 
