@@ -26,6 +26,9 @@ import AddNewForum from "../pages/AddNewForum/AddNewForum";
 import ActivityLog from "../pages/UserRoutes/ActivityLog/ActivityLog";
 import UserProfile from "../pages/UserRoutes/UserProfile/UserProfile";
 import BookedTrainer from "../pages/UserRoutes/BookedTrainer/BookedTrainer";
+import AdminRoutes from "./AdminRoutes/AdminRoutes";
+import TrainerRoutes from "./TrainerRoutes/TrainerRoutes";
+import AdminTrainerCommonRoutes from "./AdminTrainerCommonRoutes/AdminTrainerCommonRoutes";
 
 const routers = createBrowserRouter([
   {
@@ -135,33 +138,33 @@ const routers = createBrowserRouter([
   {
     path: "/admin-dashboard",
     element: (
-      <PrivateRoutes>
+      <AdminRoutes>
         <AdminDashboard />
-      </PrivateRoutes>
+      </AdminRoutes>
     ),
     children: [
       {
         path: "/admin-dashboard/newsletter-subscribers",
         element: (
-          <PrivateRoutes>
+          <AdminRoutes>
             <NewsLetterSubscribers />
-          </PrivateRoutes>
+          </AdminRoutes>
         ),
       },
       {
         path: "/admin-dashboard/all-trainers",
         element: (
-          <PrivateRoutes>
+          <AdminRoutes>
             <AllTrainers />
-          </PrivateRoutes>
+          </AdminRoutes>
         ),
       },
       {
         path: "/admin-dashboard/applied-trainers",
         element: (
-          <PrivateRoutes>
+          <AdminRoutes>
             <AppliedTrainers />
-          </PrivateRoutes>
+          </AdminRoutes>
         ),
       },
       {
@@ -173,69 +176,69 @@ const routers = createBrowserRouter([
             }`
           ),
         element: (
-          <PrivateRoutes>
+          <AdminRoutes>
             <AppliedTrainerDetails />,
-          </PrivateRoutes>
+          </AdminRoutes>
         ),
       },
       {
         path: "/admin-dashboard/balance",
         element: (
-          <PrivateRoutes>
+          <AdminRoutes>
             <Balance />
-          </PrivateRoutes>
+          </AdminRoutes>
         ),
       },
       {
         path: "/admin-dashboard/add-new-class",
         element: (
-          <PrivateRoutes>
+          <AdminRoutes>
             <AddNewClass />
-          </PrivateRoutes>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "/admin-dashboard/add-new-forum",
+        element: (
+          <AdminTrainerCommonRoutes>
+            <AddNewForum />
+          </AdminTrainerCommonRoutes>
         ),
       },
     ],
-  },
-  {
-    path: "/admin-dashboard/add-new-forum",
-    element: (
-      <PrivateRoutes>
-        <AddNewForum />
-      </PrivateRoutes>
-    ),
   },
 
   // Trainer Dashboard relate routes:
   {
     path: "/trainer-dashboard",
     element: (
-      <PrivateRoutes>
+      <TrainerRoutes>
         <TrainerDashboard />
-      </PrivateRoutes>
+      </TrainerRoutes>
     ),
     children: [
       {
         path: "/trainer-dashboard/manage-slots",
         element: (
-          <PrivateRoutes>
+          <TrainerRoutes>
             <ManageSlots />
-          </PrivateRoutes>
+          </TrainerRoutes>
         ),
       },
       {
         path: "/trainer-dashboard/add-new-slot",
         element: (
-          <PrivateRoutes>
+          <TrainerRoutes>
             <AddNewSlot />
-          </PrivateRoutes>
+          </TrainerRoutes>
         ),
       },
       {
         path: "/trainer-dashboard/add-new-forum",
         element: (
-          <PrivateRoutes>
+          <AdminTrainerCommonRoutes>
             <AddNewForum />
-          </PrivateRoutes>
+          </AdminTrainerCommonRoutes>
         ),
       },
     ],

@@ -1,0 +1,29 @@
+import { Navigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import LoadingSpinner from "./../../components/shared/LoadingSpinner/LoadingSpinner";
+
+import PropTypes from "prop-types";
+
+const AdminRoutes = ({ children }) => {
+  const { user, loading, userRole, logOutUser } = useAuth();
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
+  if (userRole !== "Admin") {
+    const logOut = async () => {
+      await logOutUser();
+    };
+    logOut();
+    return <Navigate to={"/login"} />;
+  }
+  return children;
+};
+
+AdminRoutes.propTypes = {
+  children: PropTypes.node,
+};
+
+export default AdminRoutes;

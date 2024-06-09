@@ -7,7 +7,7 @@ import swal from "sweetalert";
 
 const AdminNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logOutUser, loading } = useAuth();
+  const { user, logOutUser, } = useAuth();
   const navigate = useNavigate();
 
   const menus = [
@@ -16,6 +16,7 @@ const AdminNavbar = () => {
     { id: 3, name: "Applied Trainer", link: "/admin-dashboard/applied-trainers" },
     { id: 5, name: "Balance", link: "/admin-dashboard/balance" },
     { id: 6, name: "Add Class", link: "/admin-dashboard/add-new-class" },
+    { id: 7, name: "Add Forum", link: "/admin-dashboard/add-new-forum" },
   ];
 
   const menus2 = [
@@ -27,7 +28,7 @@ const AdminNavbar = () => {
 
   const links = menus.map((menu) => (
     <li
-      className={`hover:text-custom-primary transition duration-300 ${
+      className={`hover:text-custom-primary lg:mb-0 mb-3 transition duration-300 ${
         menu.name === "Dashboard" && !user ? "hidden" : "flex"
       }`}
       onClick={() => setIsOpen(false)}
@@ -39,7 +40,7 @@ const AdminNavbar = () => {
 
   const links2 = menus2.map((menu) => (
     <li
-      className={`hover:text-custom-primary transition duration-300 ${
+      className={`hover:text-custom-primary lg:mb-0 mb-3 transition duration-300 ${
         menu.name === "Dashboard" && !user ? "hidden" : "flex"
       }`}
       onClick={() => setIsOpen(false)}

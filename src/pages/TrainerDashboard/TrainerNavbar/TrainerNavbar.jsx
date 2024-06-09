@@ -24,7 +24,7 @@ const TrainerNavbar = () => {
 
   const links2 = menus2.map((menu) => (
     <li
-      className={`hover:text-custom-primary transition duration-300 ${
+      className={`hover:text-custom-primary lg:mb-0 mb-3 transition duration-300 ${
         menu.name === "Dashboard" && !user ? "hidden" : "flex"
       }`}
       onClick={() => setIsOpen(false)}
@@ -35,7 +35,7 @@ const TrainerNavbar = () => {
   ));
   const links = menus.map((menu) => (
     <li
-      className={`hover:text-custom-primary transition duration-300 ${
+      className={`hover:text-custom-primary lg:mb-0 mb-3 transition duration-300 ${
         menu.name === "Dashboard" && !user ? "hidden" : "flex"
       }`}
       onClick={() => setIsOpen(false)}

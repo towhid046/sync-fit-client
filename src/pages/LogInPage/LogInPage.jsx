@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import PageBanner from "./../../components/shared/PageBanner/PageBanner";
 import googleIcon from "../../assets/svg/google.svg";
@@ -33,6 +33,9 @@ const LogInPage = () => {
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
 
+
+const location  = useLocation()
+
   useEffect(() => {
     scrollToTop();
   }, []);
@@ -41,6 +44,7 @@ const LogInPage = () => {
     try {
       await logInUser(data.email, data.password);
       swal("Success", "Your member account login successfully!!", "success");
+      navigate(location?.state ? location?.state : '/');
     } catch (error) {
       swal("Error", `${error.message}`, "error");
     } finally {
@@ -52,7 +56,7 @@ const LogInPage = () => {
     try {
       await singInWithGoogle();
       swal("Success", "Your member account login successfully!!", "success");
-      navigate("/");
+      navigate(location?.state ? location?.state : '/');
     } catch (error) {
       swal("Error", `${error.message}`, "error");
     }
