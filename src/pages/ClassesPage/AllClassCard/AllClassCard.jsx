@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
 import { CiStar } from "react-icons/ci";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
+import usePublicData from './../../../hooks/usePublicData';
+import LoadingSpinner from "../../../components/shared/LoadingSpinner/LoadingSpinner";
+
 const AllClassCard = ({ singleClass }) => {
   const {
     image,
@@ -22,32 +25,38 @@ const AllClassCard = ({ singleClass }) => {
         <h2 className="text-2xl italic font-medium ">
           Trainer who took this class
         </h2>
-        {/* <div className="flex items-center gap-4">
-          <img
-            title={name || "Unknown"}
-            src={image}
+        <div className="flex items-center gap-5">
+         <figure
+         data-tooltip-id="my-tooltip" data-tooltip-content="Trainer Name"
+         className="border-4 rounded-full border-custom-primary border-opacity-50 cursor-pointer">
+         <img
+            title={"Trainer Name"}
+            src={'https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&w=600'}
             className="w-12 h-12 rounded-full"
             alt="Trainer"
           />
-          <img
-            title={name || "Unknown"}
-            src={trainerimage}
+         </figure>
+         <figure
+         data-tooltip-id="my-tooltip" data-tooltip-content="Trainer Name"
+         className="border-4 rounded-full border-custom-primary border-opacity-50 cursor-pointer">
+         <img
+            title={"Trainer Name"}
+            src={'https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&w=600'}
             className="w-12 h-12 rounded-full"
             alt="Trainer"
           />
-          <img
-            title={trainer.name || "Unknown"}
-            src={trainer?.image}
+         </figure>
+         <figure
+         data-tooltip-id="my-tooltip" data-tooltip-content="Trainer Name"
+         className="border-4 rounded-full border-custom-primary border-opacity-50 cursor-pointer">
+         <img
+            title={"Trainer Name"}
+            src={'https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&w=600'}
             className="w-12 h-12 rounded-full"
             alt="Trainer"
           />
-          <img
-            title={trainer.name || "Unknown"}
-            src={trainer?.image}
-            className="w-12 h-12 rounded-full"
-            alt="Trainer"
-          />
-        </div> */}
+         </figure>
+        </div>
       </div>
     </div>
   );

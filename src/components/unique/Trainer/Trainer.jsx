@@ -34,7 +34,7 @@ const Trainer = ({ trainer }) => {
   const allSocialItems = socialItems?.map((item) => (
     <button
       key={item.id}
-      className={`p-3 bg-custom-primary bg-opacity-70 transition  translate-y-16  duration-${item.animTime} rounded-full `}
+      className={`p-2.5 bg-custom-primary bg-opacity-70 transition  translate-y-20  duration-${item.animTime} rounded-full `}
     >
       <Link target="_blank" to={item.link}>
         <span className="text-white text-xl  ">{item.icon}</span>
@@ -51,9 +51,9 @@ const Trainer = ({ trainer }) => {
 
   return (
     <div className=" bg-white flex flex-col justify-between shadow-sm p-5 team-card-special-class ">
-      <figure className="relative overflow-hidden flex items-enter justify-center rounded-tl-3xl rounded-br-3xl">
-        <img className="h-60 w-full" src={image} alt="News Image" />
-        <div className="absolute bottom-4 left-4   flex gap-3 items-center z-20">
+      <figure className="relative overflow-hidden flex items-enter justify-center  mt-7 h-64 w-64  mx-auto rounded-full">
+        <img className="h-64 w-64 rounded-full" src={image} alt="News Image" />
+        <div className="absolute bottom-8 left-14  flex gap-2 items-center z-20">
           {allSocialItems}
         </div>
         <p className="bg-black opacity-50 trainer-overlay-class  w-[100%] bottom-0 h-0 transition absolute z-10"></p>

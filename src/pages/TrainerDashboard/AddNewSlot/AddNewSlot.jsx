@@ -186,7 +186,9 @@ const AddNewSlot = () => {
           `/update-trainer?email=${data.email}`,
           updatedTrainerInfo
         );
-        console.log(response.data);
+        if (response.data?.modifiedCount) {
+          swal("Added", "You have added new class successfully!!", "success");
+        }
       } catch (error) {
         swal("Something Wrong!", `${error.message}`, "warning");
       } finally {

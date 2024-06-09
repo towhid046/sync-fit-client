@@ -31,6 +31,7 @@ const ClassesPage = () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}&search=${searchText}`);
         setClasses(res.data);
+
       } catch (error) {
         setIsError(error?.message);
       } finally {
@@ -40,10 +41,10 @@ const ClassesPage = () => {
     getData();
   }, [currentPage, searchText]);
 
+
   const handleSearchClassesOnChange = (e) => {
     const searchVal = e.target.value;
     setSearchText(searchVal);
-    console.log(searchText)
   };
 
   const handleGetCurrentPage = (currPage) => {

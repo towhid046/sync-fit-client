@@ -3,6 +3,10 @@ import SectionHeader from "./../../../components/shared/SectionHeader/SectionHea
 import usePublicData from "../../../hooks/usePublicData";
 import ErrorElement from "../../../components/shared/ErrorElement/ErrorElement";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner/LoadingSpinner";
+import ButtonPrimary from "../../../components/shared/ButtonPrimary/ButtonPrimary";
+import { Link } from "react-router-dom";
+import { FaArrowTrendUp } from "react-icons/fa6";
+
 
 const Forums = () => {
   const {
@@ -29,6 +33,14 @@ const Forums = () => {
         {news?.slice(0, 6).map((info) => (
           <ForumCard key={info._id} info={info} />
         ))}
+      </div>
+      <div className="mt-10 flex justify-center">
+       <Link to={'/all-forums'}>
+       <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5 border-opacity-30 md:px-7 ">
+            See more blogs
+            <FaArrowTrendUp />
+          </ButtonPrimary>
+       </Link>
       </div>
     </section>
   );

@@ -14,8 +14,6 @@ const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const imgbb_api_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
 
 const BeATrainer = () => {
-  const [days, setDays] = useState([]);
-  const [times, setTimes] = useState([]);
   const [slots, setSlots] = useState([]);
   const [loading, setLoading] = useState("");
   const { register, handleSubmit, reset } = useForm();
@@ -31,7 +29,7 @@ const BeATrainer = () => {
     arr.forEach((data) => {
       newArrOfSlots.push(data.value);
     });
-    setSlots(newArrOfSlots);
+    setSlots([...newArrOfSlots]);
   };
 
   const checkboxOptions = [

@@ -9,6 +9,7 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { scrollToTop } from "../../utilities/scrollToTop";
+import LoadingSpinner from "./../../components/shared/LoadingSpinner/LoadingSpinner";
 
 const formInfo = [
   {
@@ -29,12 +30,11 @@ const formInfo = [
 
 const LogInPage = () => {
   const { register, handleSubmit } = useForm();
-  const { logInUser, singInWithGoogle, setLoading } = useAuth();
+  const { logInUser, singInWithGoogle, setLoading, loading } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
 
-
-const location  = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
     scrollToTop();
@@ -44,7 +44,7 @@ const location  = useLocation()
     try {
       await logInUser(data.email, data.password);
       swal("Success", "Your member account login successfully!!", "success");
-      navigate(location?.state ? location?.state : '/');
+      navigate(location?.state ? location?.state : "/");
     } catch (error) {
       swal("Error", `${error.message}`, "error");
     } finally {
@@ -56,11 +56,15 @@ const location  = useLocation()
     try {
       await singInWithGoogle();
       swal("Success", "Your member account login successfully!!", "success");
-      navigate(location?.state ? location?.state : '/');
+      navigate(location?.state ? location?.state : "/");
     } catch (error) {
       swal("Error", `${error.message}`, "error");
     }
   };
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <section className="min-h-screen">

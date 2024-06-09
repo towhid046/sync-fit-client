@@ -15,6 +15,7 @@ import { FaTimes } from "react-icons/fa";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import swal from "sweetalert";
 
 const BookedTrainer = () => {
   const [trainer, setTrainer] = useState({});
@@ -107,7 +108,9 @@ const BookedTrainer = () => {
       };
 
       const res = await axiosSecure.post("/reviews", review);
-      console.log(res.data);
+      if(res?.data?.insertedId){
+        swal('Thank You!', 'Thank you so much for your rating', 'success')
+      }
       
     } catch (error) {
       console.error(error.message);

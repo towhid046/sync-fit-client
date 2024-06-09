@@ -32,12 +32,6 @@ const TeamMember = ({ info = "" }) => {
           <p className="text-gray-500">
             <span className="italic">Biography :</span>{" "}
             {description?.split("").splice(0, 55).join("")}...{" "}
-            <Link
-              to={`/forums-details/${_id}`}
-              className="underline text-custom-primary italic"
-            >
-              Know Details
-            </Link>
           </p>
         </div>
       </div>

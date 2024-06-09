@@ -3,6 +3,10 @@ import SectionHeader from "./../../../components/shared/SectionHeader/SectionHea
 import usePublicData from "./../../../hooks/usePublicData";
 import LoadingSpinner from "./../../../components/shared/LoadingSpinner/LoadingSpinner";
 import ErrorElement from "./../../../components/shared/ErrorElement/ErrorElement";
+import ButtonPrimary from './../../../components/shared/ButtonPrimary/ButtonPrimary';
+import { Link } from "react-router-dom";
+import { FaArrowTrendUp } from "react-icons/fa6";
+
 
 const Classes = () => {
   const {
@@ -21,7 +25,7 @@ const Classes = () => {
   }
 
   return (
-    <section className="lg:py-16 md:py-12 py-8 container mx-auto px-4">
+    <section className="py-6 container mx-auto px-4">
       <SectionHeader
         title="Discover our Popular classes"
         description="Popular classes base on the users booked class"
@@ -31,7 +35,16 @@ const Classes = () => {
           <ClassCard key={singleClass._id} singleClass={singleClass} />
         ))}
       </div>
-    </section>
+
+      <div className="mt-10 flex justify-center">
+       <Link to={'/all-classes'}>
+       <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5 border-opacity-30 md:px-7 ">
+            See more classes
+            <FaArrowTrendUp />
+          </ButtonPrimary>
+       </Link>
+      </div>
+    </section>    
   );
 };
 

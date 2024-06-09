@@ -59,7 +59,6 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = () => {
       onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
-        setLoading(false);
 
         if (currentUser?.email) {
           const saveUser = async () => {
@@ -68,14 +67,13 @@ const AuthProvider = ({ children }) => {
           };
           saveUser();
         }
-        
+
         // send a http request if the current user have:
         if (currentUser) {
           const userInfo = { email: currentUser?.email };
           const sendData = async () => {
             try {
               // get token:
-
               const response = await axiosPublic.post("/jwt", userInfo);
               const token = response?.data?.token;
               if (token) {
@@ -104,6 +102,7 @@ const AuthProvider = ({ children }) => {
         } else {
           localStorage.removeItem("access-token");
           setUserRole("Member");
+          setLoading(false);
         }
       });
     };

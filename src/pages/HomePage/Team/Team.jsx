@@ -22,8 +22,8 @@ const Team = () => {
   return (
     <section className="container mx-auto px-4 lg:py-16 md:py-12 py-8 lg:mb-12 mb-6">
       <SectionHeader
-        title="Discover Our Trainers"
-        description="Stay Updated with SyncFit"
+        title="Our Teams"
+        description="Know about our team members"
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5">
         {forums?.slice(0, 3).map((info) => (

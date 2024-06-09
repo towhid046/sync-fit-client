@@ -11,9 +11,11 @@ import swal from "sweetalert";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import { FaTimes } from "react-icons/fa";
+import LoadingSpinner from "./../../../components/shared/LoadingSpinner/LoadingSpinner";
 
 const AppliedTrainerDetails = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { register, handleSubmit } = useForm();
 
   const axiosSecure = useAxiosSecure();
@@ -53,16 +55,24 @@ const AppliedTrainerDetails = () => {
       dangerMode: false,
     }).then(async (accept) => {
       if (accept) {
+        setIsLoading(true);
         try {
           const res = await axiosSecure.post(
             `/accept-applicant/${id}`,
             applicant
           );
           if (res.data.deletedCount) {
+            swal(
+              "Success",
+              `You have successfully Add ${name} as a trainer`,
+              "success"
+            );
             navigate("/admin-dashboard/applied-trainers");
           }
         } catch (error) {
           console.log(error.message);
+        } finally {
+          setIsLoading(false);
         }
       }
     });
@@ -97,14 +107,19 @@ const AppliedTrainerDetails = () => {
   };
 
   const socialItems = [
-    { id: 1, icon: <FaFacebookF />, link: socialLinks.facebook, animTime: 300 },
+    {
+      id: 1,
+      icon: <FaFacebookF />,
+      link: socialLinks?.facebook,
+      animTime: 300,
+    },
     {
       id: 2,
       icon: <FaInstagram />,
-      link: socialLinks.instagram,
+      link: socialLinks?.instagram,
       animTime: 500,
     },
-    { id: 3, icon: <FaLinkedin />, link: socialLinks.linkedin, animTime: 700 },
+    { id: 3, icon: <FaLinkedin />, link: socialLinks?.linkedin, animTime: 700 },
   ];
 
   const allSocialItems = socialItems?.map((item) => (
@@ -131,6 +146,10 @@ const AppliedTrainerDetails = () => {
       <span className="text-gray-500">{area}</span>
     </li>
   ));
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <section className="mx-auto container px-4">

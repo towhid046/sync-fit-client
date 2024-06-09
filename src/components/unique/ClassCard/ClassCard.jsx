@@ -2,11 +2,7 @@ import PropTypes from "prop-types";
 import { CiStar } from "react-icons/ci";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
 const ClassCard = ({ singleClass }) => {
-  const {
-    image,
-    class_name,
-    description,
-  } = singleClass;
+  const { image, class_name, description, rating, totalBookings } = singleClass;
 
   return (
     <div className=" bg-white transition duration-300 hover:-translate-y-2 shadow-sm">
@@ -25,20 +21,8 @@ const ClassCard = ({ singleClass }) => {
           </li>
         </ul>
         <div>
-          <h2 className="text-3xl font-semibold mb-2">{title}</h2>
+          <h2 className="text-3xl font-semibold mb-2">{class_name}</h2>
           <p className="text-gray-500">{description}</p>
-        </div>
-        <hr className="border-custom-primary opacity-20" />
-        <div className="flex items-center gap-4">
-          <img
-            src={trainer?.image}
-            className="w-12 h-12 rounded-full"
-            alt="Trainer"
-          />
-          <div>
-            <h2 className="text-xl font-medium">{trainer.name || "Unknown"}</h2>
-            <p className="text-gray-500 italic">{trainer?.location}</p>
-          </div>
         </div>
       </div>
     </div>
