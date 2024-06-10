@@ -9,6 +9,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Select from "react-select";
 import LoadingSpinner from "./../../components/shared/LoadingSpinner/LoadingSpinner";
 import slotData from "./../TrainerDashboard/AddNewSlot/slotData";
+import saveUserInfo from "./../../utilities/saveUserInfo";
 
 const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const imgbb_api_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
@@ -100,7 +101,7 @@ const BeATrainer = () => {
       return;
     }
     scrollToTop();
-    
+
     setLoading(true);
 
     const imageFile = { image: data.image[0] };
@@ -124,7 +125,7 @@ const BeATrainer = () => {
           image,
           status,
           socialLinks,
-          availableSlots:slots,
+          availableSlots: slots,
         };
 
         const response = await axiosPublic.post(
@@ -154,6 +155,7 @@ const BeATrainer = () => {
             "You have application successful to become a trainer",
             "success"
           );
+          saveUserInfo(data?.email);
           reset();
         }
       } catch (error) {

@@ -9,6 +9,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import swal from "sweetalert";
 import { scrollToTop } from "../../utilities/scrollToTop";
+import saveUserInfo from "./../../utilities/saveUserInfo";
 
 const formInfo = [
   { id: 1, title: "Your Name", placeholder: "Your Name", name: "name" },
@@ -36,7 +37,8 @@ const formInfo = [
 
 const Registration = () => {
   const { register, handleSubmit } = useForm();
-  const { createNewUser, updateUserProfile, singInWithGoogle } = useAuth();
+  const { createNewUser, updateUserProfile, singInWithGoogle, user } =
+    useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
 
@@ -46,6 +48,7 @@ const Registration = () => {
 
   const onSubmit = async (data) => {
     try {
+      saveUserInfo(data?.email);
       await createNewUser(data.email, data.password);
       await updateUserProfile(data.name, data.photoUrl);
       swal("Success", "Your member account register successfully!!", "success");
@@ -75,31 +78,36 @@ const Registration = () => {
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid md:grid-cols-2 gap-6 grid-cols-1 mb-4">
-            {formInfo.map((item) => (
-              <div key={item.id} className="relative">
-                <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
-                  {item.title}
-                </label>
-                <input
-                  {...register(item.name)}
-                  className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
-                  placeholder={item.placeholder}
-                  required
-                  type={(!isShowPass && item.type) || "text"}
-                />
-                {item.type === "password" && (
-                  <div
-                    onClick={() => setIsShowPass(!isShowPass)}
-                    className="cursor-pointer text-lg absolute right-4 top-12"
-                  >
-                    {isShowPass ? <IoEyeOutline /> : <IoEyeOffOutline />}
-                  </div>
-                )}
-              </div>
-            ))}
+              {formInfo.map((item) => (
+                <div key={item.id} className="relative">
+                  <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
+                    {item.title}
+                  </label>
+                  <input
+                    {...register(item.name)}
+                    className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
+                    placeholder={item.placeholder}
+                    required
+                    type={(!isShowPass && item.type) || "text"}
+                  />
+                  {item.type === "password" && (
+                    <div
+                      onClick={() => setIsShowPass(!isShowPass)}
+                      className="cursor-pointer text-lg absolute right-4 top-12"
+                    >
+                      {isShowPass ? <IoEyeOutline /> : <IoEyeOffOutline />}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
             <label htmlFor="term-policy" className="cursor-pointer">
-              <input required type="checkbox" id="term-policy" className="mr-2" />
+              <input
+                required
+                type="checkbox"
+                id="term-policy"
+                className="mr-2"
+              />
               Accept our terms and policy
             </label>
             <ButtonPrimary customClass="w-full py-3 border-custom-primary mt-5">

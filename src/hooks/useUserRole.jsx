@@ -9,18 +9,13 @@ const useUserRole = () => {
 
   if (user) {
     const getUserRole = async () => {
-      const loggedUser = { email: user?.email, role: "Member" };
-      const response = await axiosPublic.post("/users", loggedUser);
-      if (response?.status === 200) {
-        const res = await axiosPublic.get(`/user-role/${user?.email}`);
-        // console.log("Save User: ", res?.data?.role);
-        if (res?.data?.role === "Admin") {
-          setUserRole("Admin");
-          return;
-        }
-        if (res?.data?.role === "Trainer") {
-          setUserRole("Trainer");
-        }
+      const res = await axiosPublic.get(`/user-role/${user?.email}`);
+      if (res?.data?.role === "Admin") {
+        setUserRole("Admin");
+        return;
+      }
+      if (res?.data?.role === "Trainer") {
+        setUserRole("Trainer");
       }
     };
     getUserRole();
