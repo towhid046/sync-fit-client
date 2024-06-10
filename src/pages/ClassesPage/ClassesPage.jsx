@@ -1,5 +1,4 @@
 import axios from "axios";
-import SectionHeader from "../../components/shared/SectionHeader/SectionHeader";
 import { useEffect, useState } from "react";
 import { scrollToTop } from "../../utilities/scrollToTop";
 import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
@@ -7,6 +6,7 @@ import LoadingSpinner from "../../components/shared/LoadingSpinner/LoadingSpinne
 import AllClassCard from "./AllClassCard/AllClassCard";
 import { useLoaderData } from "react-router-dom";
 import ErrorElement from './../../components/shared/ErrorElement/ErrorElement';
+import PageBanner from './../../components/shared/PageBanner/PageBanner';
 
 const ClassesPage = () => {
   const [searchText, setSearchText] = useState("");
@@ -32,6 +32,7 @@ const ClassesPage = () => {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}&search=${searchText}`);
         setClasses(res.data);
 
+
       } catch (error) {
         setIsError(error?.message);
       } finally {
@@ -40,7 +41,6 @@ const ClassesPage = () => {
     };
     getData();
   }, [currentPage, searchText]);
-
 
   const handleSearchClassesOnChange = (e) => {
     const searchVal = e.target.value;
@@ -81,11 +81,9 @@ const ClassesPage = () => {
   }
 
   return (
-    <section className="py-8 md:py-12 lg:py-16 container mx-auto px-4">
-      <SectionHeader
-        title="Explore All Classes"
-        description="Explore all our classes"
-      />
+    <section>
+       <PageBanner title="All Classes" link="/all-classes" />
+    <div  className="py-8 md:py-12 lg:py-16 container mx-auto px-4">
       <div className="mb-12">
         <form  className="w-full">
            <div className="mx-auto max-w-xl relative flex justify-center">
@@ -176,6 +174,7 @@ const ClassesPage = () => {
           <FaArrowRightLong />
         </button>
       </div>
+    </div>
     </section>
   );
 };

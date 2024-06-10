@@ -5,6 +5,7 @@ import ErrorElement from "./../../../components/shared/ErrorElement/ErrorElement
 import Trainer from "../../../components/unique/Trainer/Trainer";
 import { useEffect } from "react";
 import { scrollToTop } from "./../../../utilities/scrollToTop";
+import PageBanner from "../../../components/shared/PageBanner/PageBanner";
 
 const Trainers = () => {
   useEffect(() => {
@@ -27,16 +28,15 @@ const Trainers = () => {
   }
 
   return (
-    <section className="lg:py-16 md:py-12 py-8 container mx-auto px-4">
-      <SectionHeader
-        title="Explore All Trainers"
-        description="Get to know all our trainers"
-      />
+    <section>
+       <PageBanner title="All Trainers" link="/all-trainers" />
+      <div className="lg:py-16 md:py-12 py-8 container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {trainers?.map((trainer) => (
           <Trainer key={trainer._id} trainer={trainer} />
         ))}
       </div>
+    </div>
     </section>
   );
 };

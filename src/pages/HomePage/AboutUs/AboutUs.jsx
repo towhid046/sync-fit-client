@@ -1,3 +1,4 @@
+import { Slide } from "react-awesome-reveal";
 import { IoCheckmarkDoneOutline } from "react-icons/io5";
 
 const aboutUsImg =
@@ -5,7 +6,8 @@ const aboutUsImg =
 const AboutUs = () => {
   return (
     <section className="flex md:flex-row flex-col gap-8 justify-between container mx-auto px-4 lg:py-16 md:py-12 py-8 max-w-4xl md:pt-8">
-      <div className="flex-1 ">
+      <Slide direction="left" className="flex-1">
+      <div>
         <h2 className="md:text-4xl text-3xl font-bold uppercase">
           Behind The story of SyncFit
         </h2>
@@ -13,12 +15,13 @@ const AboutUs = () => {
           Know about us what's behind the story
         </p>
         <p className="text-gray-600">
-          Quisque tortor risus, pharetra ut venenatis ac, rutrum eget ante fusce
-          in convallis nibh felis rana hendrerit diam rhoncus eget sonec dictum
-          acus element sifend nisa efficitur venenatis. Quisque tortor risus,
-          pharetra ut venenatis ac, rutrum eget ante fusce in convallis nibh
-          felis rana hendrerit diam rhoncus eget sonec dictum acus element
-          sifend nisa efficitur venenatis.
+          At SyncFit, we believe in more than just workouts; we're dedicated to
+          revolutionizing your fitness journey. Our platform offers a seamless
+          experience where you can easily book expert trainers who specialize in
+          catering to truckers' unique needs. Whether you're on the road or at
+          home, SyncFit brings the gym to you. We understand the challenges of
+          maintaining a healthy lifestyle while living life on the go, which is
+          why we've curated a team of professionals.
         </p>
 
         <ul className="list-none mt-7 space-y-2">
@@ -36,9 +39,12 @@ const AboutUs = () => {
           </li>
         </ul>
       </div>
-      <figure className="flex-1 flex justify-center md:justify-end">
+        </Slide> 
+      <Slide className="flex-1" direction="right">
+      <figure className="flex justify-center md:justify-end">
         <img src={aboutUsImg} alt="" />
       </figure>
+      </Slide>
     </section>
   );
 };

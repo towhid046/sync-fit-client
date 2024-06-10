@@ -44,8 +44,8 @@ const ActivityLog = () => {
       <PageBanner title={`Activity log`} link="activity" />
       <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
         <div className="overflow-x-auto">
-          <h2 className="text-3xl font-medium pb-3 text-center">
-            Your applied information
+        <h2 className="md:text-4xl text-center font-bold text-3xl mb-5">
+            Your Applied Information
           </h2>
           <table className="min-w-full bg-white bg-opacity-80 border border-gray-200">
             <thead>

@@ -79,10 +79,10 @@ const UserProfile = () => {
     <section className="min-h-screen">
       <PageBanner title="Your Profile" link="/user-profile" />
       <div className="container mx-auto px-4 md:py-16 py-12">
-        <h2 className="text-3xl font-medium pb-3 text-center">
-          Your Current Information
-        </h2>
         <div className="bg-custom-secondary max-w-3xl md:p-12 p-6 mx-auto shadow-sm ">
+        <h2 className="text-center md:text-4xl font-bold text-3xl mb-5">
+            Your Current Information
+          </h2>
           <figure className="mb-5 flex justify-center items-center">
             <img
               className="w-52 h-52 rounded-full"

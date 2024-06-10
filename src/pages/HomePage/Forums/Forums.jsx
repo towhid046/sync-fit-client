@@ -6,6 +6,7 @@ import LoadingSpinner from "../../../components/shared/LoadingSpinner/LoadingSpi
 import ButtonPrimary from "../../../components/shared/ButtonPrimary/ButtonPrimary";
 import { Link } from "react-router-dom";
 import { FaArrowTrendUp } from "react-icons/fa6";
+import { Slide } from "react-awesome-reveal";
 
 
 const Forums = () => {
@@ -34,6 +35,7 @@ const Forums = () => {
           <ForumCard key={info._id} info={info} />
         ))}
       </div>
+      <Slide direction="up">
       <div className="mt-10 flex justify-center">
        <Link to={'/all-forums'}>
        <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5 border-opacity-30 md:px-7 ">
@@ -42,6 +44,7 @@ const Forums = () => {
           </ButtonPrimary>
        </Link>
       </div>
+      </Slide>
     </section>
   );
 };
