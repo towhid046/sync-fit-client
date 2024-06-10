@@ -26,7 +26,7 @@ const useUserRole = () => {
     getUserRole();
   }
 
-  return { userRole };
+  return { userRole, setUserRole };
 };
 
 export default useUserRole;

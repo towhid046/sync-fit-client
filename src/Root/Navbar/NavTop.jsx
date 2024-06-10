@@ -23,12 +23,12 @@ const NavTop = () => {
         <span>Monday - Friday, 10am - 05pm</span>
       </div>
       <div className="flex items-center md:gap-5 gap-2 flex-col md:flex-row">
-        <p>abc123@gmail.com</p>
+        <p>sync123@gmail.com</p>
         <span className="hidden md:flex">|</span>
         <strong>+99 0123456677</strong>
         <span className="hidden md:flex">|</span>
         <ul className="flex items-center gap-4">
-          {socialIcons.map((icon,index) => (
+          {socialIcons.map((icon, index) => (
             <Link key={index}>{icon}</Link>
           ))}
         </ul>

@@ -7,7 +7,7 @@ import useUserRole from "../../hooks/useUserRole";
 
 const AdminRoutes = ({ children }) => {
   const { user, loading, logOutUser } = useAuth();
-  const { userRole } = useUserRole();
+  const { userRole, setUserRole } = useUserRole();
 
   if (loading || userRole === 'Member') {
     return <LoadingSpinner />;
@@ -18,6 +18,7 @@ const AdminRoutes = ({ children }) => {
   if (userRole !== "Admin") {
     const logOut = async () => {
       await logOutUser();
+      setUserRole('Member')
     };
     logOut();
     return <Navigate to={"/login"} />;

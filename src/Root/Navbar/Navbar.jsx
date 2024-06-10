@@ -15,7 +15,7 @@ const Navbar = () => {
   const { user, logOutUser } = useAuth();
   const navigate = useNavigate();
   
-  const { userRole } = useUserRole();
+  const { userRole, setUserRole } = useUserRole();
   const handleCloseBothMenu = () => {
     setIsUserRouteOpen(false);
     setIsOpen(false);
@@ -69,6 +69,7 @@ const Navbar = () => {
   const handleLogOutUser = async () => {
     try {
       await logOutUser();
+      setUserRole('Member');
       swal("Log out", "You have log Out successfully!!", "success");
       navigate("/");
     } catch (error) {

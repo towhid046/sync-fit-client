@@ -8,7 +8,7 @@ const ErrorElement = ({ errorText }) => {
 };
 
 ErrorElement.propTypes = {
-  errorText: PropTypes.string.isRequired,
+  errorText: PropTypes,
 };
 
 export default ErrorElement;

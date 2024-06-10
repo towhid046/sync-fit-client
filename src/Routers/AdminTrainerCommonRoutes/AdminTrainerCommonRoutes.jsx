@@ -7,9 +7,9 @@ import useUserRole from "../../hooks/useUserRole";
 
 const AdminTrainerCommonRoutes = ({ children }) => {
   const { user, loading, logOutUser } = useAuth();
-  const { userRole } = useUserRole();
+  const { userRole, setUserRole } = useUserRole();
 
-  if (loading || userRole === 'Member') {
+  if (loading || userRole === "Member") {
     return <LoadingSpinner />;
   }
   if (!user) {
@@ -18,6 +18,7 @@ const AdminTrainerCommonRoutes = ({ children }) => {
   if (userRole === "Member") {
     const logOut = async () => {
       await logOutUser();
+      setUserRole("Member");
     };
     logOut();
     return <Navigate to={"/login"} />;
