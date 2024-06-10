@@ -3,10 +3,13 @@ import useAuth from "../../hooks/useAuth";
 import LoadingSpinner from "./../../components/shared/LoadingSpinner/LoadingSpinner";
 
 import PropTypes from "prop-types";
+import useUserRole from "../../hooks/useUserRole";
 
 const AdminRoutes = ({ children }) => {
-  const { user, loading, userRole, logOutUser } = useAuth();
-  if (loading) {
+  const { user, loading, logOutUser } = useAuth();
+  const { userRole } = useUserRole();
+
+  if (loading || userRole === 'Member') {
     return <LoadingSpinner />;
   }
   if (!user) {

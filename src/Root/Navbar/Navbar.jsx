@@ -7,13 +7,15 @@ import { Tooltip } from "react-tooltip";
 import swal from "sweetalert";
 import { BeatLoader } from "react-spinners";
 import { BiSolidDownArrow } from "react-icons/bi";
+import useUserRole from "../../hooks/useUserRole";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isUserRouteOpen, setIsUserRouteOpen] = useState(false);
-  const { user, logOutUser, loading, userRole } = useAuth();
+  const { user, logOutUser } = useAuth();
   const navigate = useNavigate();
-
+  
+  const { userRole } = useUserRole();
   const handleCloseBothMenu = () => {
     setIsUserRouteOpen(false);
     setIsOpen(false);

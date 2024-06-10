@@ -7,7 +7,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import { auth, googleProvider } from "./../../config/firebase";
+import { auth, googleProvider } from "../../firebase/firebase.config";
 import PropTypes from "prop-types";
 import useAxiosPublic from "./../../hooks/useAxiosPublic";
 
@@ -15,7 +15,6 @@ export const UserContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userRole, setUserRole] = useState("Member");
   const [loading, setLoading] = useState(true);
   const [selectedSlot, setSelectedSlot] = useState("");
   const [selectedPackage, setSelectedPackage] = useState({});
@@ -49,63 +48,36 @@ const AuthProvider = ({ children }) => {
 
   // logout User:
   const logOutUser = () => {
-    setLoading(false);
-    setUserRole("Member");
     return signOut(auth);
   };
 
   // Truck the current user:
   useEffect(() => {
-    const unSubscribe = () => {
-      onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-
-        if (currentUser?.email) {
-          const saveUser = async () => {
-            const loggedUser = { email: currentUser?.email, role: "Member" };
-            await axiosPublic.post("/users", loggedUser);
-          };
-          saveUser();
-        }
-
-        // send a http request if the current user have:
-        if (currentUser) {
-          const userInfo = { email: currentUser?.email };
-          const sendData = async () => {
-            try {
-              // get token:
-              const response = await axiosPublic.post("/jwt", userInfo);
-              const token = response?.data?.token;
-              if (token) {
-                localStorage.setItem("access-token", token);
-              }
-
-              // get the current user role
-              const res = await axiosPublic.get(
-                `/user-role/${currentUser.email}`
-              );
-
-              if (res?.data?.role === "Admin") {
-                setUserRole("Admin");
-                return;
-              }
-              if (res?.data?.role === "Trainer") {
-                setUserRole("Trainer");
-              }
-            } catch (error) {
-              console.error(error.message);
-            } finally {
-              setLoading(false);
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      // send a http request if the current user have:
+      if (currentUser) {
+        const userInfo = { email: currentUser?.email };
+        const setToken = async () => {
+          try {
+            // set token:
+            const response = await axiosPublic.post("/jwt", userInfo);
+            const token = response?.data?.token;
+            if (token) {
+              localStorage.setItem("access-token", token);
             }
-          };
-          sendData();
-        } else {
-          localStorage.removeItem("access-token");
-          setUserRole("Member");
-          setLoading(false);
-        }
-      });
-    };
+          } catch (error) {
+            console.error(error.message);
+          } finally {
+            setLoading(false);
+          }
+        };
+        setToken();
+      } else {
+        localStorage.removeItem("access-token");
+        setLoading(false);
+      }
+    });
     return () => unSubscribe();
   }, [axiosPublic]);
 
@@ -132,7 +104,6 @@ const AuthProvider = ({ children }) => {
     selectedSlot,
     handleUserSelectedPackage,
     selectedPackage,
-    userRole,
   };
 
   return (

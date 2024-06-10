@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import { useEffect, useState } from "react";
 import { scrollToTop } from "../../utilities/scrollToTop";
 import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
@@ -20,11 +18,8 @@ const AllForums = () => {
   const [isVoteChange, setIsVoteChange] = useState(true);
 
   const { user } = useAuth();
-
   const count = useLoaderData();
-
   const navigate = useNavigate();
-
   const axiosPublic = useAxiosPublic();
 
   // pagination related variables:
@@ -41,13 +36,10 @@ const AllForums = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get(
-          `${
-            import.meta.env.VITE_API_URL
-          }/forums?totalPerPage=${perPageForums}&currentPage=${currentPage}`
+        const res = await axiosPublic.get(
+          `/forums?totalPerPage=${perPageForums}&currentPage=${currentPage}`
         );
-
-        setForums(res.data);
+        setForums(res?.data);
       } catch (error) {
         setIsError(error?.message);
       } finally {

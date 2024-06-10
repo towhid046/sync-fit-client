@@ -41,18 +41,18 @@ const LogInPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      await logInUser(data.email, data.password);
-      swal("Success", "Your member account login successfully!!", "success");
+      await logInUser(data?.email, data?.password);
+      swal("Success", "Login successfully!!", "success");
       navigate(location?.state ? location?.state : "/");
     } catch (error) {
       swal("Error", `${error.message}`, "error");
     }
   };
 
-  const handleLogInWithGoogle = async () => {
+  const handleLogInWithGoogle = async() => {
     try {
-      await singInWithGoogle();
-      swal("Success", "Your member account login successfully!!", "success");
+       await singInWithGoogle();
+      swal("Success", "Login successfully!!", "success");
       navigate(location?.state ? location?.state : "/");
     } catch (error) {
       swal("Error", `${error.message}`, "error");
