@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaTimesCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const CancelPayment = () => {
+  const { user } = useAuth();
+  const axiosPublic = useAxiosPublic();
+
+  useEffect(() => {
+    const deleteCancelBooking = async () => {
+      if (!user.email) {
+        return;
+      }
+      try {
+        const res = await axiosPublic.delete(
+          `/delete-booking-package-payment-cancel?email=${user.email}`
+        );
+        console.log(res.data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    deleteCancelBooking();
+  }, [user?.email]);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E1F8E6]">
       <div className="text-center p-6 shadow-lg bg-white max-w-sm">

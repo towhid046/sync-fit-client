@@ -10,7 +10,9 @@ const SuccessPayment = () => {
 
   useEffect(() => {
     const updateUserPaymentStatus = async () => {
-      if (!user.email) {return}
+      if (!user.email) {
+        return;
+      }
       try {
         const res = await axiosPublic.patch(
           "/update-booking-package-payment-status",
@@ -21,7 +23,7 @@ const SuccessPayment = () => {
       }
     };
     updateUserPaymentStatus();
-  }, []);
+  }, [user?.email]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E1F8E6]">

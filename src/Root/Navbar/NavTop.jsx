@@ -22,7 +22,7 @@ const NavTop = () => {
         <strong>Working Hours : </strong>
         <span>Monday - Friday, 10am - 05pm</span>
       </div>
-      <div className="flex items-center md:gap-5 gap-2 flex-col md:flex-row">
+      <div className="md:flex hidden items-center md:gap-5 gap-2 flex-col md:flex-row">
         <p>sync123@gmail.com</p>
         <span className="hidden md:flex">|</span>
         <strong>+99 0123456677</strong>
