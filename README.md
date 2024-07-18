@@ -9,7 +9,7 @@
 + If the admin accepts he or she becomes a trainer.
 + If admin rejects they can see the current status reject with admin's feedback.
 + Trainers can add or delete slots and also they can add classes.
-+ User can book a trainer with a specific time slot
++ User can book a trainer with a specific time slot and make Payment
 + Admin can access all newsletter subscriber's names and email
 + Admin can remove a particular trainer.
 + Admin can add a new class
