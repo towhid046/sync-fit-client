@@ -4,12 +4,14 @@
 
   
 ### Main Features:
++ Stripe Payment System
++ Nodemailer email system
 + A Fitness trainer can apply, to be a trainer and know the current status.
 + Admin can oversee his or her profile and reject or accept to be a trainer.
 + If the admin accepts he or she becomes a trainer.
 + If admin rejects they can see the current status reject with admin's feedback.
 + Trainers can add or delete slots and also they can add classes.
-+ User can book a trainer with a specific time slot and make Payment
++ User can book a trainer with a specific time slot and make Payment and after that they will get a email.
 + Admin can access all newsletter subscriber's names and email
 + Admin can remove a particular trainer.
 + Admin can add a new class
@@ -27,7 +29,8 @@
 + Responsive for all devices
 
 ### Packages Used for This Website
-
+- **[nodemailer](https://nodemailer.com/)**: v6.9.2
+- **[stripe](https://stripe.com/docs)**: v12.12.0
 - **[@tanstack/react-query](https://github.com/tannerlinsley/react-query)**: v5.35.1
 - **[axios](https://github.com/axios/axios)**: v1.6.8
 - **[firebase](https://firebase.google.com/)**: v10.11.1
