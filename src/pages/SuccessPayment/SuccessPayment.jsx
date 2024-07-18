@@ -18,6 +18,13 @@ const SuccessPayment = () => {
           "/update-booking-package-payment-status",
           { email: user.email }
         );
+        if (res.data?.modifiedCount) {
+          // send email to the user:
+          const resp = await axiosPublic.post("/send-email", {
+            email: user.email,
+          });
+          console.log(resp.data);
+        }
       } catch (error) {
         console.error(error.message);
       }
