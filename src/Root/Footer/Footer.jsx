@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import { FaInstagram, FaFacebook } from "react-icons/fa";
-import { FaXTwitter, FaLinkedin, FaArrowTrendUp } from "react-icons/fa6";
+import { FaXTwitter, FaLinkedin} from "react-icons/fa6";
 import { FiMapPin } from "react-icons/fi";
 import { LuPhone } from "react-icons/lu";
 import { IoMailOutline } from "react-icons/io5";
-import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
 import { IoIosArrowForward } from "react-icons/io";
 
 const Footer = () => {
