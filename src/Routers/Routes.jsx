@@ -30,12 +30,15 @@ import AdminRoutes from "./AdminRoutes/AdminRoutes";
 import TrainerRoutes from "./TrainerRoutes/TrainerRoutes";
 import AdminTrainerCommonRoutes from "./AdminTrainerCommonRoutes/AdminTrainerCommonRoutes";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
+import SuccessPayment from "../pages/SuccessPayment/SuccessPayment";
+import CancelPayment from "../pages/CancelPayment/CancelPayment";
 
 const routers = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <NotFoundPage />,
+
     children: [
       {
         path: "/",
@@ -246,6 +249,24 @@ const routers = createBrowserRouter([
         ),
       },
     ],
+  },
+
+  // payment success or cancel related routes:
+  {
+    path: "/success-payment",
+    element: (
+      <PrivateRoutes>
+        <SuccessPayment />
+      </PrivateRoutes>
+    ),
+  },
+  {
+    path: "/cancel-payment",
+    element: (
+      <PrivateRoutes>
+        <CancelPayment />
+      </PrivateRoutes>
+    ),
   },
 ]);
 

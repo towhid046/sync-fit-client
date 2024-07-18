@@ -3,20 +3,19 @@ import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import PageBanner from "../../components/shared/PageBanner/PageBanner";
 import { useForm } from "react-hook-form";
 import useAuth from "./../../hooks/useAuth";
-import { useEffect } from "react";
-import swal from "sweetalert";
+import { useEffect, useState } from "react";
 import { scrollToTop } from "../../utilities/scrollToTop";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { IoCardOutline } from "react-icons/io5";
 
 const PaymentPage = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const [loading, setLoading] = useState(false);
+  const { register, handleSubmit } = useForm();
   const { selectedSlot, selectedPackage, user } = useAuth();
   const trainer = useLoaderData();
   useEffect(() => {
     scrollToTop();
   }, []);
-
-  const navigate = useNavigate();
 
   const {
     _id,
@@ -46,13 +45,13 @@ const PaymentPage = () => {
     },
     {
       id: 2,
-      title: "Your Slot",
+      title: "Your Selected Slot",
       name: "slotName",
       defValue: selectedSlot,
     },
     {
       id: 3,
-      title: "Your Package Name",
+      title: "Membership Status",
       name: "packageName",
       defValue: selectedPackage?.membershipTitle,
     },
@@ -79,12 +78,14 @@ const PaymentPage = () => {
   const axiosPublic = useAxiosPublic();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
-      const res = await axiosPublic.post("/booking-package", data);
-      if (res.data?.insertedId) {
-        swal("Success", "You have successfully booked this package", "success");
-        reset();
-        navigate("/");
+      const res = await axiosPublic.post("/make-payment", data);
+      if (res.data.url) {
+        const resp = await axiosPublic.post("/booking-package", data);
+        if (resp.data?.insertedId) {
+          window.location = res.data.url;
+        }
       }
     } catch (error) {
       console.error(error.message);
@@ -102,7 +103,12 @@ const PaymentPage = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid md:grid-cols-2 gap-6 grid-cols-1">
               {formInfo.map((item) => (
-                <div key={item.id} className="relative">
+                <div
+                  key={item.id}
+                  className={`relative ${
+                    item.name === "userEmail" && "hidden"
+                  }`}
+                >
                   <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
                     {item.title}
                   </label>
@@ -117,8 +123,19 @@ const PaymentPage = () => {
                 </div>
               ))}
             </div>
-            <ButtonPrimary customClass="w-full py-3 border-custom-primary mt-5">
-              Confirm
+            <ButtonPrimary
+              customClass={`w-full py-3 border-custom-primary flex justify-center gap-3 items-center mt-5 ${
+                loading && "bg-gray-800"
+              }`}
+            >
+              {loading ? (
+                <span>Processing...</span>
+              ) : (
+                <>
+                  Make Payment
+                  <IoCardOutline className="text-xl" />
+                </>
+              )}
             </ButtonPrimary>
           </form>
         </div>
