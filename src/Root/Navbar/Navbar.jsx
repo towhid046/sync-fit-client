@@ -5,7 +5,6 @@ import ButtonPrimary from "./../../components/shared/ButtonPrimary/ButtonPrimary
 import useAuth from "../../hooks/useAuth";
 import { Tooltip } from "react-tooltip";
 import swal from "sweetalert";
-import { BeatLoader } from "react-spinners";
 import { BiSolidDownArrow } from "react-icons/bi";
 import useUserRole from "../../hooks/useUserRole";
 

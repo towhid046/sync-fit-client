@@ -10,6 +10,9 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import swal from "sweetalert";
 import { scrollToTop } from "../../utilities/scrollToTop";
 import saveUserInfo from "./../../utilities/saveUserInfo";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
+const imgbb_api_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
 
 const formInfo = [
   { id: 1, title: "Your Name", placeholder: "Your Name", name: "name" },
@@ -18,6 +21,7 @@ const formInfo = [
     title: "Photo Url",
     placeholder: "Your Photo Url",
     name: "photoUrl",
+    type: "file",
   },
   {
     id: 3,
@@ -41,17 +45,27 @@ const Registration = () => {
     useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     scrollToTop();
   }, []);
 
   const onSubmit = async (data) => {
+    const imageFile = { image: data.photoUrl[0] };
+
     try {
+      
+      const res = await axiosPublic.post(imgbb_api_url, imageFile, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      
+      const photoUrl = res.data?.data.url;
+      
       saveUserInfo(data?.email);
       await createNewUser(data.email, data.password);
-      await updateUserProfile(data.name, data.photoUrl);
-      swal("Success", "Your member account register successfully!!", "success");
+      await updateUserProfile(data.name, photoUrl);
+      swal("Success", "Your account register successfully!!", "success");
       navigate("/");
     } catch (error) {
       swal("Error", `${error.message}`, "error");
@@ -85,15 +99,21 @@ const Registration = () => {
                   </label>
                   <input
                     {...register(item.name)}
-                    className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
+                    className={`bg-transparent text-[#4A4E4B] border border-gray-500 block w-full ${
+                      item.type === "file" ? "py-2" : "py-3"
+                    } px-5 focus:outline-none placeholder-[#a6a7a6] `}
                     placeholder={item.placeholder}
                     required
-                    type={(!isShowPass && item.type) || "text"}
+                    type={
+                      (isShowPass && item.type === "password"
+                        ? "text"
+                        : item.type) || "text"
+                    }
                   />
                   {item.type === "password" && (
                     <div
                       onClick={() => setIsShowPass(!isShowPass)}
-                      className="cursor-pointer text-lg absolute right-4 top-12"
+                      className="cursor-pointer text-lg absolute right-4 top-11"
                     >
                       {isShowPass ? <IoEyeOutline /> : <IoEyeOffOutline />}
                     </div>
