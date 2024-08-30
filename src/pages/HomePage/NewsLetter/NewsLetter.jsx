@@ -50,7 +50,7 @@ const NewsLetter = () => {
             type="text"
             required
             placeholder="Your Name"
-            className="bg-transparent text-[#4A4E4B]  block w-full py-3 px-5 focus:outline-none focus:border-custom-primary focus:border-opacity-50 placeholder-[#a6a7a6] mb-4"
+            className="bg-transparent text-[#4A4E4B]  block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6] mb-4"
           />
 
           <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">

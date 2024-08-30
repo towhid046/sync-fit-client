@@ -118,7 +118,7 @@ const AddNewForum = () => {
                 </label>
                 <input
                   {...register(item.name)}
-                  className={`bg-transparent text-[#4A4E4B] border border-gray-500 block w-full ${
+                  className={`bg-transparent text-[#4A4E4B]  block w-full ${
                     item.type === "file" ? "py-2" : "py-2.5"
                   } px-5 focus:outline-none placeholder-[#a6a7a6]`}
                   required
@@ -132,7 +132,7 @@ const AddNewForum = () => {
                 Class Details
               </label>
               <textarea
-                className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#a6a7a6]"
+                className="bg-transparent text-[#4A4E4B]  block w-full py-2.5 px-5 focus:outline-none placeholder-[#a6a7a6]"
                 placeholder="Description in details"
                 rows={5}
                 required
@@ -141,7 +141,7 @@ const AddNewForum = () => {
             </div>
           </div>
           <ButtonPrimary customClass="w-full py-2.5 border-custom-primary mt-5">
-            Post
+            Make Post
           </ButtonPrimary>
         </form>
       </div>

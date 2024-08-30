@@ -93,7 +93,7 @@ const ClassesPage = () => {
                 onChange={handleSearchClassesOnChange}
                 type="text"
                 name="search"
-                className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
+                className="bg-transparent text-[#4A4E4B]  block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
                 placeholder="Search by class name"
               />
               <button className="absolute right-5 top-4">

@@ -52,7 +52,7 @@ const Trainer = ({ trainer }) => {
   return (
     <div className=" bg-white flex flex-col justify-between shadow-sm p-5 team-card-special-class ">
       <figure className="relative overflow-hidden flex items-enter justify-center  mt-7 h-64 w-64  mx-auto rounded-full">
-        <img className="h-64 w-64 rounded-full" src={image} alt="News Image" />
+        <img className="h-64 w-64 rounded-full object-cover" src={image} alt="News Image" />
         <div className="absolute bottom-8 left-14  flex gap-2 items-center z-20">
           {allSocialItems}
         </div>
