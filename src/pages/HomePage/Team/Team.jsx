@@ -20,7 +20,8 @@ const Team = () => {
   }
 
   return (
-    <section className="container mx-auto px-4 lg:py-16 md:py-12 py-8 lg:mb-12 mb-6">
+    <section className="bg-custom-secondary">
+      <div className="container mx-auto px-4 lg:py-16 md:py-12 py-8 lg:mb-12 mb-6">
       <SectionHeader
         title="Our Teams"
         description="Know about our team members"
@@ -30,6 +31,7 @@ const Team = () => {
           <TeamMember key={info._id} info={info} />
         ))}
       </div>
+    </div>
     </section>
   );
 };

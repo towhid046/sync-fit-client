@@ -5,9 +5,9 @@ const ClassCard = ({ singleClass }) => {
   const { image, class_name, description, rating, totalBookings } = singleClass;
 
   return (
-    <div className=" bg-white transition duration-300 hover:-translate-y-2 shadow-sm">
-      <figure className="relative">
-        <img className="max-h-72 w-full" src={image} alt="" />
+    <div className=" bg-white border">
+      <figure className="relative overflow-hidden">
+        <img className="max-h-72 w-full object-cover transition-all duration-500 hover:scale-125" src={image} alt="" />
       </figure>
       <div className="space-y-4 p-5">
         <ul className="list-none flex items-center  gap-12 flex-wrap">

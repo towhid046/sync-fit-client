@@ -5,8 +5,8 @@ export default {
     extend: {
       colors: {
         "custom-primary": "#717FF8",
-        "custom-secondary": "#E5FFEF",
-        "custom-secondary-light": "#E1F8E6",
+        "custom-secondary": "#fff",
+        "custom-secondary-light": "#FAFAFA",
       },
       fontFamily: {
         poppins: ['Poppins', 'ui-sans-serif', 'system-ui'],

@@ -25,27 +25,29 @@ const Classes = () => {
   }
 
   return (
-    <section className="py-6 container mx-auto px-4">
-      <SectionHeader
-        title="Discover our Popular classes"
-        description="Popular classes base on the users booked class"
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {classes?.map((singleClass) => (
-          <ClassCard key={singleClass._id} singleClass={singleClass} />
-        ))}
-      </div>
-
-      <Slide direction="up">
-        <div className="mt-10 flex justify-center">
-          <Link to={"/all-classes"}>
-            <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5 border-opacity-30 md:px-7 ">
-              See more classes
-              <FaArrowTrendUp />
-            </ButtonPrimary>
-          </Link>
+    <section className="bg-custom-secondary">
+      <div className="py-6 container mx-auto px-4">
+        <SectionHeader
+          title="Discover our Popular classes"
+          description="Popular classes base on the users booked class"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {classes?.map((singleClass) => (
+            <ClassCard key={singleClass._id} singleClass={singleClass} />
+          ))}
         </div>
-      </Slide>
+
+        <Slide direction="up" triggerOnce={true}>
+          <div className="mt-10 flex justify-center">
+            <Link to={"/all-classes"}>
+              <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5 border-opacity-30 md:px-7 ">
+                See more classes
+                <FaArrowTrendUp />
+              </ButtonPrimary>
+            </Link>
+          </div>
+        </Slide>
+      </div>
     </section>
   );
 };

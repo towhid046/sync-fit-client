@@ -20,10 +20,10 @@ const ForumDetails = () => {
         description={description?.split(" ").splice(0, 5).join(" ")}
       />
       <div className="max-w-3xl mx-auto">
-        <div className="border border-custom-primary  border-opacity-5 justify-between flex flex-col">
-          <figure className="relative overflow-hidden md:p-4">
+        <div className="border justify-between flex flex-col">
+          <figure className="relative overflow-hidden">
             <img
-              className="max-h-80 w-full"
+              className="max-h-80 w-full object-cover"
               src={thumbnail_img}
               alt="News Image"
             />
@@ -54,8 +54,8 @@ const ForumDetails = () => {
                 </li>
               </ul>
               <hr className="border-custom-primary opacity-20" />
-              <h2 className="text-xl font-semibold mb-3">{title}</h2>
-              <p>{description}</p>
+              <h2 className="text-2xl font-semibold mb-2">{title}</h2>
+              <p className="text-gray-600">{description}</p>
             </div>
             <div className="mt-5 flex justify-end">
               <Link to={"/"} className="flex justify-center">

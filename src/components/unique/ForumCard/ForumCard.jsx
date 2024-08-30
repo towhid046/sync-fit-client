@@ -6,16 +6,22 @@ const ForumCard = ({ info = "" }) => {
   const { _id, thumbnail_img, title, release_date, description, author } = info;
 
   return (
-    <div className="bg-white transition duration-500 hover:-translate-y-2 shadow-sm justify-between flex flex-col">
+    <div className="bg-white border shadow-sm justify-between flex flex-col">
       <figure className="relative overflow-hidden ">
-        <img className="h-60 w-full" src={thumbnail_img} alt="News Image" />
+        <Link to={`/forums-details/${_id}`}>
+          <img
+            className="h-60 duration-500 transition hover:scale-125 w-full object-cover"
+            src={thumbnail_img}
+            alt="News Image"
+          />
+        </Link>
       </figure>
       <div className="px-5 py-7 ">
         <div className=" space-y-4">
           <ul className="flex flex-wrap gap-4 justify-between items-start">
             <li className="flex items-center gap-2">
               <img
-                className="w-10 h-10 rounded-full"
+                className="w-10 h-10 rounded-full object-cover"
                 src={author?.image}
                 alt=""
               />

@@ -38,3 +38,10 @@ button.slick-arrow.slick-next:before, .slick-next:before{
     height: 100%;
     transition: .7s;
 }
+
+input{
+    border: 1px solid #80808042;
+}
+input:focus{
+    border: 1px solid #0000ff42;
+}

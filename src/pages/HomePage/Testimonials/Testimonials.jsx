@@ -53,7 +53,7 @@ const Testimonials = () => {
   }
 
   return (
-    <section className="container mx-auto px-4 py-8 md:py-12 lg:py-16 overflow-x-hidden">
+    <section className="container mx-auto px-4 py-6 pb-12 overflow-x-hidden">
       <SectionHeader
         title="Testimonial Section "
         description="Get to know what our customer says"

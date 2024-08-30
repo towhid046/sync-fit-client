@@ -31,12 +31,12 @@ const NewsLetter = () => {
 
   return (
     <section className="container max-w-4xl mx-auto lg:py-16 md:py-12 py-8 px-4 mt-5">
-      <div className=" flex md:flex-row flex-col md:gap-12 gap-5 bg-custom-secondary shadow-xl justify-between lg:p-16 md:p-12 p-8  items-center">
+      <div className=" flex md:flex-row flex-col md:gap-12 gap-5 bg-custom-secondary shadow-lg justify-between lg:p-16 md:p-12 p-8  items-center">
         <div className="flex-1">
           <h2 className="md:text-4xl text-3xl font-bold uppercase">
             Subscribe to Our Newsletter!!
           </h2>
-          <p className="text-gray-400 mt-4">
+          <p className="text-gray-600 mt-4">
             Subscribe our news letter to get exciting latest and updated news.
             So you stay connected to our forums .
           </p>
@@ -50,7 +50,7 @@ const NewsLetter = () => {
             type="text"
             required
             placeholder="Your Name"
-            className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6] mb-4"
+            className="bg-transparent text-[#4A4E4B]  block w-full py-3 px-5 focus:outline-none focus:border-custom-primary focus:border-opacity-50 placeholder-[#a6a7a6] mb-4"
           />
 
           <label className="font-bold text-gray-800 text-[14px] md:text-[16px] block mb-1">
@@ -61,7 +61,7 @@ const NewsLetter = () => {
             type="email"
             required
             placeholder="Your Email"
-            className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6] mb-5"
+            className="bg-transparent text-[#4A4E4B] block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6] mb-5"
           />
           <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5">
             Subscribe Now

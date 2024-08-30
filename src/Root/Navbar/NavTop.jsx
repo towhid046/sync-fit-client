@@ -29,7 +29,7 @@ const NavTop = () => {
         <span className="hidden md:flex">|</span>
         <ul className="flex items-center gap-4">
           {socialIcons.map((icon, index) => (
-            <Link key={index}>{icon}</Link>
+            <Link className="hover:text-custom-primary duration-300 transition" key={index}>{icon}</Link>
           ))}
         </ul>
       </div>
