@@ -28,7 +28,7 @@ const formInfo = [
 ];
 
 const LogInPage = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const { logInUser, singInWithGoogle } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
@@ -42,6 +42,7 @@ const LogInPage = () => {
   const onSubmit = async (data) => {
     try {
       await logInUser(data?.email, data?.password);
+      reset();
       swal("Success", "Login successfully!!", "success");
       navigate(location?.state ? location?.state : "/");
     } catch (error) {
@@ -49,9 +50,9 @@ const LogInPage = () => {
     }
   };
 
-  const handleLogInWithGoogle = async() => {
+  const handleLogInWithGoogle = async () => {
     try {
-       await singInWithGoogle();
+      await singInWithGoogle();
       swal("Success", "Login successfully!!", "success");
       navigate(location?.state ? location?.state : "/");
     } catch (error) {

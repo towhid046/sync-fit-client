@@ -14,7 +14,7 @@ const socialIcons = [
 
 const NavTop = () => {
   return (
-    <nav className="container mx-auto flex lg:justify-between flex-col lg:flex-row px-4 py-2 items-center md:gap-4 gap-3 ">
+    <nav className="container mx-auto md:flex lg:justify-between flex-col lg:flex-row px-4 py-2 items-center md:gap-4 gap-3 hidden">
       <div className="flex items-center gap-2">
         <span>
           <MdOutlineWatchLater />
@@ -22,7 +22,7 @@ const NavTop = () => {
         <strong>Working Hours : </strong>
         <span>Monday - Friday, 10am - 05pm</span>
       </div>
-      <div className="md:flex hidden items-center md:gap-5 gap-2 flex-col md:flex-row">
+      <div className="lg:flex hidden items-center md:gap-5 gap-2 flex-col md:flex-row">
         <p>sync123@gmail.com</p>
         <span className="hidden md:flex">|</span>
         <strong>+99 0123456677</strong>
