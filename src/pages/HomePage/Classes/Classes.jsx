@@ -7,6 +7,7 @@ import ButtonPrimary from "./../../../components/shared/ButtonPrimary/ButtonPrim
 import { Link } from "react-router-dom";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { Slide } from "react-awesome-reveal";
+import Reveal from "../../../components/shared/Reveal/Reveal";
 
 const Classes = () => {
   const {
@@ -33,11 +34,11 @@ const Classes = () => {
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {classes?.map((singleClass) => (
-            <ClassCard key={singleClass._id} singleClass={singleClass} />
+              <ClassCard key={singleClass._id} singleClass={singleClass} />
           ))}
         </div>
 
-        <Slide direction="up" triggerOnce={true}>
+        <Reveal Reveal>
           <div className="mt-10 flex justify-center">
             <Link to={"/all-classes"}>
               <ButtonPrimary customClass="border-custom-primary flex items-center gap-4 py-2.5 border-opacity-30 md:px-7 ">
@@ -46,7 +47,7 @@ const Classes = () => {
               </ButtonPrimary>
             </Link>
           </div>
-        </Slide>
+        </Reveal>
       </div>
     </section>
   );

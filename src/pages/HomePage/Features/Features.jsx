@@ -2,6 +2,7 @@ import usePublicData from "../../../hooks/usePublicData";
 import SectionHeader from "./../../../components/shared/SectionHeader/SectionHeader";
 import ErrorElement from "./../../../components/shared/ErrorElement/ErrorElement";
 import LoadingSpinner from "./../../../components/shared/LoadingSpinner/LoadingSpinner";
+import Reveal from "../../../components/shared/Reveal/Reveal";
 const Features = () => {
   const {
     data: features,
@@ -11,21 +12,22 @@ const Features = () => {
   } = usePublicData(["features"], "/features");
 
   const items = features?.map((item) => (
-    <div
-      key={item._id}
-      className="
+    <Reveal key={item._id}>
+      <div
+        className="
       hover:shadow-lg
       transition duration-300
       space-y-7 p-6 bg-custom-secondary shadow-sm "
-    >
-      <figure>
-        <img src={item.img} alt="" />
-      </figure>
-      <div className="space-y-3">
-        <h3 className="lg:text-3xl text-2xl font-semibold">{item.title}</h3>
-        <p className="text-gray-600 text-justify">{item.description}</p>
+      >
+        <figure>
+          <img src={item.img} alt="" />
+        </figure>
+        <div className="space-y-3">
+          <h3 className="lg:text-3xl text-2xl font-semibold">{item.title}</h3>
+          <p className="text-gray-600 text-justify">{item.description}</p>
+        </div>
       </div>
-    </div>
+    </Reveal>
   ));
 
   if (isError) {
