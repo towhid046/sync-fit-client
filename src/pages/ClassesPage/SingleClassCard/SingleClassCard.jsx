@@ -33,7 +33,7 @@ const SingleClassCard = ({ singleClass }) => {
   return (
     <div className=" bg-custom-secondary transition duration-300 hover:-translate-y-2 shadow-sm">
       <figure className="relative">
-        <img className="max-h-72 w-full" src={image} alt="" />
+        <img className="max-h-72 w-full object-cover" src={image} alt="" />
       </figure>
       <div className="space-y-4 p-5">
         <div>
@@ -58,7 +58,7 @@ const SingleClassCard = ({ singleClass }) => {
                 >
                   <img
                     src={instructor.image}
-                    className="w-12 h-12 rounded-full"
+                    className="w-12 h-12 rounded-full object-cover"
                     alt={instructor.name}
                   />
                 </figure>

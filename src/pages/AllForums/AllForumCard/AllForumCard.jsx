@@ -70,9 +70,9 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
               <ul className="flex flex-wrap gap-4 justify-between items-start">
                 <li className="flex items-center gap-3">
                   <img
-                    className="w-11 h-11 rounded-full"
+                    className="w-11 h-11 object-cover rounded-full"
                     src={author?.image}
-                    alt=""
+                    alt="Author Image"
                   />
                   <div>
                     <span className="text- font-semibold text-md">
@@ -126,7 +126,7 @@ const AllForumCard = ({ forum, handleUpVote, handleDownVote, loading }) => {
           {/* forum article image */}
           <figure className="relative overflow-hidden md:p-4">
             <img
-              className="max-h-80 w-full"
+              className="max-h-80 w-full object-cover"
               src={thumbnail_img}
               alt="News Image"
             />
