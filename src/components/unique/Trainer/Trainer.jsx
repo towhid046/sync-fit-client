@@ -42,7 +42,7 @@ const Trainer = ({ trainer }) => {
     </button>
   ));
 
-  const slotItems = availableSlots?.slice(0,3).map((slot) => (
+  const slotItems = availableSlots?.slice(0,2).map((slot) => (
     <li key={slot} className="flex items-center gap-2">
       <IoCheckmarkDoneOutline className="text-custom-primary text-2xl" />
       <span className="text-gray-500">{slot}</span>
