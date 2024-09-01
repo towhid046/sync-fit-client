@@ -31,7 +31,7 @@ const SingleClassCard = ({ singleClass }) => {
   }
 
   return (
-    <div className=" bg-custom-secondary transition duration-300 hover:-translate-y-2 shadow-sm">
+    <div className=" bg-custom-secondary flex flex-col justify-between border shadow-sm">
       <figure className="relative">
         <img className="max-h-72 w-full object-cover" src={image} alt="" />
       </figure>
