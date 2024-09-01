@@ -3,6 +3,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
 
 const SuccessPayment = () => {
   const { user } = useAuth();
@@ -34,6 +35,7 @@ const SuccessPayment = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E1F8E6]">
+      <CustomHelmet title={'Payment Success'}/>
       <div className="text-center p-6  shadow-lg bg-white max-w-sm">
         <FaCheckCircle className="text-gray-800 text-6xl mx-auto mb-4" />
         <h1 className="text-3xl font-bold text-gray-800">

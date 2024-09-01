@@ -9,6 +9,7 @@ import { IoCheckmarkDoneOutline } from "react-icons/io5";
 import ButtonPrimary from "../../components/shared/ButtonPrimary/ButtonPrimary";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import useAuth from "./../../hooks/useAuth";
+import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
 
 const TrainerDetails = () => {
   useEffect(() => {
@@ -77,6 +78,7 @@ const TrainerDetails = () => {
 
   return (
     <section className="mx-auto container px-4">
+      <CustomHelmet title={name}/>
       <SectionHeader
         title={`Trainer ${name} Details`}
         description={`Around ${yearsOfExperience} years of experiences and his / her average rating is ${rating}`}

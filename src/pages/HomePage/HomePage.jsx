@@ -8,6 +8,7 @@ import Testimonials from "./Testimonials/Testimonials";
 import Forums from "./Forums/Forums";
 import NewsLetter from "./NewsLetter/NewsLetter";
 import Team from "./Team/Team";
+import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
 
 const HomePage = () => {
   useEffect(() => {
@@ -16,6 +17,7 @@ const HomePage = () => {
 
   return (
     <div>
+      <CustomHelmet title={'Home'}/>
       <Hero />
       <Features />
       <AboutUs />

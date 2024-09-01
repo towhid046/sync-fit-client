@@ -9,6 +9,7 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { scrollToTop } from "../../utilities/scrollToTop";
+import CustomHelmet from "./../../components/shared/CustomHelmet/CustomHelmet";
 
 const formInfo = [
   {
@@ -62,6 +63,7 @@ const LogInPage = () => {
 
   return (
     <section className="min-h-screen">
+      <CustomHelmet title={"Login"} />
       <PageBanner title="Login" link="/login" />
       <div className="container mx-auto px-4 md:py-16 py-12">
         <div className="bg-custom-secondary max-w-xl md:p-12 p-6 mx-auto shadow-sm ">

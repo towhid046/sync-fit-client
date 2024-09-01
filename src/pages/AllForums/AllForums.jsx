@@ -157,6 +157,7 @@ const AllForums = () => {
 
   return (
     <section>
+      <CustomHelmet title={"Community"} />
       <PageBanner title="Community" link="/all-forums" />
       <div className="pt-10 container mx-auto px-4">
         {/* all forums container */}

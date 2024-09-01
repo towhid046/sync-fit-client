@@ -183,6 +183,7 @@ const BeATrainer = () => {
 
   return (
     <section className="min-h-screen">
+      <CustomHelmet title={"Become trainer"} />
       <PageBanner title="Be A Trainer" link={`/be-a-trainer`} />
       <div className="container mx-auto px-4 md:py-16 py-12">
         {loading ? (

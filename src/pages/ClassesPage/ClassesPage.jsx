@@ -32,7 +32,8 @@ const ClassesPage = () => {
         const res = await axios.get(
           `${
             import.meta.env.VITE_API_URL
-          }/classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}&search=${searchText}`
+          }/import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
+classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}&search=${searchText}`
         );
         setClasses(res.data);
       } catch (error) {
@@ -84,7 +85,9 @@ const ClassesPage = () => {
 
   return (
     <section>
+      <CustomHelmet title='Classes'/>
       <PageBanner title="All Classes" link="/all-classes" />
+
       <div className="py-8 md:py-12 lg:py-16 container mx-auto px-4">
         <div className="mb-12">
           <form className="w-full">
@@ -114,7 +117,7 @@ const ClassesPage = () => {
           </form>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 lg:gap-5 gap-4">
           {classes?.map((singleClass, index) => (
             <SingleClassCard
               key={singleClass._id}

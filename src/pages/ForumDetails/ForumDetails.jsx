@@ -4,6 +4,7 @@ import SectionHeader from "../../components/shared/SectionHeader/SectionHeader";
 import { useEffect } from "react";
 import { scrollToTop } from "./../../utilities/scrollToTop";
 import { HiMiniArrowUpLeft } from "react-icons/hi2";
+import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
 
 const ForumDetails = () => {
   useEffect(() => {
@@ -15,6 +16,7 @@ const ForumDetails = () => {
 
   return (
     <section className="mb-16">
+      <CustomHelmet title={title}/>
       <SectionHeader
         title={title.split(" ").splice(0, 3).join(" ")}
         description={description?.split(" ").splice(0, 5).join(" ")}

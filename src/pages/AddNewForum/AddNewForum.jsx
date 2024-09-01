@@ -11,6 +11,7 @@ import moment from "moment";
 import useSecureData from "./../../hooks/useSecureData";
 import ErrorElement from "./../../components/shared/ErrorElement/ErrorElement";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
 
 const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const imgbb_api_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
@@ -104,6 +105,7 @@ const AddNewForum = () => {
 
   return (
     <section className="min-h-screen">
+      <CustomHelmet title={"Registration"} />
       <SectionHeader
         title="Add New Forum"
         description="In here you can add new forum"

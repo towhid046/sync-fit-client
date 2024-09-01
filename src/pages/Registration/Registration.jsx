@@ -84,6 +84,7 @@ const Registration = () => {
 
   return (
     <section className="min-h-screen">
+      <CustomHelmet title={"Registration"} />
       <PageBanner title="Registration" link="/registration" />
       <div className="container mx-auto px-4 md:py-16 py-12">
         <div className="bg-custom-secondary max-w-3xl md:p-12 p-6 mx-auto shadow-sm ">
