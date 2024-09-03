@@ -9,6 +9,7 @@ const useToGetImageUrl = () => {
     const res = await axios.post(img_hosting_api, imgFile, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+    console.log(res?.data?.data)
     return res?.data?.data?.url;
   };
   return getImageUrl;
