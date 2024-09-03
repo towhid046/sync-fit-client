@@ -6,7 +6,6 @@ import ErrorElement from "./../../../components/shared/ErrorElement/ErrorElement
 import ButtonPrimary from "./../../../components/shared/ButtonPrimary/ButtonPrimary";
 import { Link } from "react-router-dom";
 import { FaArrowTrendUp } from "react-icons/fa6";
-import { Slide } from "react-awesome-reveal";
 import Reveal from "../../../components/shared/Reveal/Reveal";
 
 const Classes = () => {
@@ -34,7 +33,7 @@ const Classes = () => {
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {classes?.map((singleClass) => (
-              <ClassCard key={singleClass._id} singleClass={singleClass} />
+            <ClassCard key={singleClass._id} singleClass={singleClass} />
           ))}
         </div>
 

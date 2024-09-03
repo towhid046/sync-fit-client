@@ -7,6 +7,7 @@ import SingleClassCard from "./SingleClassCard/SingleClassCard";
 import { useLoaderData } from "react-router-dom";
 import ErrorElement from "./../../components/shared/ErrorElement/ErrorElement";
 import PageBanner from "./../../components/shared/PageBanner/PageBanner";
+import CustomHelmet from "../../components/shared/CustomHelmet/CustomHelmet";
 
 const ClassesPage = () => {
   const [searchText, setSearchText] = useState("");
@@ -32,8 +33,7 @@ const ClassesPage = () => {
         const res = await axios.get(
           `${
             import.meta.env.VITE_API_URL
-          }/import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
-classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}&search=${searchText}`
+          }/classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}&search=${searchText}`
         );
         setClasses(res.data);
       } catch (error) {
@@ -85,7 +85,7 @@ classes?totalPerPage=${perPageClasses}&currentPage=${currentPage}&search=${searc
 
   return (
     <section>
-      <CustomHelmet title='Classes'/>
+      <CustomHelmet title="Classes" />
       <PageBanner title="All Classes" link="/all-classes" />
 
       <div className="py-8 md:py-12 lg:py-16 container mx-auto px-4">
