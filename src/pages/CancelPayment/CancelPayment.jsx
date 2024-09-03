@@ -27,6 +27,7 @@ const CancelPayment = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E1F8E6]">
+      <CustomHelmet title={"Cancel Payment"} />
       <div className="text-center p-6 shadow-lg bg-white max-w-sm">
         <FaTimesCircle className="text-gray-800 text-6xl mx-auto mb-4" />
         <h1 className="text-3xl font-bold text-gray-800">Payment Cancelled</h1>

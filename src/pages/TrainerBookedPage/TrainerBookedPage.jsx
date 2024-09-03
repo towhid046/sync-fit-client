@@ -7,6 +7,7 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 import ButtonPrimary from "./../../components/shared/ButtonPrimary/ButtonPrimary";
 import { useEffect } from "react";
 import { scrollToTop } from "./../../utilities/scrollToTop";
+import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
 
 const TrainerBookedPage = () => {
   useEffect(() => {
@@ -66,6 +67,7 @@ const TrainerBookedPage = () => {
 
   return (
     <section className="container mx-auto px-4 pb-16">
+      <CustomHelmet title={'Booking'}/>
       <SectionHeader
         title={`${name} will be your trainer`}
         description={`You have selected the ${selectedSlot} Slot`}

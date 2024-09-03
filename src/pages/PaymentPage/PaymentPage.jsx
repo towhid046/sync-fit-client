@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { scrollToTop } from "../../utilities/scrollToTop";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { IoCardOutline } from "react-icons/io5";
+import CustomHelmet from "../../components/shared/CustomHelmet/CustomHelmet";
 
 const PaymentPage = () => {
   const [loading, setLoading] = useState(false);
@@ -94,6 +95,7 @@ const PaymentPage = () => {
 
   return (
     <section className="min-h-screen">
+      <CustomHelmet title={"Payment"} />
       <PageBanner title="Payment" link={`/payment/${_id}`} />
       <div className="container mx-auto px-4 md:py-16 py-12">
         <div className="bg-custom-secondary max-w-3xl md:p-12 p-6 mx-auto shadow-sm ">
@@ -114,7 +116,7 @@ const PaymentPage = () => {
                   </label>
                   <input
                     {...register(item.name)}
-                    className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
+                    className="bg-transparent text-[#4A4E4B] block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
                     required
                     readOnly
                     defaultValue={item.defValue}

@@ -4,6 +4,7 @@ import Review from "./../../../components/unique/Review/Review";
 import ErrorElement from "../../../components/shared/ErrorElement/ErrorElement";
 import LoadingSpinner from "../../../components/shared/LoadingSpinner/LoadingSpinner";
 import SectionHeader from "./../../../components/shared/SectionHeader/SectionHeader";
+import Reveal from "./../../../components/shared/Reveal/Reveal";
 
 const Testimonials = () => {
   const {
@@ -49,11 +50,11 @@ const Testimonials = () => {
   }
 
   if (isLoading) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   return (
-    <section className="container mx-auto px-4 py-8 md:py-12 lg:py-16 overflow-x-hidden">
+    <section className="container mx-auto px-4 py-6 pb-12 overflow-x-hidden">
       <SectionHeader
         title="Testimonial Section "
         description="Get to know what our customer says"
@@ -62,7 +63,9 @@ const Testimonials = () => {
         <Slider {...settings}>
           {reviews?.map((review) => (
             <div key={review._id}>
-              <Review review={review} />
+              <Reveal>
+                <Review review={review} />
+              </Reveal>
             </div>
           ))}
         </Slider>

@@ -9,6 +9,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ErrorElement from "./../../components/shared/ErrorElement/ErrorElement";
 import swal from "sweetalert";
 import useAuth from "./../../hooks/useAuth";
+import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
 
 const AllForums = () => {
   const [forums, setForums] = useState([]);
@@ -157,6 +158,7 @@ const AllForums = () => {
 
   return (
     <section>
+      <CustomHelmet title={"Community"} />
       <PageBanner title="Community" link="/all-forums" />
       <div className="pt-10 container mx-auto px-4">
         {/* all forums container */}

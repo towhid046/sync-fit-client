@@ -174,7 +174,7 @@ const BeATrainer = () => {
           {...register(option.name)}
           type="checkbox"
           value={option.title}
-          className="bg-transparent text-[#4A4E4B] border border-gray-500 rounded focus:ring-0 focus:outline-none mr-2 p-2"
+          className="bg-transparent text-[#4A4E4B]   rounded focus:ring-0 focus:outline-none mr-2 p-2"
         />
         <span className="text-[#4A4E4B]">{option.title}</span>
       </label>
@@ -183,6 +183,7 @@ const BeATrainer = () => {
 
   return (
     <section className="min-h-screen">
+      <CustomHelmet title={"Become trainer"} />
       <PageBanner title="Be A Trainer" link={`/be-a-trainer`} />
       <div className="container mx-auto px-4 md:py-16 py-12">
         {loading ? (
@@ -202,7 +203,7 @@ const BeATrainer = () => {
                     </label>
                     <input
                       {...register(item.name)}
-                      className={`bg-transparent text-[#4A4E4B] border border-gray-500 block w-full ${
+                      className={`bg-transparent text-[#4A4E4B]   block w-full ${
                         item.type === "file" ? "py-2" : "py-2.5"
                       } px-5 focus:outline-none placeholder-[#a6a7a6]`}
                       required
@@ -244,7 +245,7 @@ const BeATrainer = () => {
                     Brief Biography
                   </label>
                   <textarea
-                    className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-2.5 px-5 focus:outline-none placeholder-[#a6a7a6]"
+                    className="bg-transparent text-[#4A4E4B]   block w-full py-2.5 px-5 focus:outline-none placeholder-[#a6a7a6]"
                     placeholder="Your brief biography"
                     rows={4}
                     required

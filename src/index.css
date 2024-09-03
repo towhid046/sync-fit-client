@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.menu>li>a.active{
+.menu>a.active{
     color:#717FF8
 }
 body{
@@ -37,4 +37,11 @@ button.slick-arrow.slick-next:before, .slick-next:before{
 .team-card-special-class:hover >figure>p.trainer-overlay-class{
     height: 100%;
     transition: .7s;
+}
+
+input,textarea{
+    border: 1px solid #80808042;
+}
+input:focus, textarea:focus{
+    border: 1px solid #0000ff42;
 }

@@ -9,6 +9,7 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 import { scrollToTop } from "../../utilities/scrollToTop";
+import CustomHelmet from "./../../components/shared/CustomHelmet/CustomHelmet";
 
 const formInfo = [
   {
@@ -28,7 +29,7 @@ const formInfo = [
 ];
 
 const LogInPage = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const { logInUser, singInWithGoogle } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const LogInPage = () => {
   const onSubmit = async (data) => {
     try {
       await logInUser(data?.email, data?.password);
+      reset();
       swal("Success", "Login successfully!!", "success");
       navigate(location?.state ? location?.state : "/");
     } catch (error) {
@@ -49,9 +51,9 @@ const LogInPage = () => {
     }
   };
 
-  const handleLogInWithGoogle = async() => {
+  const handleLogInWithGoogle = async () => {
     try {
-       await singInWithGoogle();
+      await singInWithGoogle();
       swal("Success", "Login successfully!!", "success");
       navigate(location?.state ? location?.state : "/");
     } catch (error) {
@@ -61,6 +63,7 @@ const LogInPage = () => {
 
   return (
     <section className="min-h-screen">
+      <CustomHelmet title={"Login"} />
       <PageBanner title="Login" link="/login" />
       <div className="container mx-auto px-4 md:py-16 py-12">
         <div className="bg-custom-secondary max-w-xl md:p-12 p-6 mx-auto shadow-sm ">
@@ -75,7 +78,7 @@ const LogInPage = () => {
                   {item.title}
                 </label>
                 <input
-                  className="bg-transparent text-[#4A4E4B] border border-gray-500 block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
+                  className="bg-transparent text-[#4A4E4B] block w-full py-3 px-5 focus:outline-none placeholder-[#a6a7a6]"
                   placeholder={item.placeholder}
                   required
                   type={(!isShowPass && item.type) || "text"}

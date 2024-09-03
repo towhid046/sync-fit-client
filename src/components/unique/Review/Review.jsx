@@ -36,7 +36,7 @@ const Review = ({ review }) => {
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <img className="w-11 h-11 rounded-full" src={author?.image} alt="Img" />
+        <img className="w-11 h-11 rounded-full object-cover" src={author?.image} alt="Img" />
         <div>
           <h3 className="font-bold text-lg">{author?.name}</h3>
           <p className="text-gray-600 ">{author?.location}</p>

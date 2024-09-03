@@ -42,7 +42,7 @@ const Trainer = ({ trainer }) => {
     </button>
   ));
 
-  const slotItems = availableSlots?.slice(0,3).map((slot) => (
+  const slotItems = availableSlots?.slice(0,2).map((slot) => (
     <li key={slot} className="flex items-center gap-2">
       <IoCheckmarkDoneOutline className="text-custom-primary text-2xl" />
       <span className="text-gray-500">{slot}</span>
@@ -52,7 +52,7 @@ const Trainer = ({ trainer }) => {
   return (
     <div className=" bg-white flex flex-col justify-between shadow-sm p-5 team-card-special-class ">
       <figure className="relative overflow-hidden flex items-enter justify-center  mt-7 h-64 w-64  mx-auto rounded-full">
-        <img className="h-64 w-64 rounded-full" src={image} alt="News Image" />
+        <img className="h-64 w-64 rounded-full object-cover" src={image} alt="News Image" />
         <div className="absolute bottom-8 left-14  flex gap-2 items-center z-20">
           {allSocialItems}
         </div>

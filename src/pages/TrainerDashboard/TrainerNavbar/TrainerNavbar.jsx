@@ -7,7 +7,7 @@ const TrainerNavbar = () => {
 
   const menus = [
     { id: 1, name: "Manage Slots", link: "/trainer-dashboard/manage-slots" },
-    { id: 3, name: "Add New Slot", link: "/trainer-dashboard/add-new-slot" },
+    { id: 3, name: "Add Class / Slot", link: "/trainer-dashboard/add-new-slot" },
     { id: 2, name: "Add New Forum", link: "/trainer-dashboard/add-new-forum" },
   ];
   const menus2 = [
