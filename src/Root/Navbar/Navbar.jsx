@@ -23,11 +23,10 @@ const Navbar = () => {
   };
 
   const links = menus.map((menu) => (
-    <NavLink to={menu.link} className="inline-block">
+    <NavLink key={menu.id} to={menu.link} className="inline-block">
       <li
         className={`transition duration-300 md:py-0 md:hover:text-custom-primary md:hover:bg-gray-800 hover:bg-gray-700 md:px-0 py-2 px-10 `}
         onClick={handleCloseBothMenu}
-        key={menu.id}
       >
         {menu.name}
       </li>

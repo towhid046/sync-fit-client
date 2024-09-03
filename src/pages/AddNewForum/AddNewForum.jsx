@@ -10,11 +10,8 @@ import useAuth from "./../../hooks/useAuth";
 import moment from "moment";
 import useSecureData from "./../../hooks/useSecureData";
 import ErrorElement from "./../../components/shared/ErrorElement/ErrorElement";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
-
-const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
-const imgbb_api_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
+import CustomHelmet from "./../../components/shared/CustomHelmet/CustomHelmet";
+import useToGetImageUrl from "./../../hooks/useToGetImgUrl";
 
 const AddNewForum = () => {
   const formInfo = [
@@ -34,13 +31,13 @@ const AddNewForum = () => {
   const [loading, setLoading] = useState("");
   const { register, handleSubmit, reset } = useForm();
   const axiosSecure = useAxiosSecure();
-  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     scrollToTop();
   }, []);
 
   const { user } = useAuth();
+  const getImgUrl = useToGetImageUrl();
 
   const {
     data: singleUser,
@@ -51,11 +48,9 @@ const AddNewForum = () => {
 
   const onSubmit = (data) => {
     setLoading(true);
-    if(isLoading){
-      return setLoading(true)
+    if (isLoading) {
+      return setLoading(true);
     }
-
-    const imageFile = { image: data.image[0] };
 
     const author = {
       name: user?.displayName,
@@ -66,10 +61,7 @@ const AddNewForum = () => {
 
     const postData = async () => {
       try {
-        const res = await axiosPublic.post(imgbb_api_url, imageFile, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-        const thumbnail_img = res.data?.data.url;
+        const thumbnail_img = await getImgUrl(data.image);
 
         const newForum = {
           thumbnail_img,

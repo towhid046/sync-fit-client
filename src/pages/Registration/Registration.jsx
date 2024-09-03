@@ -10,9 +10,8 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import swal from "sweetalert";
 import { scrollToTop } from "../../utilities/scrollToTop";
 import saveUserInfo from "./../../utilities/saveUserInfo";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
-const imgbb_api_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
+import useToGetImageUrl from "./../../hooks/useToGetImgUrl";
+import CustomHelmet from './../../components/shared/CustomHelmet/CustomHelmet';
 
 const formInfo = [
   { id: 1, title: "Your Name", placeholder: "Your Name", name: "name" },
@@ -41,27 +40,19 @@ const formInfo = [
 
 const Registration = () => {
   const { register, handleSubmit } = useForm();
-  const { createNewUser, updateUserProfile, singInWithGoogle, user } =
-    useAuth();
+  const { createNewUser, updateUserProfile, singInWithGoogle } = useAuth();
   const [isShowPass, setIsShowPass] = useState(false);
   const navigate = useNavigate();
-  const axiosPublic = useAxiosPublic();
+  const getImgUrl = useToGetImageUrl();
 
   useEffect(() => {
     scrollToTop();
   }, []);
 
   const onSubmit = async (data) => {
-    const imageFile = { image: data.photoUrl[0] };
-
     try {
-      
-      const res = await axiosPublic.post(imgbb_api_url, imageFile, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      
-      const photoUrl = res.data?.data.url;
-      
+      const photoUrl = await getImgUrl(data.photoUrl);
+
       saveUserInfo(data?.email);
       await createNewUser(data.email, data.password);
       await updateUserProfile(data.name, photoUrl);
